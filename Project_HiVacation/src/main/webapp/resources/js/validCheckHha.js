@@ -1,4 +1,4 @@
-// 잘못되면 true, 정상이면 false
+// 잘못되면 true, 정상이면 false 
 
 // <input>을 넣어주면 거기에 글자가 없는지 체크해줄 함수
 // 없으면 true, 있으면 false 리턴

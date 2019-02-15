@@ -8,7 +8,7 @@
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
 <link rel="stylesheet" href="resources/css/index.css">
-<script type="text/javascript">
+<script type="text/javascript"> 
 $(function() {
 	
 });
