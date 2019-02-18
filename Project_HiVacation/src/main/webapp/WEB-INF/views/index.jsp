@@ -36,7 +36,7 @@
 					<tr>
 						<td align="center">
 							<span id="title" onclick="goHome();">
-								<img src="resources/img/title.png">
+								<img src="resources/img/title.jpg">
 							</span>
 						</td>
 					</tr>
