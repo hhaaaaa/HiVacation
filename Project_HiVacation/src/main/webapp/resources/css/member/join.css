@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+#joinTable {
+	margin-top: 10px;
+	width: 400px;
+}
+.joinTd {
+	width: 100%;
+}
+#joinid {
+	height: 25px;
+	outline: none;
+}
+.joinInputSmall {
+	width: 75%;
+}
+#joinIdOk {
+	font-size: 10pt;
+}
+.joinInput {
+	width: 99%;
+	height: 25px;
+	outline: none;
+}
+#joinpw {
+}
+#joinpw2 {
+}
+#joinname {
+}
+#joinPostNo{
+	height: 25px;
+	outline: none;
+}
+#joinAddressSearchButton {
+	font-size: 10pt;
+}
+#joinAddressSearchButton:hover {
+	cursor: pointer;
+}
+#joinAddress {
+}
+#address {
+}
+#joinDoButton {
+	border: grey solid 1px;
+	outline: none;
+	width: 100%;
+	background-color: transparent;
+	font-weight: 900;
+}
+#joinDoButton:hover {
+	cursor: pointer;
+}

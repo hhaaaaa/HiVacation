@@ -1,9 +1,43 @@
 @CHARSET "UTF-8";
 #loginDoTable {
+	margin-top: 10px;
 	width: 400px;
-	height: 600px;
 }
 .loginDoTd {
 	width: 100%;
 }
-
+#id {
+	width: 100%;
+	height: 25px;
+	outline: none;
+}
+#pw {
+	width: 100%;
+	height: 25px;
+	outline: none;
+}
+.loginDoTdSmall {
+	width: 50%;
+	height: 30px;
+}
+#loginButton {
+	width: 102%;
+	height: 100%;
+	font-weight: 900;
+	border: grey solid 1px;
+	background-color: transparent;
+	outline: none;
+}
+#loginButton:hover {
+	cursor: pointer;
+}
+#joinButton {
+	width: 100%;
+	font-weight: 900;
+	border: grey solid 1px;
+	background-color: transparent;
+	outline: none;
+}
+#joinButton:hover {
+	cursor: pointer;
+}

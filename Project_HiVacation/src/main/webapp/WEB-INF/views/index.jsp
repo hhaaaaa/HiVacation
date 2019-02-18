@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Hi Vacation</title>
 <link rel="stylesheet" href="resources/css/index.css">
+<link rel="stylesheet" href="resources/css/member/login.css">
+<link rel="stylesheet" href="resources/css/member/join.css">
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
 <script type="text/javascript" src="resources/js/HVjQuery.js"></script>
@@ -36,7 +38,7 @@
 					<tr>
 						<td align="center">
 							<span id="title" onclick="goHome();">
-								<img src="resources/img/title.jpg">
+								<img src="resources/img/title.jpg" id="titleImg">
 							</span>
 						</td>
 					</tr>

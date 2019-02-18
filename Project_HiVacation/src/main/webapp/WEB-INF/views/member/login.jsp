@@ -1,34 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<table id="loginDoTable">
 		<tr>
-			<td align="center" class="loginDoTd">
-				<input id="id">
+			<td align="center" class="loginDoTd" colspan="2">
+				<input id="id" autocomplete="off" autofocus="autofocus" placeholder="&nbsp;&nbsp;ID">
 			</td>
 		</tr>
 		<tr>
-			<td align="center" class="loginDoTd">
-				<input id="pw">
+			<td align="center" class="loginDoTd" colspan="2">
+				<input id="pw" autocomplete="off" placeholder="&nbsp;&nbsp;PW">
 			</td>
 		</tr>
+		<tr><td></td></tr>
 		<tr>
-			<td align="center" class="loginDoTd">
+			<td align="center" class="loginDoTdSmall" style="font-size: 10pt;">
 				<input type="checkbox">자동로그인
 			</td>
-			<td align="center" class="loginDoTd">
+			<td align="center" class="loginDoTdSmall" rowspan="2">
 				<button id="loginButton">로그인</button>
 			</td>
 		</tr>
 		<tr>
-			<td align="center" class="loginDoTd">
-				<button id="joinButton">회원가입</button>
+			<td align="center" style="width: 50%;">
+				<button id="joinButton" onclick="goJoin();">회원가입</button>
 			</td>
 		</tr>
 	</table>
