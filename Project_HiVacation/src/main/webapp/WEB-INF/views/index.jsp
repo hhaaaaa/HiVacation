@@ -36,7 +36,7 @@
 					<tr>
 						<td align="center">
 							<span id="title" onclick="goHome();">
-								Hi Vacation
+								<img src="resources/img/title.png">
 							</span>
 						</td>
 					</tr>
