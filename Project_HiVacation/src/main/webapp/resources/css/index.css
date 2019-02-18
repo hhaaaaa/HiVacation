@@ -1,1 +1,71 @@
-@CHARSET "UTF-8"; 
+@CHARSET "UTF-8";
+body {
+	margin: 0px;
+	padding: 0px;
+} 
+#totalPageTable {
+	width: 100%;
+	height: 100%;
+	border: black solid 2px;
+	font-weight: 900;
+}
+#borderWhiteSpan {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 40px;
+	background-color: white;
+}
+#aboutUsTable {
+	position: fixed;
+	top: 5px;
+	left: 10px;
+	width: 60px;
+	height: 30px;
+	border: blue solid 2px;
+	font-size: 11pt;
+}
+#aboutUsTable:hover {
+	cursor: pointer;
+	text-shadow: 1px 1px 1px black;
+}
+#loginTable {
+	position: fixed;
+	top: 5px;
+	right: 10px;
+	width: 150px;
+	height: 30px;
+	border: blue solid 2px;
+	font-size: 11pt;
+}
+#login:hover {
+	cursor: pointer;
+	text-shadow: 1px 1px 1px black;
+}
+#join:hover {
+	cursor: pointer;
+	text-shadow: 1px 1px 1px black;
+}
+#titleTable {
+	position: fixed;
+	top: 40px;
+	left: 0px;
+	width: 100%;
+	height: 80px;
+	border: red solid 2px;
+	background-color: white;
+}
+#title {
+	cursor: pointer;
+}
+#contentTable {
+	margin-top: 120px;
+	width: 100%;
+	height: 100%;
+}
+#content {
+	width: 1000px;
+	height: 100%;
+	border: orange solid 2px;
+}

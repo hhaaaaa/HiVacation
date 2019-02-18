@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+#loginDoTable {
+	width: 400px;
+	height: 600px;
+}
+.loginDoTd {
+	width: 100%;
+}
+
