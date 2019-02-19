@@ -11,24 +11,24 @@
 		<tr>
 			<td class="joinTd">
 				<div>
-					<input id="joinid" name="id" placeholder="&nbsp;&nbsp;ID" class="joinInputSmall" maxlength="15" autocomplete="off" autofocus="autofocus">
+					<input id="joinid" name="hm_id" placeholder="&nbsp;&nbsp;ID" class="joinInputSmall" maxlength="15" autocomplete="off" autofocus="autofocus">
 					<span id="joinIdOk" onsubmit="goCheckId();">ID확인</span>
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td class="joinTd">
-				<input id="joinpw" name="pw" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW" maxlength="">
+				<input id="joinpw" name="hm_pw" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW" maxlength="">
 			</td>
 		</tr>
 		<tr>
 			<td class="joinTd">
-				<input id="joinpw2" name="pw2" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW확인" maxlength="">
+				<input id="joinpw2" name="hm_pw2" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW확인" maxlength="">
 			</td>
 		</tr>
 		<tr>
 			<td class="joinTd">
-				<input id="joinname" name="name" autocomplete="off" class="joinInput" placeholder="&nbsp;&nbsp;이름" maxlength="">
+				<input id="joinname" name="hm_name" autocomplete="off" class="joinInput" placeholder="&nbsp;&nbsp;이름" maxlength="">
 			</td>
 		</tr>
 		<tr>

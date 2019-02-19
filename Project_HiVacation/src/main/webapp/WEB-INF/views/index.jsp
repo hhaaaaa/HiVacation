@@ -8,13 +8,14 @@
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/member/login.css">
 <link rel="stylesheet" href="resources/css/member/join.css">
+<link rel="stylesheet" href="resources/css/scheduling/scheduling.css">
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
 <script type="text/javascript" src="resources/js/HVjQuery.js"></script>
 <script type="text/javascript" src="resources/js/go.js"></script>
 <script type="text/javascript"> 
 	$(function() {
-		
+		schedulingPaging();
 	});
 </script>
 </head>

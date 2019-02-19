@@ -6,12 +6,12 @@
 .loginDoTd {
 	width: 100%;
 }
-#id {
+#hm_id {
 	width: 100%;
 	height: 25px;
 	outline: none;
 }
-#pw {
+#hm_pw {
 	width: 100%;
 	height: 25px;
 	outline: none;

@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+#schedulingTotalDiv {
+	margin-top: 10px;
+	width: 100%;
+}
+#step1Div {
+	position: fixed;
+	top: 160px;
+	left: 305px;
+	width: 1000px;
+	border: red solid 2px;
+}
+#step2Div {
+	border: orange solid 2px;
+}
+#step3Div {
+	border: yellow solid 2px;
+}
+#step4Div {
+	border: green solid 2px;	
+}
+#step5Div {
+	border: blue solid 2px;
+}
+.prevButtonScheDiv {
+	cursor: pointer;
+}
+.nextButtonScheDiv {
+	cursor: pointer;
+}
+.saveButtonScheDiv {
+	cursor: pointer;
+}
+.cannotSeeFirstDiv {
+	position: fixed;
+	top: 160px;
+	left: -1200px;
+	width: 1000px;
+}

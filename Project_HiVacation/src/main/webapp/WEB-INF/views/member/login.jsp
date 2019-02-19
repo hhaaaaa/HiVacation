@@ -10,12 +10,12 @@
 	<table id="loginDoTable">
 		<tr>
 			<td align="center" class="loginDoTd" colspan="2">
-				<input id="id" autocomplete="off" autofocus="autofocus" placeholder="&nbsp;&nbsp;ID">
+				<input id="hm_id" autocomplete="off" autofocus="autofocus" placeholder="&nbsp;&nbsp;ID">
 			</td>
 		</tr>
 		<tr>
 			<td align="center" class="loginDoTd" colspan="2">
-				<input id="pw" autocomplete="off" placeholder="&nbsp;&nbsp;PW">
+				<input id="hm_pw" autocomplete="off" placeholder="&nbsp;&nbsp;PW">
 			</td>
 		</tr>
 		<tr><td></td></tr>
