@@ -8,5 +8,6 @@
 </head>
 <body>
 	여행 계획 세우기
+	<div></div>
 </body>
 </html>

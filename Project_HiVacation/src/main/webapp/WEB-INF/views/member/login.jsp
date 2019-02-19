@@ -20,7 +20,7 @@
 		</tr>
 		<tr><td></td></tr>
 		<tr>
-			<td align="center" class="loginDoTdSmall" style="font-size: 10pt;">
+			<td align="center" class="loginDoTdSmall" style="font-size: 10pt; height: 20px;">
 				<input type="checkbox">자동로그인
 			</td>
 			<td align="center" class="loginDoTdSmall" rowspan="2">
@@ -30,6 +30,14 @@
 		<tr>
 			<td align="center" style="width: 50%;">
 				<button id="joinButton" onclick="goJoin();">회원가입</button>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" class="loginDoTdSmall">
+				<span class="findInfoSpan">ID찾기</span>
+			</td>
+			<td align="center" class="loginDoTdSmall" rowspan="2">
+				<span class="findInfoSpan">PW찾기</span>
 			</td>
 		</tr>
 	</table>

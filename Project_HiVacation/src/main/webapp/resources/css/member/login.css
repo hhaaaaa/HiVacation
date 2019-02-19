@@ -33,11 +33,16 @@
 }
 #joinButton {
 	width: 100%;
+	height: 30px;
 	font-weight: 900;
 	border: grey solid 1px;
 	background-color: transparent;
 	outline: none;
 }
 #joinButton:hover {
+	cursor: pointer;
+}
+.findInfoSpan {
+	font-size: 10pt;
 	cursor: pointer;
 }

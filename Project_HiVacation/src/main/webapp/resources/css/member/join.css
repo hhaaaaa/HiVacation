@@ -45,6 +45,7 @@
 	border: grey solid 1px;
 	outline: none;
 	width: 100%;
+	height: 25px;
 	background-color: transparent;
 	font-weight: 900;
 }
