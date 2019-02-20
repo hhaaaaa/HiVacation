@@ -39,7 +39,7 @@
 					<tr>
 						<td align="center">
 							<span id="title" onclick="goHome();">
-								<img src="resources/img/title.jpg" id="titleImg">
+								<img src="resources/img/title.png" id="titleImg">
 							</span>
 						</td>
 					</tr>
