@@ -36,6 +36,22 @@ create table hv_reply(
 create sequence hr_seq;
 
 -----------------------------------------
+create table hv_cart(
+	hc_location  primary key,
+	hc_name  not null,
+	hc_url  not null,
+	hc_phone  not null,
+	hc_category  null
+);
+create table hv_plan(
+	hp_date  primary key,
+	hp_name  not null,
+	hp_phone  not null,
+	hp_location  not null,
+	hp_url  not null
+);
+
+-----------------------------------------
 
 select * from hv_member;
 select * from hv_sns;
