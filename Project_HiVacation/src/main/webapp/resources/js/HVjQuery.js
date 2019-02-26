@@ -15,3 +15,15 @@ function schedulingPaging() {
 		alert("저장할까요?");
 	});
 }
+
+function connectSummonAddInputEvent() {
+	$("#joinAddressSearchButton").click(function(){
+		 new daum.Postcode({
+		        oncomplete: function(data) {
+		        	$("#joinPostNo").val(data.zonecode);
+		        	$("#joinAddress").val(data.address);
+
+		        }
+		    }).open();
+	});
+}

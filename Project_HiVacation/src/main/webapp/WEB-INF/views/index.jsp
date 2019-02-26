@@ -13,6 +13,7 @@
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
 <script type="text/javascript" src="resources/js/HVjQuery.js"></script>
 <script type="text/javascript" src="resources/js/go.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"> 
 	$(function() {
 		schedulingPaging();
