@@ -14,10 +14,14 @@
 <script type="text/javascript" src="resources/js/validCheck.js"></script>
 <script type="text/javascript" src="resources/js/HVjQuery.js"></script>
 <script type="text/javascript" src="resources/js/go.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY&language=kr&region=KR"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"> 
 	$(function() {
+		connectSummonAddInputEvent();
+		connectIdCheckEvent();
 		schedulingPaging();
+		initMap();
 	});
 </script>
 </head>
@@ -25,10 +29,11 @@
 	<table id="totalPageTable">
 		<tr>
 			<td align="center">
-				<span id="borderWhiteSpan"></span>
-				<table id="aboutUsTable">
+				<!-- <span id="borderWhiteSpan"></span> -->
+				<table id="MenuTable">
 					<tr>
-						<td align="center" onclick="goPageInfo();">저희는</td>
+						<td align="center" id="goAboutUs" onclick="goPageInfo();">AboutUs</td>
+						<td align="center" id="goSns" onclick="goSns();">게시판</td>
 					</tr>
 				</table>
 				<table id="loginTable">
@@ -46,8 +51,6 @@
 						</td>
 					</tr>
 				</table>
-				
-				<!-- 메뉴?? -->
 				
 				<table id="contentTable">
 					<tr>

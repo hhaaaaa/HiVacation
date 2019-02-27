@@ -21,7 +21,7 @@ public class MemberDAO {
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
 		String address3 = request.getParameter("address3");
-		m.setHm_address(address1+" "+address2+" "+address3);
+		m.setHm_address(address1+";"+address2+";"+address3);
 		
 		if(mm.join(m)==1){
 			request.setAttribute("r", "가입성공");

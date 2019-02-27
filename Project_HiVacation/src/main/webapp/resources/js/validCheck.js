@@ -42,6 +42,8 @@ function join() {
 	} 
 	return true;
 }
+
+
 function login() {
 	var hm_id = document.loginForm.hm_id;
 	var hm_pw = document.loginForm.hm_pw;

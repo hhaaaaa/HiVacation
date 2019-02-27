@@ -35,25 +35,47 @@ create table hv_reply(
 );
 create sequence hr_seq;
 
------------------------------------------
 create table hv_cart(
-	hc_location  primary key,
-	hc_name  not null,
-	hc_url  not null,
-	hc_phone  not null,
-	hc_category  null
+	hc_no number(5) primary key,
+	hc_id varchar2(15 char) not null,
+	hc_store varchar2(50 char) not null,
+	hc_location varchar2(100 char) not null,
+	hc_url varchar2(100 char) not null,
+	hc_phone varchar2(13 char) not null,
+	hc_category varchar2(15 char) null,
+	constraint c_cart 
+		foreign key(hc_id) 
+		references hv_member(hm_id) 
+		on delete cascade
 );
+create sequence hc_no;
+
 create table hv_plan(
-	hp_date  primary key,
-	hp_name  not null,
-	hp_phone  not null,
-	hp_location  not null,
-	hp_url  not null
+	hp_no number(5) primary key,
+	hp_id varchar2(15 char) not null,
+	hp_date date not null,
+	hp_city varchar2(20 char) not null,
+	hp_store varchar2(50 char) not null,
+	hp_location varchar2(100 char) not null,
+	hp_url varchar2(100 char) not null
+	hp_phone varchar2(13 char) not null,
+	constraint c_plan 
+		foreign key(hp_id) 
+		references hv_member(hm_id) 
+		on delete cascade
 );
+create sequence hp_no;
 
 -----------------------------------------
 
 select * from hv_member;
 select * from hv_sns;
 select * from hv_reply;
+select * from hv_cart;
+select * from hv_plan;
+
+-----------------------------------------
+
+drop table hv_plan cascade constraint purge;
+
 

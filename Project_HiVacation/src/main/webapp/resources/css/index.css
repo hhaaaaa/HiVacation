@@ -16,15 +16,19 @@ body {
 	height: 40px;
 	background-color: white;
 }
-#aboutUsTable {
+#MenuTable {
 	position: fixed;
 	top: 5px;
 	left: 10px;
-	width: 60px;
+	width: 150px;
 	height: 30px;
 	font-size: 11pt;
 }
-#aboutUsTable:hover {
+#goAboutUs:hover {
+	cursor: pointer;
+	text-shadow: 1px 1px 1px black;
+}
+#goSns:hover {
 	cursor: pointer;
 	text-shadow: 1px 1px 1px black;
 }

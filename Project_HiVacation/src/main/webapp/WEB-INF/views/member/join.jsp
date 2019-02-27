@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="do.join" name="joinForm" onsubmit="return join();">
+	<form action="do.join" name="joinForm" onsubmit="return join();" method="post">
 		<table id="joinTable">
 			<tr>
 				<td class="joinTd">
@@ -19,17 +19,17 @@
 			</tr>
 			<tr>
 				<td class="joinTd">
-					<input id="joinpw" name="hm_pw" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW" maxlength="">
+					<input id="joinpw" name="hm_pw" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW" maxlength="20">
 				</td>
 			</tr>
 			<tr>
 				<td class="joinTd">
-					<input id="joinpw2" name="hm_pw2" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW확인" maxlength="">
+					<input id="joinpw2" name="hm_pw2" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW확인" maxlength="20">
 				</td>
 			</tr>
 			<tr>
 				<td class="joinTd">
-					<input id="joinname" name="hm_name" autocomplete="off" class="joinInput" placeholder="&nbsp;&nbsp;이름" maxlength="">
+					<input id="joinname" name="hm_name" autocomplete="off" class="joinInput" placeholder="&nbsp;&nbsp;이름" maxlength="10">
 				</td>
 			</tr>
 			<tr>
@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td class="joinTd">
-					<input id="address" name="address3" autocomplete="off" class="joinInput" placeholder="&nbsp;&nbsp;상세주소" maxlength="">
+					<input id="address" name="address3" autocomplete="off" class="joinInput" placeholder="&nbsp;&nbsp;상세주소">
 				</td>
 			</tr>
 			<tr><td></td></tr>

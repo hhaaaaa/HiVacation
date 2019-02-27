@@ -25,10 +25,10 @@ public class MemberController {
 		return "index"; 
 	}
 	
-	@RequestMapping(value = "/do.join", method = RequestMethod.GET)
+	@RequestMapping(value = "/do.join", method = RequestMethod.POST)
 	public String doJoin(Member m, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.join(m, request, response);
-		request.setAttribute("contentPage", "member/join.jsp");
+		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
 		return "index"; 
 	}
 

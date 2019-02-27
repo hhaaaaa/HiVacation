@@ -1,39 +1,84 @@
 @CHARSET "UTF-8";
-#schedulingTotalDiv {
+#schedulingMenuTable {
 	margin-top: 10px;
+	width: 1000px;
+	border-spacing: 0px;
+}
+.schedulingMenuTd {
+	width: 20%;
+	height: 40px;
+	color: grey;
+}
+#step1Menu {
+	border-radius: 7px;
+	background-color: grey;
+	color: white;
+	border: grey solid 2px;
+	cursor: pointer;
+}
+#step2Menu {
+	border-radius: 7px;
+	border: grey solid 2px;
+	cursor: pointer;
+}
+#step3Menu {
+	border-radius: 7px;
+	border: grey solid 2px;
+	cursor: pointer;
+}
+
+#schedulingTotalDiv {
 	width: 100%;
 }
 #step1Div {
+	padding-top: 5px;
 	position: fixed;
-	top: 160px;
-	left: 305px;
+	top: 195px;
+	left: 300px;
 	width: 1000px;
-	border: red solid 2px;
+	border: grey solid 2px;
+	background-color: white;
+}
+#step1Map {
+	width: 950px;
+	height: 400px;
+	border: black solid 1px;
+}
+#step1SearchCity {
+	width: 300px;
+	text-align: center;
+	height: 20px;
+	outline: none;
+}
+#step1SearchCategory {
+	width: 300px;
+	text-align: center;
+	height: 20px;
+	outline: none;
+}
+#step1SearchImg {
+	position: relative;
+	top: 12px;
+	cursor: pointer;
+}
+#step1SearchResult {
+	
 }
 #step2Div {
-	border: orange solid 2px;
+	padding-top: 5px;
+	border: grey solid 2px;
 }
 #step3Div {
-	border: yellow solid 2px;
-}
-#step4Div {
-	border: green solid 2px;	
-}
-#step5Div {
-	border: blue solid 2px;
-}
-.prevButtonScheDiv {
-	cursor: pointer;
-}
-.nextButtonScheDiv {
-	cursor: pointer;
+	padding-top: 5px;
+	border: grey solid 2px;
 }
 .saveButtonScheDiv {
 	cursor: pointer;
 }
 .cannotSeeFirstDiv {
 	position: fixed;
-	top: 160px;
+	top: 195px;
 	left: -1200px;
 	width: 1000px;
+	background-color: white;
 }

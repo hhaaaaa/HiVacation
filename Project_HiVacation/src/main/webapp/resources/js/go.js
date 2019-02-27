@@ -13,3 +13,7 @@ function goJoin() {
 function goHome() {
 	location.href="go.home";
 }
+
+function goSns() {
+	location.href="go.sns";
+}

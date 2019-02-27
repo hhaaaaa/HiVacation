@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 #joinTable {
-	margin-top: 10px;
+	margin-top: 70px;
 	width: 400px;
 }
 .joinTd {
@@ -33,9 +33,11 @@
 }
 #joinAddressSearchButton {
 	font-size: 10pt;
+	color: grey;
 }
 #joinAddressSearchButton:hover {
 	cursor: pointer;
+	text-shadow: 1px 1px 1px grey;
 }
 #joinAddress {
 }
