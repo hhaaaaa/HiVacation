@@ -36,4 +36,11 @@ public class MemberController {
 	public @ResponseBody Members IdCheck(Member m) {
 		return mDAO.idCheck(m); 
 	}
+	
+	@RequestMapping(value = "/do.login", method = RequestMethod.POST)
+	public String doLogin(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.login(m, request, response);
+		request.setAttribute("contentPage", "member/login.jsp");
+		return "index"; 
+	}
 }

@@ -42,3 +42,20 @@ function join() {
 	} 
 	return true;
 }
+function login() {
+	var hm_id = document.loginForm.hm_id;
+	var hm_pw = document.loginForm.hm_pw;
+	
+	if (isEmpty(hm_id)) {
+		alert("ID를 입력해주세요.");
+		hm_id.value = "";
+		hm_id.focus();
+		return false;
+	} else if (isEmpty(hm_pw)) {
+		alert("PW를 입력해주세요.");
+		hm_pw.value = "";
+		hm_pw.focus();
+		return false;
+	} 
+	return true;
+}
