@@ -1,5 +1,7 @@
 package com.ht.hv.member;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,5 +29,11 @@ public class MemberDAO {
 		}
 	}
 	
-	
+	public Members idCheck(Member m){
+		Member dbm = ss.getMapper(MemberMapper.class).getMemberById(m);
+		ArrayList<Member> alM = new ArrayList<Member>();
+		alM.add(dbm);
+		Members ms = new Members(alM);
+		return ms;		
+	}
 }

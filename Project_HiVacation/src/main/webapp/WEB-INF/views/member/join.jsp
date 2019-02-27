@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="do.join">
+	<form action="do.join" name="joinForm" onsubmit="return join();">
 		<table id="joinTable">
 			<tr>
 				<td class="joinTd">

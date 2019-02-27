@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
@@ -29,5 +30,10 @@ public class MemberController {
 		mDAO.join(m, request, response);
 		request.setAttribute("contentPage", "member/join.jsp");
 		return "index"; 
+	}
+
+	@RequestMapping(value = "/member.id.check", method = RequestMethod.GET,produces="application/json; charset=utf-8")
+	public @ResponseBody Members IdCheck(Member m) {
+		return mDAO.idCheck(m); 
 	}
 }

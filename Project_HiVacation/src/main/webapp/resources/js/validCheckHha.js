@@ -12,7 +12,7 @@ function isEmpty(field) {
 
 // <input>, 최소 글자수를 넣어주면 체크해줄 함수
 // 최소글자수보다 짧으면 true, 길면 false 리턴
-function lessThan(field, min) {
+function lessThan(field, min) {18710
 		/*if (field.value.length < min) {
 			return true;
 		}

@@ -27,3 +27,18 @@ function connectSummonAddInputEvent() {
 		    }).open();
 	});
 }
+
+function connectiIdCheckEvent() {
+	$("#joinid").keyup(function() {
+		var id = $(this).val();
+		$.getJSON("member.id.check?hm_id="+id,function(data){
+			if (id.length == 0) {
+				$("#joinIdOk").text("미입력").css("color","grey");
+			}else if (data.member[0] != null ) {
+				$("#joinIdOk").text("id중복").css("color","red");
+			}else{
+				$("#joinIdOk").text("사용가능").css("color","grey");
+			}
+		});
+	});
+}

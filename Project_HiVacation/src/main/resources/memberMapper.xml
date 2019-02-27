@@ -4,7 +4,7 @@
 	<insert id="join">
 		insert into hv_member values(#{hm_id},#{hm_pw},#{hm_name},#{hm_address})
 	</insert>
-	<select id="login">
-		
+	<select id="getMemberById" parameterType="com.ht.hv.member.Member" resultType="com.ht.hv.member.Member">
+		select * from hv_member where hm_id=#{hm_id }
 	</select>
 </mapper>
