@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
 #schedulingMenuTable {
+	position: fixed;
+	left: 300px;
 	margin-top: 10px;
 	width: 1000px;
 	border-spacing: 0px;

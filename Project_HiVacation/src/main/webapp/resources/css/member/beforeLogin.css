@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+#beforeLoginTable {
+	width: 100%;
+}
+#loginGo:hover {
+	cursor: pointer;
+	text-shadow: 1px 1px 1px black;
+}
+#joinGo:hover {
+	cursor: pointer;
+	text-shadow: 1px 1px 1px black;
+}

@@ -70,3 +70,16 @@ function connectIdCheckEvent() {
 		});
 	});
 }
+
+var isMyMenuCliced = 0;
+function myMenuLocationControl() {
+	$("#afterLoginMenuDiv").click(function() {
+		if (isMyMenuCliced == 0) {
+			$("#myMenuTable").css("top", "40px");
+			isMyMenuCliced = 1;
+		} else {
+			$("#myMenuTable").css("top", "-130px");
+			isMyMenuCliced = 0;
+		}
+	});
+}

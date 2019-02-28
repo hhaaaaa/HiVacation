@@ -90,10 +90,10 @@ public class MemberDAO {
 		autoLogin(m, request, response);
 		Member mb = (Member) request.getSession().getAttribute("loginMember");
 		if(mb != null){
-			request.setAttribute("loginPage", "member/loginOk.jsp");
+			request.setAttribute("loginPage", "member/afterLogin.jsp");
 			return true;
 		}
-		request.setAttribute("loginPage", "member/login.jsp");
+		request.setAttribute("loginPage", "member/beforeLogin.jsp");
 		return false;
 	}
 }

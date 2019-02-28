@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+#afterLoginMenuDiv {
+}
+#afterLoginMenuDiv:hover {
+	cursor: pointer;
+	text-shadow: 1px 1px 1px black;
+}
+#afterLoginMyImg {
+	position: relative;
+	top: 2px;
+	width: 30px;
+}
+#myNameSpan {
+	position: relative;
+	top: -8px;
+}
+#myMenuTable {
+	position: fixed;
+	top: -130px;
+	width: 150px;
+	color: grey;
+	height: 120px;
+}
+.goMyMenu {
+	border: grey solid 2px;
+	border-radius: 7px;
+}
+.goMyMenu:hover {
+	cursor: pointer;
+	background-color: grey;
+	color: white;
+}

@@ -7,6 +7,8 @@
 <title>Hi Vacation</title>
 <link rel="stylesheet" href="resources/css/index.css">
 <link rel="stylesheet" href="resources/css/member/login.css">
+<link rel="stylesheet" href="resources/css/member/beforeLogin.css">
+<link rel="stylesheet" href="resources/css/member/afterLogin.css">
 <link rel="stylesheet" href="resources/css/member/join.css">
 <link rel="stylesheet" href="resources/css/scheduling/scheduling.css">
 <script type="text/javascript" src="resources/js/jquery.js"></script>
@@ -22,6 +24,7 @@
 		connectIdCheckEvent();
 		schedulingPaging();
 		initMap();
+		myMenuLocationControl();
 	});
 </script>
 </head>
@@ -29,6 +32,7 @@
 	<table id="totalPageTable">
 		<tr>
 			<td align="center">
+				<span id="actionResultSpan">${r }</span>
 				<!-- <span id="borderWhiteSpan"></span> -->
 				<table id="MenuTable">
 					<tr>
@@ -36,12 +40,7 @@
 						<td align="center" id="goSns" onclick="goSns();">게시판</td>
 					</tr>
 				</table>
-				<table id="loginTable">
-					<tr>
-						<td align="center" id="login" onclick="goLogin();">로그인</td>
-						<td align="center" id="join" onclick="goJoin();">회원가입</td>
-					</tr>
-				</table>
+				<div id="loginTable"><jsp:include page="${loginPage }"/></div>
 				<table id="titleTable">
 					<tr>
 						<td align="center">

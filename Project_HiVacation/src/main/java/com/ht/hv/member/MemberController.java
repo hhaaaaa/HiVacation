@@ -14,19 +14,32 @@ public class MemberController {
 	@Autowired private MemberDAO mDAO;
 	
 	@RequestMapping(value = "/go.login", method = RequestMethod.GET)
-	public String goLogin(HttpServletRequest request, HttpServletResponse response) {
+	public String goLogin(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
 		request.setAttribute("contentPage", "member/login.jsp");
 		return "index"; 
 	}
+	@RequestMapping(value = "/do.login", method = RequestMethod.POST)
+	public String doLogin(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.login(m, request, response);
+		if (mDAO.loginCheck(m, request, response)) {
+			request.setAttribute("contentPage", "scheduling/scheduling.jsp");
+		} else {
+			request.setAttribute("contentPage", "member/login.jsp");
+		}
+		return "index";
+	}
 	
 	@RequestMapping(value = "/go.join", method = RequestMethod.GET)
-	public String goJoin(HttpServletRequest request, HttpServletResponse response) {
+	public String goJoin(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
 		request.setAttribute("contentPage", "member/join.jsp");
 		return "index"; 
 	}
 	
 	@RequestMapping(value = "/do.join", method = RequestMethod.POST)
 	public String doJoin(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
 		mDAO.join(m, request, response);
 		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
 		return "index"; 
@@ -37,10 +50,4 @@ public class MemberController {
 		return mDAO.idCheck(m); 
 	}
 	
-	@RequestMapping(value = "/do.login", method = RequestMethod.POST)
-	public String doLogin(Member m, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.login(m, request, response);
-		request.setAttribute("contentPage", "member/login.jsp");
-		return "index"; 
-	}
 }
