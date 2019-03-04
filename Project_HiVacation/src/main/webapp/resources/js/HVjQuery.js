@@ -39,11 +39,14 @@ var markers = [];
 var contentString = "표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko";
 
 function initMap() {
-	map = new google.maps.Map(document.getElementById('step1Map'), {
-		center: {lat: 37.5693619, lng: 126.9837841},
-		zoom: 15,
-		mapTypeControl: false
-	});
+	var loadMap = document.getElementById('step1Map');
+	if (loadMap != null) {
+		map = new google.maps.Map(loadMap, {
+			center: {lat: 37.5693619, lng: 126.9837841},
+			zoom: 15,
+			mapTypeControl: false
+		});
+	}
 	
 	//검색하면 -> dropAllMarker();
 	
@@ -116,39 +119,6 @@ function connectSummonAddInputEventUpdate() {
 	});
 }
 
-function connectSummonAddInputEventUpdate() {
-	$("#updateAddressSearchButton").click(function(){
-		new daum.Postcode({
-			oncomplete: function(data) {
-		    	$("#updatePostNo").val(data.zonecode);
-		    	$("#updateAddress").val(data.address);
-			}
-		}).open();
-	});
-}
-
-function connectSummonAddInputEventUpdate() {
-	$("#updateAddressSearchButton").click(function(){
-		new daum.Postcode({
-			oncomplete: function(data) {
-		    	$("#updatePostNo").val(data.zonecode);
-		    	$("#updateAddress").val(data.address);
-			}
-		}).open();
-	});
-}
-
-function connectSummonAddInputEventUpdate() {
-	$("#updateAddressSearchButton").click(function(){
-		new daum.Postcode({
-			oncomplete: function(data) {
-		    	$("#updatePostNo").val(data.zonecode);
-		    	$("#updateAddress").val(data.address);
-			}
-		}).open();
-	});
-}
-
 function connectIdCheckEvent() {
 	$("#joinid").keyup(function() {
 		var id = $(this).val();
@@ -164,15 +134,14 @@ function connectIdCheckEvent() {
 	});
 }
 
-var isMyMenuClicked = 0;
+var isMyMenuClicked = 1;
 function myMenuLocationControl() {
 	$("#afterLoginMenuDiv").click(function() {
-		if (isMyMenuClicked == 0) {
+		if (isMyMenuClicked == 1) {
 			$("#myMenuTable").css("top", "40px");
-			isMyMenuClicked = 1;
 		} else {
 			$("#myMenuTable").css("top", "-130px");
-			isMyMenuClicked = 0;
 		}
+		isMyMenuClicked *= -1;
 	});
 }

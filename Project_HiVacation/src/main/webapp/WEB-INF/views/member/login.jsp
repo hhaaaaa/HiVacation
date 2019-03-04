@@ -10,22 +10,20 @@
 	<form action="do.login" name="loginForm" method="post" onsubmit="return login();">
 		<table id="loginDoTable">
 			<tr>
-				<td align="center" class="loginDoTd" colspan="2"><input
-					id="hm_id" name="hm_id" autocomplete="off" autofocus="autofocus"
-					placeholder="&nbsp;&nbsp;ID" maxlength="15"></td>
+				<td align="center" class="loginDoTd" colspan="2">
+					<input id="hm_id" name="hm_id" autocomplete="off" autofocus="autofocus" placeholder="&nbsp;&nbsp;ID" maxlength="15">
+				</td>
 			</tr>
 			<tr>
-				<td align="center" class="loginDoTd" colspan="2"><input
-					id="hm_pw" name="hm_pw" autocomplete="off"
-					placeholder="&nbsp;&nbsp;PW" maxlength="20"></td>
+				<td align="center" class="loginDoTd" colspan="2">
+					<input id="hm_pw" name="hm_pw" type="password" autocomplete="off" placeholder="&nbsp;&nbsp;PW" maxlength="20">
+				</td>
 			</tr>
+			<tr><td></td></tr>
 			<tr>
-				<td></td>
-			</tr>
-			<tr>
-				<td align="center" class="loginDoTdSmall"
-					style="font-size: 10pt; height: 20px;"><input type="checkbox"
-					name="hm_auto">자동로그인</td>
+				<td align="center" class="loginDoTdSmall" style="font-size: 10pt; height: 20px;">
+					<input type="checkbox" name="hm_auto">자동로그인
+				</td>
 				<td align="center" class="loginDoTdSmall" rowspan="2">
 					<button id="loginButton">로그인</button>
 				</td>

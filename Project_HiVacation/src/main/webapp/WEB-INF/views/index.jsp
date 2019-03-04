@@ -19,8 +19,6 @@
 <script type="text/javascript" src="resources/js/validCheck.js"></script>
 <script type="text/javascript" src="resources/js/HVjQuery.js"></script>
 <script type="text/javascript" src="resources/js/go.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY&libraries=drawing"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY&libraries=places"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY&language=kr&region=KR"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"> 
