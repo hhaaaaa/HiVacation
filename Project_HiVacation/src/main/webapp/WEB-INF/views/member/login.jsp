@@ -17,7 +17,8 @@
 			<tr>
 				<td align="center" class="loginDoTd" colspan="2"><input
 					id="hm_pw" name="hm_pw" autocomplete="off"
-					placeholder="&nbsp;&nbsp;PW" maxlength="20"></td>
+					placeholder="&nbsp;&nbsp;PW" maxlength="20"
+					type="password"></td>
 			</tr>
 			<tr>
 				<td></td>

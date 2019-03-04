@@ -66,7 +66,7 @@ public class MemberController {
 		return "index"; 
 	}
 	
-	@RequestMapping(value = "/do.update", method = RequestMethod.GET)
+	@RequestMapping(value = "/do.update", method = RequestMethod.POST)
 	public String doUpdate(Member m, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
 		mDAO.update(m, request, response);

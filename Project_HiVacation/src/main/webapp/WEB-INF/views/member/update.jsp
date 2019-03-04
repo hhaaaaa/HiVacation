@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="do.update" name="updateForm" onsubmit="return update();">
+	<form action="do.update" name="updateForm" method="post" onsubmit="return update();">
 		<table id="updateTable">
 			<tr>
 				<td class="updateTd" colspan="2">
