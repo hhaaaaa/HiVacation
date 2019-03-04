@@ -5,11 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Hi Vacation</title>
-<link rel="stylesheet" href="resources/css/index.css">   
+<link rel="stylesheet" href="resources/css/index.css">    
 <link rel="stylesheet" href="resources/css/member/login.css">
 <link rel="stylesheet" href="resources/css/member/beforeLogin.css">
 <link rel="stylesheet" href="resources/css/member/afterLogin.css">
 <link rel="stylesheet" href="resources/css/member/join.css">
+<link rel="stylesheet" href="resources/css/member/update.css">
 <link rel="stylesheet" href="resources/css/scheduling/scheduling.css">
 <link rel="stylesheet" href="resources/css/sns/sns.css">
 <link rel="stylesheet" href="resources/css/sns/snsWrite.css">
@@ -24,7 +25,8 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"> 
 	$(function() {
-		connectSummonAddInputEvent();
+		connectSummonAddInputEventJoin();
+		connectSummonAddInputEventUpdate();
 		connectIdCheckEvent();
 		schedulingPaging();
 		initMap();

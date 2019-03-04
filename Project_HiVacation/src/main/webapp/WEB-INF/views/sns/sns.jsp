@@ -9,7 +9,7 @@
 <body>
 	<div id="snsTotalDiv">
 		<div id="snsWriteGoDiv" onclick="goSnsWrite();">글쓰기</div>
-		<table id="snsMenuTable">   
+		<table id="snsMenuTable">    
 			<tr>
 				<td align="center" id="snsNoMenu">
 					번호

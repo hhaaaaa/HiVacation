@@ -17,6 +17,11 @@ function goHome() {
 function goSns() {
 	location.href="go.sns";
 }
+
 function goSnsWrite() {
 	location.href="go.sns.write";
+} 
+
+function goUpdate() {
+	location.href="go.update";
 }

@@ -50,4 +50,19 @@ public class MemberController {
 		return mDAO.idCheck(m); 
 	}
 	
+	@RequestMapping(value = "/go.update", method = RequestMethod.GET)
+	public String goUpdate(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
+		mDAO.divideAddr(request, response);
+		request.setAttribute("contentPage", "member/update.jsp");
+		return "index"; 
+	}
+	
+	@RequestMapping(value = "/do.update", method = RequestMethod.GET)
+	public String doUpdate(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
+		mDAO.update(m, request, response);
+		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
+		return "index"; 
+	}
 }
