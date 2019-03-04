@@ -45,12 +45,23 @@ function initMap() {
 // -----------------------------------------------------
 
 // 멤버 ##############################################################
-function connectSummonAddInputEvent() {
+function connectSummonAddInputEventJoin() {
 	$("#joinAddressSearchButton").click(function(){
 		new daum.Postcode({
 			oncomplete: function(data) {
 		    	$("#joinPostNo").val(data.zonecode);
 		    	$("#joinAddress").val(data.address);
+			}
+		}).open();
+	});
+}
+
+function connectSummonAddInputEventUpdate() {
+	$("#updateAddressSearchButton").click(function(){
+		new daum.Postcode({
+			oncomplete: function(data) {
+		    	$("#updatePostNo").val(data.zonecode);
+		    	$("#updateAddress").val(data.address);
 			}
 		}).open();
 	});

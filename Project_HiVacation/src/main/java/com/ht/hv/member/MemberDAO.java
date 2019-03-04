@@ -96,4 +96,33 @@ public class MemberDAO {
 		request.setAttribute("loginPage", "member/beforeLogin.jsp");
 		return false;
 	}
+
+	public void divideAddr(HttpServletRequest request, HttpServletResponse response){
+		Member m = (Member) request.getSession().getAttribute("loginMember");
+		String[] addr= m.getHm_address().split(";");
+		request.setAttribute("addr1", addr[0]);
+		request.setAttribute("addr2", addr[1]);
+		request.setAttribute("addr3", addr[2]);
+	}
+	
+	public void update(Member m, HttpServletRequest request, HttpServletResponse response){
+		Member m1 = (Member) request.getSession().getAttribute("loginMember");
+		MemberMapper mm = ss.getMapper(MemberMapper.class);
+		HttpSession hs = request.getSession();
+		
+		m.setHm_id(m1.getHm_id());
+		
+		String address1 = request.getParameter("address1");
+		String address2 = request.getParameter("address2");
+		String address3 = request.getParameter("address3");
+		m.setHm_address(address1+";"+address2+";"+address3);
+		
+		if(mm.update(m)==1){
+			request.setAttribute("r", "정보수정 완료");
+			hs.setAttribute("loginMember", m);
+		}else{
+			request.setAttribute("r", "정보수정 실패");
+		}
+	}
+
 }

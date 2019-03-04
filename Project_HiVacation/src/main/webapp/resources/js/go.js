@@ -17,3 +17,7 @@ function goHome() {
 function goSns() {
 	location.href="go.sns";
 }
+
+function goUpdate() {
+	location.href="go.update";
+}

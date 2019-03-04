@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="resources/css/member/beforeLogin.css">
 <link rel="stylesheet" href="resources/css/member/afterLogin.css">
 <link rel="stylesheet" href="resources/css/member/join.css">
+<link rel="stylesheet" href="resources/css/member/update.css">
 <link rel="stylesheet" href="resources/css/scheduling/scheduling.css">
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
@@ -20,7 +21,8 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"> 
 	$(function() {
-		connectSummonAddInputEvent();
+		connectSummonAddInputEventJoin();
+		connectSummonAddInputEventUpdate();
 		connectIdCheckEvent();
 		schedulingPaging();
 		initMap();
