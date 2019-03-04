@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Hi Vacation</title>
-<link rel="stylesheet" href="resources/css/index.css"> 
+<link rel="stylesheet" href="resources/css/index.css">  
 <link rel="stylesheet" href="resources/css/member/login.css">
 <link rel="stylesheet" href="resources/css/member/beforeLogin.css">
 <link rel="stylesheet" href="resources/css/member/afterLogin.css">

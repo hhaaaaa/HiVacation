@@ -11,7 +11,7 @@
 		<table id="joinTable">
 			<tr>
 				<td class="joinTd">
-					<div> 
+					<div>  
 						<input id="joinid" name="hm_id" placeholder="&nbsp;&nbsp;ID" class="joinInputSmall" maxlength="15" autocomplete="off" autofocus="autofocus">
 						<span id="joinIdOk" onsubmit="goCheckId();">ID확인</span>
 					</div>
