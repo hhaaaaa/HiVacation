@@ -31,7 +31,7 @@
 				</tr>
 				<tr><td><br></td></tr>
 				<tr>
-					<td align="right" colspan="2">  
+					<td align="right" colspan="2">   
 						<button id="snsWriteButton">글쓰기</button>
 					</td>
 				</tr>

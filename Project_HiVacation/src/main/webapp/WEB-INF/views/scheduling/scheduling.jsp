@@ -12,7 +12,7 @@
 			<td align="center" class="schedulingMenuTd" id="step1Menu">Search</td>
 			<td align="center" class="schedulingMenuTd" id="step2Menu">Choice</td>
 			<td align="center" class="schedulingMenuTd" id="step3Menu">Budget</td>
-			<td class="schedulingMenuTd"></td>  
+			<td class="schedulingMenuTd"></td>   
 			<td class="schedulingMenuTd"></td>
 		</tr>
 	</table>

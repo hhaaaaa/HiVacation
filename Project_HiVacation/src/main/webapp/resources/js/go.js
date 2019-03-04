@@ -1,6 +1,6 @@
 function goPageInfo() {
 	location.href="go.pageInfo";
-}  
+}   
 
 function goLogin() {
 	location.href="go.login";
