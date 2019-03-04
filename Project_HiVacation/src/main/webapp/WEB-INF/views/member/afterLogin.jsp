@@ -25,7 +25,7 @@
 			<td align="center" class="goMyMenu" onclick="goUpdate();">정보수정</td>
 		</tr>
 		<tr>
-			<td align="center" class="goMyMenu">로그아웃</td>
+			<td align="center" class="goMyMenu" onclick="doLogout();">로그아웃</td>
 		</tr>
 	</table>
 </body>
