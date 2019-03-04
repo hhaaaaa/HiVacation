@@ -97,6 +97,21 @@ public class MemberDAO {
 		return false;
 	}
 
+	public void logout(Member m, HttpServletRequest request, HttpServletResponse response){
+		request.getSession().setAttribute("loginMember", null);
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null){
+			for (Cookie c : cookies) {
+				if(c.getName().equals("autoLoginID")){
+					c.setValue(null);
+					response.addCookie(c);
+				}
+				break;
+			}
+		}
+		request.setAttribute("r", "로그아웃 완료");
+	}
+
 	public void divideAddr(HttpServletRequest request, HttpServletResponse response){
 		Member m = (Member) request.getSession().getAttribute("loginMember");
 		String[] addr= m.getHm_address().split(";");

@@ -10,6 +10,10 @@ function goJoin() {
 	location.href="go.join";
 }
 
+function doLogout() {
+	location.href="do.logout";
+}
+
 function goHome() {
 	location.href="go.home";
 }
@@ -25,3 +29,4 @@ function goSnsWrite() {
 function goUpdate() {
 	location.href="go.update";
 }
+

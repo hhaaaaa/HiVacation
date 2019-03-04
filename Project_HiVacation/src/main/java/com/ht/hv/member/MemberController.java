@@ -50,6 +50,14 @@ public class MemberController {
 		return mDAO.idCheck(m); 
 	}
 	
+	@RequestMapping(value = "/do.logout", method = RequestMethod.GET)
+	public String doLogout(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.logout(m, request, response);
+		mDAO.loginCheck(m, request, response);
+		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
+		return "index"; 
+	}
+	
 	@RequestMapping(value = "/go.update", method = RequestMethod.GET)
 	public String goUpdate(Member m, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
