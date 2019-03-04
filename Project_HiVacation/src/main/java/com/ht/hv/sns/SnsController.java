@@ -27,7 +27,7 @@ public class SnsController {
 	@RequestMapping(value = "/go.sns.write", method = RequestMethod.GET)
 	public String goSnsWrite(Member m, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
-		request.setAttribute("contentPage", "sns/snsWrite.jsp");     
+		request.setAttribute("contentPage", "sns/snsWrite.jsp");      
 		return "index"; 
 	}
 }

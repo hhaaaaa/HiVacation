@@ -78,7 +78,7 @@ function clearMarkers() {
 	}
 	markers = [];
 }*/
-     
+      
 
 // 마커 클릭했을 때, 정보 뜨도록
 /*
@@ -100,6 +100,17 @@ function connectSummonAddInputEventJoin() {
 			oncomplete: function(data) {
 		    	$("#joinPostNo").val(data.zonecode);
 		    	$("#joinAddress").val(data.address);
+			}
+		}).open();
+	});
+}
+
+function connectSummonAddInputEventUpdate() {
+	$("#updateAddressSearchButton").click(function(){
+		new daum.Postcode({
+			oncomplete: function(data) {
+		    	$("#updatePostNo").val(data.zonecode);
+		    	$("#updateAddress").val(data.address);
 			}
 		}).open();
 	});
