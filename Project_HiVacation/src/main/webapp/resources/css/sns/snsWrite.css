@@ -34,7 +34,7 @@
 }
 #snsWriteButton {
 	outline: none;
-	border: black solid 1px;
+	border: black solid 1px; 
 	font-weight: 900;
 	background-color: transparent;
 	cursor: pointer;

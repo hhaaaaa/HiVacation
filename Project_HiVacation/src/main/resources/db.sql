@@ -4,7 +4,7 @@ create table hv_member(
 	hm_name varchar2(10 char) not null,
 	hm_address varchar2(100 char) not null
 );
-      
+       
 create table hv_sns(
 	hs_no number(5) primary key,
 	hs_id varchar2(15 char) not null,
