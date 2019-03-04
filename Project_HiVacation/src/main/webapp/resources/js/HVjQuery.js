@@ -138,6 +138,17 @@ function connectSummonAddInputEventUpdate() {
 	});
 }
 
+function connectSummonAddInputEventUpdate() {
+	$("#updateAddressSearchButton").click(function(){
+		new daum.Postcode({
+			oncomplete: function(data) {
+		    	$("#updatePostNo").val(data.zonecode);
+		    	$("#updateAddress").val(data.address);
+			}
+		}).open();
+	});
+}
+
 function connectIdCheckEvent() {
 	$("#joinid").keyup(function() {
 		var id = $(this).val();
