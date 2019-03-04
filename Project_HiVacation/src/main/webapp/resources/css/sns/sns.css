@@ -1,0 +1,59 @@
+@CHARSET "UTF-8";
+#snsTotalDiv {
+	width: 1000px;
+	margin-top: 10px;
+}
+#snsWriteGoDiv {
+	position: relative;
+	left: 430px;
+	width: 60px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	color: grey;
+}
+#snsWriteGoDiv:hover {
+	text-shadow: 1px 1px 1px grey;
+}
+#snsMenuTable {
+	width: 100%;
+	border: black solid 2px;
+	border-left: none;
+	border-right: none;
+}
+#snsNoMenu {
+	width: 70px;
+}
+#snsTitleMenu {
+	width: 650px;
+}
+#snsIdMenu {
+	width: 140px;
+}
+#snsDateMenu {
+	width: 140px;
+}
+
+#snsContentTable {
+	border: none;
+	border-bottom: grey solid 1px;
+}
+
+#searchSnsSelect {
+	outline: none;
+	height: 21px;
+}
+#searchSnsInput {
+	outline: none;
+}
+#searchSnsButton {
+	color: black;
+	background-color: transparent;
+	border: black solid 1px;
+	outline: none;
+	cursor: pointer;
+	font-size: 10pt;
+	font-weight: 900;
+	height: 22px;
+	position: relative;
+	top: 2px;
+}

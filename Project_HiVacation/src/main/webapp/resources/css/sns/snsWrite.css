@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+#snsWriteTotalDiv {
+	width: 1000px;
+	margin-top: 10px;
+}
+#snsWriteTable {
+	width: 700px;
+	border-spacing: 0px;
+}
+.snsWriteMenu {
+	width: 70px; 
+	font-size: 11pt;
+	border-bottom: black solid 1px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+#snsTitle {
+	width: 580px;
+	outline: none;
+	height: 30px;
+	border: none;
+}
+#snsText {
+	margin-left: 1px;
+	width: 578px;
+	height: 290px;
+	resize: none;
+	outline: none;
+	border: none;
+}
+#snsImage {
+	width: 580px;
+	outline: none;
+}
+#snsWriteButton {
+	outline: none;
+	border: black solid 1px;
+	font-weight: 900;
+	background-color: transparent;
+	cursor: pointer;
+	width: 70px;
+	height: 25px;
+}
+#goSnsListDiv {
+	border: black solid 1px;
+	font-weight: 900;
+	cursor: pointer;
+	width: 80px;
+	height: 21px;
+	font-size: 10pt;
+	padding-top: 2px;
+	position: fixed;
+	top: 574px;
+	left: 513px;
+}

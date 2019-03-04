@@ -8,6 +8,7 @@ create table hv_member(
 create table hv_sns(
 	hs_no number(5) primary key,
 	hs_id varchar2(15 char) not null,
+	hs_title varchar2(150 char) not null,
 	hs_text varchar2(2500 char) not null,
 	hs_date date not null,
 	hs_img varchar2(150 char) not null,
@@ -57,7 +58,7 @@ create table hv_plan(
 	hp_city varchar2(20 char) not null,
 	hp_store varchar2(50 char) not null,
 	hp_location varchar2(100 char) not null,
-	hp_url varchar2(100 char) not null
+	hp_url varchar2(100 char) not null,
 	hp_phone varchar2(13 char) not null,
 	constraint c_plan 
 		foreign key(hp_id) 

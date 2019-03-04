@@ -23,4 +23,11 @@ public class SnsController {
 		request.setAttribute("contentPage", "sns/sns.jsp");
 		return "index"; 
 	}
+	
+	@RequestMapping(value = "/go.sns.write", method = RequestMethod.GET)
+	public String goSnsWrite(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
+		request.setAttribute("contentPage", "sns/snsWrite.jsp");
+		return "index"; 
+	}
 }

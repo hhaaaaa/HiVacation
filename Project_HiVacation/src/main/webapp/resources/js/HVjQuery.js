@@ -33,13 +33,62 @@ function schedulingPaging() {
 	});
 }
 
+// 홈 지도 불러오기
 var map;
+var markers = [];
+var contentString = "표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko";
+
 function initMap() {
 	map = new google.maps.Map(document.getElementById('step1Map'), {
 		center: {lat: 37.5693619, lng: 126.9837841},
-		zoom: 15
+		zoom: 15,
+		mapTypeControl: false
 	});
+	
+	//검색하면 -> dropAllMarker();
+	
+	/*marker.addListener('click', function(e) {
+		showPlaceInfo();
+	});
+	google.maps.event.clearInstanceListeners(marker);*/
 }
+
+// 여행검색하면 마커 찍히도록
+/*
+function dropAllMarker() {
+	clearMarkers();
+	for (var i = 0; i < "검색된데이터위치".length; i++) {
+		addMarkerWithTimeout("검색된데이터위치"[i], i * 200);
+	}
+}
+function addMarkerWithTimeout(position, timeout) {
+	window.setTimeout(function() {
+		markers.push(new google.maps.Marker({
+			position: position,
+			map: map,
+			animation: google.maps.Animation.DROP,
+			title: "검색된이름"
+		}));
+	}, timeout);
+}
+// 끝나면 초기화해주기 위함
+function clearMarkers() {
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(null);
+	}
+	markers = [];
+}*/
+
+
+// 마커 클릭했을 때, 정보 뜨도록
+/*
+function showPlaceInfo() {
+	var infowindow = new google.maps.InfoWindow({
+		content: contentString,
+		maxWidth: 200
+	});
+	infowindow.open(map, markers);	// .open 공부 필요, markers 자리 어떻게 처리해야??
+}*/
 
 
 // -----------------------------------------------------
@@ -71,15 +120,15 @@ function connectIdCheckEvent() {
 	});
 }
 
-var isMyMenuCliced = 0;
+var isMyMenuClicked = 0;
 function myMenuLocationControl() {
 	$("#afterLoginMenuDiv").click(function() {
-		if (isMyMenuCliced == 0) {
+		if (isMyMenuClicked == 0) {
 			$("#myMenuTable").css("top", "40px");
-			isMyMenuCliced = 1;
+			isMyMenuClicked = 1;
 		} else {
 			$("#myMenuTable").css("top", "-130px");
-			isMyMenuCliced = 0;
+			isMyMenuClicked = 0;
 		}
 	});
 }
