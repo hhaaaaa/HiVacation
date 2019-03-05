@@ -30,15 +30,22 @@ function goUpdate() {
 	location.href="go.update";
 }
 
+var checkBox = 0;
 function doWithdraw(hm_pw) {
-	
-	var presentPW = prompt('비밀번호를 입력하세요.','');
-	if(presentPW==hm_pw){
-		location.href="do.withdraw";
-	}else if(presentPW==null){
-		location.href="go.update";
-	}else{
-		alert("비밀번호가 틀립니다.");
-		location.href="go.update";
+	if (checkBox == 0) {
+		$("#withdrawPwCheck").css("top", "500px").css("left", "602px");
+		checkBox = 1;
+	} else {
+		$("#withdrawPwCheck").css("top", "-500px");
+		checkBox = 0;
 	}
+	$("#withdrawOK").click(function(){
+		var pw = $("#wpcPW").val();
+		if(pw==hm_pw){
+			location.href="do.withdraw";
+		}else{
+			alert("비밀번호가 틀립니다.");
+			location.href="go.update";
+		}
+	});
 }

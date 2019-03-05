@@ -63,3 +63,10 @@
 	background-color: transparent;
 	font-weight: 900;
 }
+#withdrawPwCheck{
+	position: fixed;
+	border : black solid 1px;
+	width : 392px;
+	top: -500px;
+	color: grey;
+}

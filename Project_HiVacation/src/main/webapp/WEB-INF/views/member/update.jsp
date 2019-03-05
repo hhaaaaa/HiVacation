@@ -60,5 +60,11 @@
 				</td>
 			</tr>
 		</table>
+		<div id="withdrawPwCheck"><h3>정말로 탈퇴하시겠습니까?</h3><br>
+						비밀번호 : <input id="wpcPW" type="password"><p>
+						<span id="withdrawOK">확인</span>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span onclick="goUpdate();">취소</span><p>
+		</div>
 </body>
 </html>
