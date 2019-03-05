@@ -10,4 +10,7 @@
 	<update id="update" parameterType="com.ht.hv.member.Member">
 		update hv_member set hm_pw=#{hm_pw}, hm_name=#{hm_name}, hm_address=#{hm_address} where hm_id=#{hm_id }
 	</update>
+	<delete id="withdraw" parameterType="com.ht.hv.member.Member">
+		delete from hv_member where hm_id=#{hm_id}
+	</delete>
 </mapper>

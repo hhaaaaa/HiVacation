@@ -30,3 +30,15 @@ function goUpdate() {
 	location.href="go.update";
 }
 
+function doWithdraw(hm_pw) {
+	
+	var presentPW = prompt('비밀번호를 입력하세요.','');
+	if(presentPW==hm_pw){
+		location.href="do.withdraw";
+	}else if(presentPW==null){
+		location.href="go.update";
+	}else{
+		alert("비밀번호가 틀립니다.");
+		location.href="go.update";
+	}
+}

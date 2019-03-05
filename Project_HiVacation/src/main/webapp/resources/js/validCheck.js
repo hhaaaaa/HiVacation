@@ -10,12 +10,12 @@ function join() {
 		hm_id.value = "";
 		hm_id.focus();
 		return false;
-	} else if (isEmpty(hm_pw) || containKS(hm_pw)) {
+	} else if (isEmpty(hm_pw)) {
 		alert("PW를 다시 입력해주세요.");
 		hm_pw.value = "";
 		hm_pw.focus();
 		return false;
-	} else if (isEmpty(hm_pw2) || containKS(hm_pw2)) {
+	} else if (isEmpty(hm_pw2)) {
 		alert("PW확인을 다시 입력해주세요.");
 		hm_pw2.value = "";
 		hm_pw2.focus();
@@ -73,7 +73,7 @@ function update() {
 		hm_pw.value = "";
 		hm_pw.focus();
 		return false;
-	} else if (isEmpty(hm_pw2) || containKS(hm_pw2)) {
+	} else if (isEmpty(hm_pw2)) {
 		alert("PW확인을 다시 입력해주세요.");
 		hm_pw2.value = "";
 		hm_pw2.focus();

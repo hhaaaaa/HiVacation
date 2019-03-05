@@ -97,7 +97,7 @@ public class MemberDAO {
 		return false;
 	}
 
-	public void logout(Member m, HttpServletRequest request, HttpServletResponse response){
+	public void logout(HttpServletRequest request, HttpServletResponse response){
 		request.getSession().setAttribute("loginMember", null);
 		Cookie[] cookies = request.getCookies();
 		if(cookies != null){
@@ -140,4 +140,15 @@ public class MemberDAO {
 		}
 	}
 
+	public void withdraw(Member m, HttpServletRequest request, HttpServletResponse response){
+		MemberMapper mm = ss.getMapper(MemberMapper.class);
+		
+		Member mb = (Member) request.getSession().getAttribute("loginMember");
+		m.setHm_id(mb.getHm_id());
+		if(mm.withdraw(m)==1){
+			logout(request, response);
+			request.setAttribute("r", "탈퇴 완료");
+		}
+	}
+	
 }

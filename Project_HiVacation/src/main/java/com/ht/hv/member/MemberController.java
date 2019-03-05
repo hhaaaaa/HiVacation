@@ -52,7 +52,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/do.logout", method = RequestMethod.GET)
 	public String doLogout(Member m, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.logout(m, request, response);
+		mDAO.logout(request, response);
 		mDAO.loginCheck(m, request, response);
 		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
 		return "index"; 
@@ -70,6 +70,14 @@ public class MemberController {
 	public String doUpdate(Member m, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
 		mDAO.update(m, request, response);
+		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
+		return "index"; 
+	}
+	
+	@RequestMapping(value = "/do.withdraw", method = RequestMethod.GET)
+	public String doWithdraw(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.withdraw(m, request, response);
+		mDAO.loginCheck(m, request, response);
 		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
 		return "index"; 
 	}

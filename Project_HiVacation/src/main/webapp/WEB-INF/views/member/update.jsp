@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="do.update" name="updateForm" method="post" onsubmit="return update();">
 		<table id="updateTable">
+	<form action="do.update" name="updateForm" method="post" onsubmit="return update();">
 			<tr>
 				<td class="updateTd" colspan="2">
 					<div>
@@ -56,7 +56,7 @@
 				</td>
 	</form>
 				<td class="updateTd2">
-					<button id="withdrawButton" >탈퇴</button>
+					<button id="withdrawButton" onclick="doWithdraw(${sessionScope.loginMember.hm_pw });">탈퇴</button>
 				</td>
 			</tr>
 		</table>
