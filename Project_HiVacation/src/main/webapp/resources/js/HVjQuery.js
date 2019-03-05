@@ -35,8 +35,10 @@ function schedulingPaging() {
 
 // 홈 지도 불러오기
 var map;
+var service;
+var locLatLng;
 var markers = [];
-var contentString = "표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko";
+//var contentString = "표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko";
 
 function initMap() {
 	var loadMap = document.getElementById('step1Map');
@@ -47,13 +49,67 @@ function initMap() {
 			mapTypeControl: false
 		});
 	}
-	
 	//검색하면 -> dropAllMarker();
 	
 	/*marker.addListener('click', function(e) {
 		showPlaceInfo();
 	});
 	google.maps.event.clearInstanceListeners(marker);*/
+}
+
+// 지역 검색 -> 지도 중앙 변경
+function searchLocationByQuery() {
+	var location;
+	
+	$("#step1SearchCity").keyup(function(e) {
+		location = $(this).val();
+		
+		var request = {
+			query: location,
+			fields: ['name', 'geometry', 'place_id']
+		};
+		service = new google.maps.places.PlacesService(map);
+		service.findPlaceFromQuery(request, function(results, status) {
+	    	if (status === google.maps.places.PlacesServiceStatus.OK) {
+	    		map.setCenter(results[0].geometry.location);
+	    		// results[0].name/geometry/place_id 로 접근가능!
+	    		locLatLng = new google.maps.LatLng({lat:map.getCenter().lat(), lng:map.getCenter().lng() });
+	    	}
+		});
+	});
+}
+
+// 돋보기 클릭 -> 카테고리 검색
+function searchDetailByKeyword() {
+	// 엔터쳐도 검색될 수 있도록
+	$("#step1SearchCategory").keyup(function(e) {
+		if (e.keyCode == 13) {
+			$("#step1SearchImg").trigger("click");
+		}
+	});
+	
+	var detail;
+	$("#step1SearchImg").click(function() {
+		detail = $("#step1SearchCategory").val();
+
+		var request = {
+			location: locLatLng,
+			radius: '1000',			// m단위
+			fields: ['name', 'geometry', 'place_id'],
+			keyword: detail
+			//type: ['restaurant']
+		};
+		service = new google.maps.places.PlacesService(map);
+		service.nearbySearch(request, function(results, status) {
+			if (status == google.maps.places.PlacesServiceStatus.OK) {
+				for (var i = 0; i < results.length; i++) {
+					var place = results[i];
+					alert(place);
+					//createMarker(results[i]);
+				}
+			}
+		});
+	});
 }
 
 // 여행검색하면 마커 찍히도록

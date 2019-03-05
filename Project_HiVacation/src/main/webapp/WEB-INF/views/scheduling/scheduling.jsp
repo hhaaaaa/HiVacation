@@ -20,7 +20,7 @@
 		<div id="step1Div">
 			Step1. 여행 검색<p>
 			<div id="step1Map"></div>
-			<input id="step1SearchCity" placeholder="도시" autocomplete="off" autofocus="autofocus">
+			<input id="step1SearchCity" placeholder="지역" autocomplete="off" autofocus="autofocus">
 			<input id="step1SearchCategory" placeholder="카테고리" autocomplete="off">
 			<img id="step1SearchImg" src="resources/img/search_black.png"><p>
 			<table id="step1SearchResult"></table><p>
