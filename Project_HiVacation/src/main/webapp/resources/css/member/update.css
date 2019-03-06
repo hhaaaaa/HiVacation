@@ -15,12 +15,14 @@
 }
 .updateInputSmall {
 	width: 75%;
+	padding-left: 5px;
 }
 
 .updateInput {
 	width: 99%;
 	height: 25px;
 	outline: none;
+	padding-left: 5px;
 }
 #updatepw {
 }
@@ -62,6 +64,7 @@
 	height: 25px;
 	background-color: transparent;
 	font-weight: 900;
+	cursor: pointer;
 }
 #withdrawPwCheck{
 	position: fixed;
@@ -69,4 +72,9 @@
 	width : 392px;
 	top: -500px;
 	color: grey;
+	font-size: 10pt;
+}
+#wpcPW {
+	outline: none;
+	width: 250px;
 }

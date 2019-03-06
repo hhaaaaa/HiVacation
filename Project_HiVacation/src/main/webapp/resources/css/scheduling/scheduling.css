@@ -1,8 +1,7 @@
 @CHARSET "UTF-8";
 #schedulingMenuTable {
-	position: fixed;
+	position: absolute;
 	left: 300px;
-	margin-top: 10px;
 	width: 1000px;
 	border-spacing: 0px;
 }
@@ -34,7 +33,7 @@
 }
 #step1Div {
 	padding-top: 5px;
-	position: fixed;
+	position: absolute;
 	top: 195px;
 	left: 300px;
 	width: 1000px;
@@ -78,7 +77,7 @@
 	cursor: pointer;
 }
 .cannotSeeFirstDiv {
-	position: fixed;
+	position: absolute;
 	top: 195px;
 	left: -1200px;
 	width: 1000px;

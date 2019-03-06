@@ -12,6 +12,7 @@
 }
 .joinInputSmall {
 	width: 75%;
+	padding-left: 5px;
 }
 #joinIdOk {
 	font-size: 10pt;
@@ -20,6 +21,7 @@
 	width: 99%;
 	height: 25px;
 	outline: none;
+	padding-left: 5px;
 }
 #joinpw {
 }

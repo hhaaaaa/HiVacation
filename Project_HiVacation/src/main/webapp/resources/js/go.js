@@ -39,6 +39,7 @@ function doWithdraw(hm_pw) {
 		$("#withdrawPwCheck").css("top", "-500px");
 		checkBox = 0;
 	}
+	
 	$("#withdrawOK").click(function(){
 		var pw = $("#wpcPW").val();
 		if(pw==hm_pw){

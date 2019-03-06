@@ -17,7 +17,8 @@
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
 <script type="text/javascript" src="resources/js/validCheck.js"></script>
-<script type="text/javascript" src="resources/js/HVjQuery.js"></script>
+<script type="text/javascript" src="resources/js/memberJquery.js"></script>
+<script type="text/javascript" src="resources/js/mapJquery.js"></script>
 <script type="text/javascript" src="resources/js/go.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY&language=ko&region=KO"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY&libraries=places"></script>
@@ -38,9 +39,9 @@
 <body>
 	<table id="totalPageTable">
 		<tr>
-			<td align="center">
+			<td align="center" style="background-color: white;">
 				<span id="actionResultSpan">${r }</span>
-				<!-- <span id="borderWhiteSpan"></span> -->
+				<span id="borderWhiteSpan"></span>
 				<table id="MenuTable">
 					<tr>
 						<td align="center" id="goAboutUs" onclick="goPageInfo();">AboutUs</td>
@@ -57,7 +58,10 @@
 						</td>
 					</tr>
 				</table>
-				
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<table id="contentTable">
 					<tr>
 						<td align="center">

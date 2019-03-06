@@ -23,7 +23,11 @@
 			<input id="step1SearchCity" placeholder="지역" autocomplete="off" autofocus="autofocus">
 			<input id="step1SearchCategory" placeholder="카테고리" autocomplete="off">
 			<img id="step1SearchImg" src="resources/img/search_black.png"><p>
-			<table id="step1SearchResult"></table><p>
+			<table id="step1SearchResult">
+				<tr><td>
+					<!-- 검색 결과 출력할 테이블 -->
+				</td></tr>
+			</table><p>
 		</div>
 		<div id="step2Div" class="cannotSeeFirstDiv">
 			Step2. 찜 목록 &amp; 일정 저장<p>
