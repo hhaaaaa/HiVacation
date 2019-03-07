@@ -24,7 +24,7 @@
 			<input id="step1SearchCategory" placeholder="카테고리" autocomplete="off">
 			<img id="step1SearchImg" src="resources/img/search_black.png"><p>
 			<table id="step1SearchResult">
-				<tr><td>
+				<tr><td id="step1ResultTd">
 					<!-- 검색 결과 출력할 테이블 -->
 				</td></tr>
 			</table><p>

@@ -4,6 +4,7 @@ var service;
 var locLatLng;
 var markers = [];
 var searchedResult = [];
+var detailedResult = [];
 var srIndex;
 //var contentString = "표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko";
 
@@ -86,31 +87,32 @@ function searchDetailByKeyword() {
 	
 	var detail;
 	$("#step1SearchImg").click(function() {
-		var start = -20;
-		var end = -1;
 		searchedResult = [];
+//		detailedResult = [];
 		srIndex = 0;
+		
+		clearMarkers();
 		detail = $("#step1SearchCategory").val();
 
 		var request = {
 			location: locLatLng,
 			radius: '4000',			// m단위
-			fields: ['name', 'geometry', 'place_id', 'formatted_address', 
-					 'formatted_phone_number', 'icon', 'photos', 'rating', 
-					 'url', 'website'],
+			fields: ['name', 'geometry', 'place_id', 'photos'],
 			keyword: detail
 			//type: ['restaurant']
 		};
 		service = new google.maps.places.PlacesService(map);
+		// nearby 검색으로 위치, 장소명, place_id, 사진 챙기고,
+//		// detail 검색으로 별점, 전화번호, 주소, 웹사이트 챙기자!
 		service.nearbySearch(request, function(results, status, pagination) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
-				start += 20;
-				if (results.length < 20) {end += results.length;} 
-				else {end += 20;}
-				
 				for (var i = 0; i < results.length; i++) {
 					// 모든 페이지의 마커 한번에 출력할 수 있도록
 					searchedResult[srIndex] = results[i];
+					
+					// 테이블/infowindow 출력 위한 상세 정보 검색
+//					????????getDetails()
+					
 					srIndex += 1;
 				}
 				
@@ -120,12 +122,13 @@ function searchDetailByKeyword() {
 			    };
 			    if (getNextPage) {
 			    	getNextPage();
+			    } else {
+			    	// 모든 검색 결과 마커로 출력
+			    	dropAllMarker(searchedResult);
+			    	
+			    	// 모든 검색 결과 테이블로 출력
+			    	printSearchedResult(searchedResult);
 			    }
-			    // 모든 검색 결과 마커로 출력
-			    dropAllMarker(searchedResult);
-			    
-			    // 모든 검색 결과 테이블로 출력
-			    printSearchedResult(searchedResult, start, end);
 			    
 				/*marker.addListener('click', function(e) {
 					showPlaceInfo();
@@ -133,13 +136,10 @@ function searchDetailByKeyword() {
 				google.maps.event.clearInstanceListeners(marker);*/
 			}
 		});
-		// 여기다하면 2초문제 해결할 수 있을것같은데...
-		//dropAllMarker(searchedResult);
 	});
 }
 // ### 여행검색하면 마커 찍히도록 ###
 function dropAllMarker(data) {
-	//clearMarkers();
 	for (var i = 0; i < data.length; i++) {
 		addMarkerWithTimeout(data[i], 0);
 	}
@@ -163,23 +163,17 @@ function clearMarkers() {
 	markers = [];
 }
        
-// 검색 결과 출력해주기
-function printSearchedResult(data, start, end) {
-	//alert(data.length);
-	alert(end - start + 1);
-//	for (var i = start; i < end; i++) {
-//		alert(searchedResult[i].name);
-//	}
-//	alert(searchedResult[1].photos);
-//	alert(searchedResult[1].formatted_phone_number);
-//	alert(searchedResult[1].formatted_address);
-//	alert(searchedResult[1].url);
-//	alert(searchedResult[1].website);
-//	alert(searchedResult[1].rating);
-//	alert(searchedResult[0].icon);
-//	var td1 = $("<td></td>").
-//  var tr1 = $("<tr></tr>").append(td1, );
-//    $("<table></table>").append(tr1, );
+// ### 검색 결과 출력해주기 ###
+function printSearchedResult(data) {
+	var d;
+	for (var i = 0; i < data.length; i++) {
+		d = data[i];
+		var td1 = $("<td></td>").html(d.name + "," + d.rating + "," + d.place_id);
+//		// detail 정보 어떻게 받아와서 처리할 건지??
+		var tr1 = $("<tr></tr>").append(td1);
+		var table = $("<table></table>").append(tr1);
+		$("#step1ResultTd").append(table);
+	}
 }
 
 // ### 마커 클릭했을 때, InfoWindow 뜨도록 설정 ###
