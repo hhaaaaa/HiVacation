@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="snsWriteTotalDiv">
-		<form action="do.sns.write" name="snsWriteForm" onsubmit="" method="post">
+		<form action="do.sns.write" name="snsWriteForm" onsubmit="" method="post" enctype="multipart/form-data">
 			<table id="snsWriteTable">
 				<tr><td></td></tr>
 				<tr>

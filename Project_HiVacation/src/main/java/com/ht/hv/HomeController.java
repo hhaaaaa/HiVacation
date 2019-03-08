@@ -15,6 +15,7 @@ import com.ht.hv.sns.SnsDAO;
 public class HomeController {
 	@Autowired
 	private MemberDAO mDAO;
+	
 	@Autowired
 	private SnsDAO sDAO;
 	

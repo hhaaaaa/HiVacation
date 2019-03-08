@@ -7,8 +7,6 @@ var markers = [];
 var searchedResult = [];
 var detailedResult = [];
 var srIndex;
-var infowindow;
-var contentString = "hi";//"표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko";
 
 // ### 홈 페이지 화면 조정 ###
 function schedulingPaging() {
@@ -159,7 +157,7 @@ function addMarkerWithTimeout(data, timeout) {
 		})
 		markers.push(marker);
 		google.maps.event.addListener(marker, 'click', function() {
-    		showPlaceInfo(marker);
+    		showPlaceInfo(marker, data);
     	});
 	}, timeout);
 }
@@ -190,9 +188,28 @@ function printSearchedResult(data) {
 }
 
 // ### 마커 클릭했을 때, InfoWindow 뜨도록 설정 ###
-function showPlaceInfo(marker) {
+function showPlaceInfo(marker, data) {
 	var infowindow = new google.maps.InfoWindow({
-		content: contentString,
+		// 표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko
+		content: "<table>" +
+				"	<tr>" +
+				"		<td rowspan=\"3\">사진</td>" +
+						"<td>장소명</td>" +
+						"<td>찜</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"2\">전화번호</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"2\">별점</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"3\">주소</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"3\">홈페이지</td>" +
+				"	</tr>" +
+				"</table>",
 		maxWidth: 200
 	});
 	infowindow.open(map, marker);	// .open 공부 필요, markers 자리 어떻게 처리해야??

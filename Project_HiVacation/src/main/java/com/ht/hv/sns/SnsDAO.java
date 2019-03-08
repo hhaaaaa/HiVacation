@@ -11,11 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ht.hv.member.Member;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+@Service
 public class SnsDAO {
 
 	private int allMsgCount;
@@ -44,6 +46,7 @@ public class SnsDAO {
 				request.setAttribute("r","글쓰기 완료");
 				allMsgCount++;
 			}
+			
 		} catch (Exception e) {
 			request.setAttribute("r","글쓰기 실패");
 			e.printStackTrace();
@@ -79,16 +82,11 @@ public class SnsDAO {
 			
 			int start = (searchMsgs.size() - ((pageNo - 1) * (int) count));
 			int end = (int) ((pageNo == pageCount) ? 1 : (start - (count - 1)));
-			System.out.println(start);
-			System.out.println(end);
 			ArrayList<SNSMsg> msgs = new ArrayList<SNSMsg>();
 			SNSMsg smsg = null;
 			
 			for (int i = start-1; i >= end-1; i--) {
 				smsg = searchMsgs.get(i);
-				System.out.println("--");
-				System.out.println(smsg.getHs_id());
-				System.out.println("--");
 				msgs.add(smsg);
 			}
 			request.setAttribute("msgs", msgs);

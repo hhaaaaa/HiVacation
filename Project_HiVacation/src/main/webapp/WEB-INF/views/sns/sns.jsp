@@ -29,8 +29,6 @@
 				</td>
 			</tr>
 		</table>
-		<table id="snsContentTable"></table><p>
-		
 		<table id="snsContentTable">
 			<c:forEach items="${msgs }" var="m">
 				<tr>
@@ -61,7 +59,7 @@
 		</tr>
 		</table>
 		
-		<form action="search.go">
+		<form action="go.search">
 			<table>
 				<tr>
 					<td>
