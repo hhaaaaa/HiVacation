@@ -32,7 +32,19 @@
 #snsDateMenu {
 	width: 140px;
 }
-       
+#snsContentNo{
+	width: 70px;
+}
+#snsContentTitle{
+	width: 650px;
+}
+#snsContentId{
+	width: 140px;
+}
+#snsContentDate{
+	width: 140px;
+}
+     
 #snsContentTable {
 	border: none;
 	border-bottom: grey solid 1px;
