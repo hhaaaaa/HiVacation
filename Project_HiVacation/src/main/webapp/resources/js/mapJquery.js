@@ -199,7 +199,7 @@ function showPlaceInfo(marker) {
 }
 
 function printDetailInfo(searchedResult) {
-	var requestsForDetail = [];
+	var requestsForDetail = []; 
 	serviceForDetail = new google.maps.places.PlacesService(map);
 	
 //[1] 10개씩 detail 요청하기
