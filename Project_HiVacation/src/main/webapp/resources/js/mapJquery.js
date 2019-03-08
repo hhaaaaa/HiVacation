@@ -7,7 +7,8 @@ var markers = [];
 var searchedResult = [];
 var detailedResult = [];
 var srIndex;
-//var contentString = "표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko";
+var infowindow;
+var contentString = "hi";//"표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko";
 
 // ### 홈 페이지 화면 조정 ###
 function schedulingPaging() {
@@ -93,6 +94,7 @@ function searchDetailByKeyword() {
 		srIndex = 0;
 		
 		clearMarkers();
+		$("#step1ResultTd").empty();
 		detail = $("#step1SearchCategory").val();
 
 		var request = {
@@ -125,32 +127,17 @@ function searchDetailByKeyword() {
 			    	printSearchedResult(searchedResult);
 
 			    	// 테이블, infowindow 출력 위한 상세 정보 검색
-			    	var requestsForDetail = [];
-			    	serviceForDetail = new google.maps.places.PlacesService(map);
+			    	printDetailInfo(searchedResult);
+//			    	 -> 10개씩 처리해서 다음 다음 할 건지 고민해보기!
 			    	
-			    	for (var i = 0; i < searchedResult.length; i++) {
-			    		requestsForDetail[i] = {
-			    				placeId: searchedResult[i].place_id,
-			    				fields: ['name', 'rating', 'formatted_phone_number', 'international_phone_number',  
-			    						'formatted_address', 'adr_address', 'url', 'website', 'geometry']
-			    		};
-			    		serviceForDetail.getDetails(requestsForDetail[i], function(place, status) {
-			    			if (status == google.maps.places.PlacesServiceStatus.OK) {
-//			    				alert(place.formatted_phone_number + ", " + place.international_phone_number);
-	//			    			if (i == searchedResult.length - 1) {
-	//			    				sleep(1000);
-	//			    			}
-//			    				alert(i);
-			    			}
-			    			alert(status == google.maps.places.PlacesServiceStatus);
-			    		});
-					}
+			    	// marker 클릭하면 infowindow 표시하기
+//			    	google.maps.event.addListener(markers, 'click', function() {
+//			    		alert('fff');
+//			    		//showPlaceInfo();
+//			    	});
+			    	//google.maps.event.clearInstanceListeners(marker);
 			    }
 			    
-				/*marker.addListener('click', function(e) {
-					showPlaceInfo();
-				});
-				google.maps.event.clearInstanceListeners(marker);*/
 			}
 		});
 	});
@@ -164,12 +151,16 @@ function dropAllMarker(data) {
 // ### 약간의 시간차가 있도록 마커 추가 (지금은 시간차 없게 0으로 설정) ###
 function addMarkerWithTimeout(data, timeout) {
 	window.setTimeout(function() {
-		markers.push(new google.maps.Marker({
+		var marker = new google.maps.Marker({
 			position: data.geometry.location,
 			map: map,
 			//animation: google.maps.Animation.BOUNCE,
 			title: data.name
-		}));
+		})
+		markers.push(marker);
+		google.maps.event.addListener(marker, 'click', function() {
+    		showPlaceInfo(marker);
+    	});
 	}, timeout);
 }
 // ### 검색 끝나면 마커 초기화 ###
@@ -186,6 +177,11 @@ function printSearchedResult(data) {
 	for (var i = 0; i < data.length; i++) {
 		d = data[i];
 		var td1 = $("<td></td>").html(d.name + "," + d.rating + "," + d.place_id);
+//		테이블 클릭하면 맵 중앙 이동
+//		$(td1).click(function() {
+//			alert('ad');
+//			map.setCenter(d.geometry.location);
+//		});
 //		// detail 정보 어떻게 받아와서 처리할 건지??
 		var tr1 = $("<tr></tr>").append(td1);
 		var table = $("<table></table>").append(tr1);
@@ -194,14 +190,63 @@ function printSearchedResult(data) {
 }
 
 // ### 마커 클릭했을 때, InfoWindow 뜨도록 설정 ###
-/*
-function showPlaceInfo() {
+function showPlaceInfo(marker) {
 	var infowindow = new google.maps.InfoWindow({
 		content: contentString,
 		maxWidth: 200
 	});
-	infowindow.open(map, markers);	// .open 공부 필요, markers 자리 어떻게 처리해야??
-}*/
+	infowindow.open(map, marker);	// .open 공부 필요, markers 자리 어떻게 처리해야??
+}
+
+function printDetailInfo(searchedResult) {
+	var requestsForDetail = [];
+	serviceForDetail = new google.maps.places.PlacesService(map);
+	
+//[1] 10개씩 detail 요청하기
+//	var resultLength = searchedResult.length;
+//	var start = 0;
+//	var end = 10;
+//	for (var j = 0; j < 6; j++) {
+//    	for (var i = start; i < end; i++) {
+//    		if (i > resultLength) {
+//				break;
+//			}
+//    		requestsForDetail[i] = {
+//    			placeId: searchedResult[i].place_id,
+//    			fields: ['name', 'rating', 'formatted_phone_number', 'international_phone_number',  
+//    					'formatted_address', 'adr_address', 'url', 'website', 'geometry']
+//    		};
+//    		serviceForDetail.getDetails(requestsForDetail[i], function(place, status) {
+//    			if (status == google.maps.places.PlacesServiceStatus.OK) {
+//    				alert(place.formatted_phone_number + ", " + place.international_phone_number);
+//    			}
+//    		});
+//		}
+//    	start += 10;
+//    	end += 10;
+//	}
+	
+//[2] 한번에 다 요청받기
+	for (var i = 0; i < searchedResult.length; i++) {
+		requestsForDetail[i] = {
+				placeId: searchedResult[i].place_id,
+				fields: ['name', 'rating', 'formatted_phone_number', 'international_phone_number',  
+					'formatted_address', 'adr_address', 'url', 'website', 'geometry']
+		};
+		serviceForDetail.getDetails(requestsForDetail[i], function(place, status) {
+			// status가 OVER_QUERY_LIMIT일 때(빠른시간내 너무 많은 정보 요청), 1) 시간 텀을 둘 수 있게(요청당 2초?)
+			// 													 2) 24시 이후에 요청
+			//													 3) 새로운 응답만 DB로 저장해서, DB 데이터 사용
+			if (status == google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {    
+				setTimeout(function() {
+					// ???
+				}, 200);
+			} else if (status == google.maps.places.PlacesServiceStatus.OK) {
+				alert(place.formatted_phone_number + ", " + place.international_phone_number);
+			}
+		});
+	}
+}
 
 function sleep(ms) 
 {
