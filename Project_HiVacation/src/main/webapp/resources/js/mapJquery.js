@@ -1,6 +1,7 @@
 var no = 1;
 var map;
 var service;
+var serviceForDetail;
 var locLatLng;
 var markers = [];
 var searchedResult = [];
@@ -88,7 +89,7 @@ function searchDetailByKeyword() {
 	var detail;
 	$("#step1SearchImg").click(function() {
 		searchedResult = [];
-//		detailedResult = [];
+		detailedResult = [];
 		srIndex = 0;
 		
 		clearMarkers();
@@ -99,35 +100,51 @@ function searchDetailByKeyword() {
 			radius: '4000',			// m단위
 			fields: ['name', 'geometry', 'place_id', 'photos'],
 			keyword: detail
-			//type: ['restaurant']
 		};
 		service = new google.maps.places.PlacesService(map);
 		// nearby 검색으로 위치, 장소명, place_id, 사진 챙기고,
-//		// detail 검색으로 별점, 전화번호, 주소, 웹사이트 챙기자!
+		// detail 검색으로 별점, 전화번호, 주소, 웹사이트 챙기자!
 		service.nearbySearch(request, function(results, status, pagination) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
 				for (var i = 0; i < results.length; i++) {
 					// 모든 페이지의 마커 한번에 출력할 수 있도록
 					searchedResult[srIndex] = results[i];
-					
-					// 테이블/infowindow 출력 위한 상세 정보 검색
-//					????????getDetails()
-					
 					srIndex += 1;
 				}
-				
 				// 검색 결과 20개보다 많을경우(페이지 넘어갈 때) 처리
 				getNextPage = pagination.hasNextPage && function() {
 			    	pagination.nextPage();
 			    };
 			    if (getNextPage) {
 			    	getNextPage();
-			    } else {
+			    } else {		// 더 이상 Nearby 검색 결과 페이지가 없을 경우에 다음과 같은 코드 수행
 			    	// 모든 검색 결과 마커로 출력
 			    	dropAllMarker(searchedResult);
 			    	
 			    	// 모든 검색 결과 테이블로 출력
 			    	printSearchedResult(searchedResult);
+
+			    	// 테이블, infowindow 출력 위한 상세 정보 검색
+			    	var requestsForDetail = [];
+			    	serviceForDetail = new google.maps.places.PlacesService(map);
+			    	
+			    	for (var i = 0; i < searchedResult.length; i++) {
+			    		requestsForDetail[i] = {
+			    				placeId: searchedResult[i].place_id,
+			    				fields: ['name', 'rating', 'formatted_phone_number', 'international_phone_number',  
+			    						'formatted_address', 'adr_address', 'url', 'website', 'geometry']
+			    		};
+			    		serviceForDetail.getDetails(requestsForDetail[i], function(place, status) {
+			    			if (status == google.maps.places.PlacesServiceStatus.OK) {
+//			    				alert(place.formatted_phone_number + ", " + place.international_phone_number);
+	//			    			if (i == searchedResult.length - 1) {
+	//			    				sleep(1000);
+	//			    			}
+//			    				alert(i);
+			    			}
+			    			alert(status == google.maps.places.PlacesServiceStatus);
+			    		});
+					}
 			    }
 			    
 				/*marker.addListener('click', function(e) {
@@ -185,4 +202,14 @@ function showPlaceInfo() {
 	});
 	infowindow.open(map, markers);	// .open 공부 필요, markers 자리 어떻게 처리해야??
 }*/
+
+function sleep(ms) 
+{
+    var start = new Date().getTime();
+    var cur = start;
+    while (cur - start < ms) 
+    {
+        cur = new Date().getTime();
+    }
+}
 
