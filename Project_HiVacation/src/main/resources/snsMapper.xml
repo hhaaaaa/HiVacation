@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.hv.sns.SnsMapper">
+	<insert id="write" parameterType="com.ht.hv.sns.SNSMsg">
+		insert into hv_sns values(hs_seq.nextval, #{hs_id}, #{hs_title}, #{hs_text}, sysdate, #{hs_img})
+	</insert>
+	<select id="getAllSNSMsgCount" resultType="java.lang.Integer">
+		select count(*) from hv_member,hv_sns where hm_id=hs_id
+	</select> 
+	<select id="getMySNSMsgCount" resultType="java.lang.Integer" parameterType="com.ht.hv.member.Member">
+		select count(*) from
+			(select * from hv_member,hv_sns where hm_id=hs_id)
+		where hm_id = #{hm_id}
+	</select> 
+	<select id="getSNSMsg" parameterType="com.ht.hv.sns.SNSMsgNo" resultType="com.ht.hv.sns.SNSMsg">
+		select * from 
+		 	(select rownum as rn, hs_no, hs_id, hs_title, hs_text, hs_date, hs_img from
+				(select * from hv_member, hv_sns where hm_id=hs_id order by hs_date ))
+		where rn &lt;=#{start} and rn &gt;=#{end}
+		order by rn desc
+	</select> 
+	
+	<select id="searchId" parameterType="com.ht.hv.sns.Search" resultType="com.ht.hv.sns.SNSMsg">
+		select * from hv_member,hv_sns where hm_id=hs_id and hs_id like '%'||#{search}||'%' order by hs_date 
+	</select>
+	<select id="searchTitle" parameterType="com.ht.hv.sns.Search" resultType="com.ht.hv.sns.SNSMsg">
+		select * from hv_member,hv_sns where hm_id=hs_id and hs_title like '%'||#{search}||'%' order by hs_date 
+	</select>
+	<select id="searchText" parameterType="com.ht.hv.sns.Search" resultType="com.ht.hv.sns.SNSMsg">
+		select * from hv_member,hv_sns where hm_id=hs_id and hs_text like '%'||#{search}||'%' order by hs_date 
+	</select>
+</mapper>
