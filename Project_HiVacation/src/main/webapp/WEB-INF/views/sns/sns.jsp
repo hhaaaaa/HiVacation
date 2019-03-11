@@ -51,12 +51,38 @@
 		</table><p>
 		
 		<table id="pageCountTalbe">
-		<tr>
-			<c:forEach var="i" begin="1" end="${pageCount }">
-				<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
-				</td>
-			</c:forEach>
-		</tr>
+			<tr>
+				<c:if test="${curPage==1 }">
+					<c:forEach var="i" begin="1" end="${curPage+2 }">
+					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
+					</td>
+					</c:forEach>
+				</c:if> 
+				<c:if test="${curPage==2 }">
+					<c:forEach var="i" begin="1" end="${curPage+2 }">
+					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
+					</td>
+					</c:forEach>
+				</c:if> 
+				<c:if test="${curPage==pageCount-1 }">
+					<c:forEach var="i" begin="${curPage-2 }" end="${pageCount }">
+					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
+					</td>
+					</c:forEach>
+				</c:if> 
+				<c:if test="${curPage==pageCount }">
+					<c:forEach var="i" begin="${curPage-2 }" end="${pageCount }">
+					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
+					</td>
+					</c:forEach>
+				</c:if>	
+				<c:if test="${2<curPage&&curPage<pageCount-1 }">
+					<c:forEach var="i" begin="${curPage-2 }" end="${curPage+2 }">
+					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
+					</td>
+				</c:forEach>
+				</c:if>		
+			</tr>
 		</table>
 		
 		<form action="go.search">
