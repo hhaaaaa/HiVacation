@@ -1,5 +1,75 @@
 @CHARSET "UTF-8";
 #snsReadTable {
 	width: 1000px;
-	margin-top: 10px; 
+	margin-top: 10px;
+	font-weight: normal;
+	border-spacing: 0px;
+}
+#snsUdpateSpan {
+	cursor: pointer;
+	font-size: 11pt;
+	font-weight: 900;
+}
+#snsUdpateSpan:hover {
+	text-shadow: 1px 1px 1px black;
+}
+#snsDeleteSpan {
+	cursor: pointer;
+	font-size: 11pt;
+	font-weight: 900;
+}
+#snsDeleteSpan:hover {
+	text-shadow: 1px 1px 1px black;
+}
+.snsReadMenu {
+	width: 100px;
+	height: 25px;
+	font-weight: 900;
+	border-bottom: grey solid 1px;
+}
+#snsReadTitle {
+	padding-left: 10px;
+	border-bottom: grey solid 1px;
+	height: 25px;
+}
+#snsReadId {
+	padding-left: 10px;
+	height: 25px;
+	width: 400px;
+	border-bottom: grey solid 1px;
+}
+#snsReadDate {
+	padding-left: 10px;
+	height: 25px;
+	width: 400px;
+	border-bottom: grey solid 1px;
+}
+#snsReadText {
+	height: 60px;
+	font-size: 11pt;
+	border-bottom: grey solid 1px;
+}
+#snsReadReplyWrite {
+	height: 25px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+#snsReadReplyInput {
+	width: 450px;
+	outline: none;
+}
+#snsReadReplyButton {
+	outline: none;
+	background-color: transparent;
+	border: none;
+	font-weight: 900;
+	cursor: pointer;
+}
+#snsReadReplyButton:hover {
+	text-shadow: 1px 1px 1px black;
+}
+#snsReadReply {
+	height: 25px;
+	border-bottom: grey solid 1px;
+	padding-bottom: 20px;
 }
