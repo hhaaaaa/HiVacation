@@ -7,6 +7,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-	게시글 보기
+	<table id="snsReadTable">
+		<tr>
+			<td align="right" colspan="4">수정,삭제</td>
+		</tr>
+		<tr>
+			<td align="center" class="snsReadMenu">제목</td>
+			<td colspan="3">제목</td>
+		</tr>
+		<tr>
+			<td align="center" class="snsReadMenu">아이디</td>
+			<td>아이디</td>
+			<td align="center" class="snsReadMenu">날짜</td>
+			<td>날짜</td>
+		</tr>
+		<tr>
+			<td align="center" class="snsReadMenu">내용</td>
+		</tr>
+		<tr>
+			<td align="center">댓글</td>
+		</tr>
+		<tr>
+			<td align="center">댓글입력</td>
+		</tr>
+	</table>
 </body>
 </html>

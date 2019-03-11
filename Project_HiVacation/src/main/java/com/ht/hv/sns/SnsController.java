@@ -35,6 +35,14 @@ public class SnsController {
 		return "index"; 
 	}
 	
+	@RequestMapping(value = "/go.sns.read", method = RequestMethod.GET)
+	public String goSnsRead(Member m, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
+		request.setAttribute("contentPage", "sns/snsRead.jsp");
+		//
+		return "index"; 
+	}
+	
 	@RequestMapping(value = "/do.sns.write", method = RequestMethod.POST)
 	public String doSnsWrite(Member m, SNSMsg s, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);

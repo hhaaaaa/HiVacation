@@ -26,6 +26,10 @@ function goSnsWrite() {
 	location.href="go.sns.write";
 } 
 
+function goSnsRead(hs_no) {
+	location.href="go.sns.read?hs_no=" + hs_no;
+}
+
 function goUpdate() {
 	location.href="go.update";
 }
