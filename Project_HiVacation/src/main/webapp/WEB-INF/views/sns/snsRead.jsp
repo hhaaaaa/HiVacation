@@ -22,13 +22,13 @@
 			<td>날짜</td>
 		</tr>
 		<tr>
-			<td align="center" class="snsReadMenu">내용</td>
+			<td align="center" colspan="4">내용</td>
 		</tr>
 		<tr>
-			<td align="center">댓글</td>
+			<td align="center" colspan="4">댓글</td>
 		</tr>
 		<tr>
-			<td align="center">댓글입력</td>
+			<td align="center" colspan="4">댓글입력</td>
 		</tr>
 	</table>
 </body>
