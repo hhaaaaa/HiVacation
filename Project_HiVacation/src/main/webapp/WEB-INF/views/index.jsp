@@ -34,6 +34,7 @@
 		myMenuLocationControl();
 		searchLocationByQuery();
 		searchDetailByKeyword();
+		clickHeartImage();
 	});
 </script>
 </head>
