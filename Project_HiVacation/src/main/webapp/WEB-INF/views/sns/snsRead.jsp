@@ -22,7 +22,7 @@
 			<td>날짜</td>
 		</tr>
 		<tr>
-			<td align="center" colspan="4">내용</td>
+			<td align="center" colspan="4">내용 </td>
 		</tr>
 		<tr>
 			<td align="center" colspan="4">댓글</td>

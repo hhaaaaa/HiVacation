@@ -35,7 +35,7 @@
 					<td align="center" id="snsContentNo">
 					 번호난중에
 					</td>
-					<td id="snsContentTitle" onclick="goSnsRead(${m.hs_no}));"> 
+					<td id="snsContentTitle" onclick="goSnsRead(${m.hs_no}));">  
 						&nbsp;&nbsp;${m.hs_title }
 					</td>
 					<td align="center" id="snsContentId">

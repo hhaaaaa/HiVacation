@@ -39,7 +39,7 @@ public class SnsController {
 	public String goSnsRead(Member m, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
 		request.setAttribute("contentPage", "sns/snsRead.jsp");
-		// ?
+		// ? 
 		return "index"; 
 	}
 	
