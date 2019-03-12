@@ -77,6 +77,8 @@ select * from hv_plan;
 
 -----------------------------------------
 
+
+
 drop table hv_plan cascade constraint purge;
 
 

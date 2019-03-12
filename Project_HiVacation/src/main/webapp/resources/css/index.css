@@ -48,8 +48,7 @@ body {
 	right: 10px;
 	width: 150px;
 	font-size: 11pt;
-	z-index: 9;
-	z-index: 9;
+	z-index: 12;
 }
 #titleTable {
 	position: fixed;
