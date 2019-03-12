@@ -29,11 +29,13 @@
 				</td>
 			</tr>
 		</table>
+		<c:set var="no" value="${allMsgCount+1}"/>
+		<c:set var="no" value="${no-((curPage-1)*count) }" />
 		<table id="snsContentTable">
 			<c:forEach items="${msgs }" var="m">
 				<tr>
 					<td align="center" id="snsContentNo">
-					 번호난중에
+					 	<c:set var="no" value="${no-1 }" /> <fmt:formatNumber value="${no }" pattern="#"/>
 					</td>
 					<td id="snsContentTitle" onclick="goSnsRead(${m.hs_no}));">  
 						&nbsp;&nbsp;${m.hs_title }
