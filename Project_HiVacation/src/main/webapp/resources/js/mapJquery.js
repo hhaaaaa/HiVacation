@@ -120,13 +120,9 @@ function searchDetailByKeyword() {
 			    } else {		// 더 이상 Nearby 검색 결과 페이지가 없을 경우에 다음과 같은 코드 수행
 			    	// 모든 검색 결과 마커로 출력
 			    	dropAllMarker(searchedResult);
-			    	
-			    	// 모든 검색 결과 테이블로 출력
-			    	printSearchedResult(searchedResult);
 
-			    	// 테이블, infowindow 출력 위한 상세 정보 검색
+			    	// 상세 정보 요청해서 테이블 출력
 			    	printDetailInfo(searchedResult);
-//			    	 -> 10개씩 처리해서 다음 다음 할 건지 고민해보기!
 			    	
 			    }
 			    
@@ -157,6 +153,7 @@ function addMarkerWithTimeout(data) {
 		};
 		serviceForDetail.getDetails(request, function(place, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
+				// marker, nearby검색, detail응답 정보 파라미터로
 				showPlaceInfo(marker, data, place);
 			}
 		});
@@ -231,24 +228,6 @@ function showPlaceInfo(marker, data, place) {
 	infowindow.open(map, marker);	// .open 공부 필요, markers 자리 어떻게 처리해야??
 }
 
-// ### 검색 결과 출력해주기 ###
-function printSearchedResult(data) {
-	var d;
-	for (var i = 0; i < data.length; i++) {
-		d = data[i];
-		var td1 = $("<td></td>").html(d.name + "," + d.rating + "," + d.place_id);
-//		테이블 클릭하면 맵 중앙 이동
-//		$(td1).click(function() {
-//			alert('ad');
-//			map.setCenter(d.geometry.location);
-//		});
-//		// detail 정보 어떻게 받아와서 처리할 건지??
-		var tr1 = $("<tr></tr>").append(td1);
-		var table = $("<table></table>").append(tr1);
-		$("#step1ResultTd").append(table);
-	}
-}
-
 // 상세 검색 출력??
 function printDetailInfo(searchedResult) {
 	var requestsForDetail = []; 
@@ -262,14 +241,27 @@ function printDetailInfo(searchedResult) {
 					'formatted_address', 'adr_address', 'url', 'website', 'geometry']
 		};
 		
+		// Proxy서버를 통해 json 파일 ajax요청
 		$.ajax({
 			url: "get.detail.search",
 			dataType: 'json',
-			data: {placeid:searchedResult[i].place_id, key:"AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY"},
-//			async: false,
+			data: {placeid: searchedResult[i].place_id, 
+					key: "AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY"},
+//			async: false,		// 동기식으로 ajax 요청하기
 			success: function(data) {
-//				data.result.name과 같이 모두 출력됨 ㅠㅠㅠㅠㅠ 흐엉개조아
-				
+				var d;
+					d = data.result;
+					var td1 = $("<td></td>").html(d.name + "," + d.place_id + "," 
+							+ d.formatted_phone_number + "," + d.formatted_address);
+					// 테이블 클릭하면 맵 중앙 이동
+//					$(document).on("click", td1, function() {
+//						alert('ad');
+//						map.setCenter(d.geometry.location);
+//					});
+					// detail 정보 어떻게 받아와서 처리할 건지??
+					var tr1 = $("<tr></tr>").append(td1);
+					var table = $("<table></table>").append(tr1);
+					$("#step1ResultTd").append(table);
 			}
 		});
 	}
