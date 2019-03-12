@@ -55,37 +55,43 @@
 		<table id="pageCountTalbe">
 			<tr>
 				<c:choose>
-				<c:when test="${curPage==1 }">
-					<c:forEach var="i" begin="1" end="${curPage+2 }">
-					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
-					</td>
-					</c:forEach>
-				</c:when>
-				<c:when test="${curPage==2 }">
-					<c:forEach var="i" begin="1" end="${curPage+2 }">
-					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
-					</td>
-					</c:forEach>
-				</c:when> 
-				<c:when test="${curPage==pageCount-1 }">
-					<c:forEach var="i" begin="${curPage-2 }" end="${pageCount }">
-					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
-					</td>
-					</c:forEach>
-				</c:when> 
-				<c:when test="${curPage==pageCount }">
-					<c:forEach var="i" begin="${curPage-2 }" end="${pageCount }">
-					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
-					</td>
-					</c:forEach>
-				</c:when>	
-				<c:when test="${2<curPage&&curPage<pageCount-1 }">
-					<c:forEach var="i" begin="${curPage-2 }" end="${curPage+2 }">
-					<td>&nbsp;<a href="page.go?p=${i }">${i }</a>
-					</td>
-				</c:forEach>
-				</c:when>		
-			</c:choose>
+					<%--현재페이지가 1 이고 마지막페이지가 현재페이지+2미만 --%>
+					<c:when test="${curPage==1 && curPage+2>pageCount }">
+						<c:forEach var="i" begin="1" end="${pageCount }">
+							<td>&nbsp;<a href="page.go?p=${i }">${i }</a></td>
+						</c:forEach>
+					</c:when>
+					<%--현재페이지가 1 이고 마지막페이지가 현재페이지+2이상 --%>
+					<c:when test="${curPage==1 && curPage+2<=pageCount }">
+						<c:forEach var="i" begin="1" end="${curPage+2 }">
+							<td>&nbsp;<a href="page.go?p=${i }">${i }</a></td>
+						</c:forEach>
+					</c:when>
+					<%--현재페이지가 2 이고 마지막페이지가 현재페이지+2미만 --%>
+					<c:when test="${curPage==2 && curPage+2>pageCount }">
+						<c:forEach var="i" begin="1" end="${pageCount }">
+							<td>&nbsp;<a href="page.go?p=${i }">${i }</a></td>
+						</c:forEach>
+					</c:when>
+					<%--현재페이지가 2 이고 마지막페이지가 현재페이지+2이상 --%>
+					<c:when test="${curPage==2 && curPage+2<=pageCount }">
+						<c:forEach var="i" begin="1" end="${curPage+2 }">
+							<td>&nbsp;<a href="page.go?p=${i }">${i }</a></td>
+						</c:forEach>
+					</c:when>
+					<%--현재페이지가 3이상 이고 마지막페이지가 현재페이지+2미만 --%>					
+					<c:when test="${curPage>=3 && curPage+2>pageCount } ">
+						<c:forEach var="i" begin="${curPage-2 }" end="${pageCount }">
+							<td>&nbsp;<a href="page.go?p=${i }">${i }</a></td>
+						</c:forEach>
+					</c:when>
+					<%--현재페이지가 3이상 이고 마지막페이지가 현재페이지+2이상 --%>					
+					<c:when test="${curPage>=3 && curPage+2>pageCount } ">
+						<c:forEach var="i" begin="${curPage-2 }" end="${curPage+2 }">
+							<td>&nbsp;<a href="page.go?p=${i }">${i }</a></td>
+						</c:forEach>
+					</c:when>
+				</c:choose>
 			</tr>
 		</table>
 		
