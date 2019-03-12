@@ -92,7 +92,7 @@ function searchDetailByKeyword() {
 		srIndex = 0;
 		
 		clearMarkers();
-		$("#step1ResultTd").empty();
+		$("#step1ResultDiv").empty();
 		detail = $("#step1SearchCategory").val();
 
 		var request = {
@@ -123,7 +123,6 @@ function searchDetailByKeyword() {
 
 			    	// 상세 정보 요청해서 테이블 출력
 			    	printDetailInfo(searchedResult);
-			    	
 			    }
 			    
 			}
@@ -167,10 +166,12 @@ function clearMarkers() {
 	markers = [];
 }
 
-//### 마커 클릭했을 때, InfoWindow 뜨도록 설정 ###
+// ### 마커 클릭했을 때, InfoWindow 뜨도록 설정 ###
+// 찜하면 어떻게 처리???????????????????????????????????????????????????????????
 function showPlaceInfo(marker, data, place) {
 	var name = data.name;
 	var rate = data.rating;
+	var placeid = data.place_id;
 	var phoneNo = place.formatted_phone_number;
 	var address = place.formatted_address;
 	var url = place.url;
@@ -249,19 +250,49 @@ function printDetailInfo(searchedResult) {
 					key: "AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY"},
 //			async: false,		// 동기식으로 ajax 요청하기
 			success: function(data) {
-				var d;
-					d = data.result;
-					var td1 = $("<td></td>").html(d.name + "," + d.place_id + "," 
-							+ d.formatted_phone_number + "," + d.formatted_address);
-					// 테이블 클릭하면 맵 중앙 이동
-//					$(document).on("click", td1, function() {
-//						alert('ad');
-//						map.setCenter(d.geometry.location);
-//					});
-					// detail 정보 어떻게 받아와서 처리할 건지??
-					var tr1 = $("<tr></tr>").append(td1);
-					var table = $("<table></table>").append(tr1);
-					$("#step1ResultTd").append(table);
+				var d = data.result;
+				
+				var td1 = $("<td></td>").text(d.name);
+				$(td1).css("font-weight", "900").css("cursor", "pointer").css("padding-left", "5px");
+				$(td1).mouseenter(function() {
+					$(td1).css("text-shadow", "1px 1px 1px black");
+				});
+				$(td1).mouseleave(function() {
+					$(td1).css("text-shadow", "none");
+				});
+				var tr1 = $("<tr></tr>").append(td1);
+				
+				var td2 = $("<td></td>").text(d.formatted_phone_number);
+				$(td2).attr("align", "right").css("padding-right", "5px").css("font-size", "10pt");
+				var tr2 = $("<tr></tr>").append(td2);
+				
+				var td3 = $("<td></td>").text(d.website);
+				$(td3).css("font-size", "10pt").css("padding-left", "5px");
+				var tr3 = $("<tr></tr>").append(td3);
+				
+				var td4 = $("<td></td>").text(d.place_id);
+				$(td4).attr("align", "center").css("font-size", "5pt");
+				var tr4 = $("<tr></tr>").append(td4);
+				
+				// 테이블 클릭하면 맵 중앙 이동
+				$(document).on("click", td1, function() {
+					map.setCenter(d.geometry.location);
+				});
+				
+				var table = $("<table></table>").append(tr1, tr2, tr3, tr4);
+				
+				$(table).css("font-weight", "normal").css("width", "320px").css("height", "150px").css("max-width", "320px");
+				$(table).css("word-break", "break-all").css("margin", "1px");
+				$(table).css("border", "grey solid 2px").css("float", "left");
+				$(table).css("border-radius", "7px");
+				$(table).mouseenter(function() {
+					$(table).css("box-shadow","0px 0px 10px #2eb8b8").css("border", "#2eb8b8 solid 2px");
+				});
+				$(table).mouseleave(function() {
+					$(table).css("box-shadow","0px 0px 0px grey").css("border", "grey solid 2px");
+				});
+				
+				$("#step1ResultDiv").append(table);
 			}
 		});
 	}

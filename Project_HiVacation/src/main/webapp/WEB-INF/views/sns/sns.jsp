@@ -29,8 +29,7 @@
 				</td>
 			</tr>
 		</table>
-		<c:set var="no" value="${allMsgCount+1}"/>
-		<c:set var="no" value="${no-((curPage-1)*count) }" />
+		<c:set var="no" value="${allMsgCount + 1 - ((curPage-1) * count) }" />
 		<table id="snsContentTable">
 			<c:forEach items="${msgs }" var="m">
 				<tr>
@@ -80,13 +79,13 @@
 						</c:forEach>
 					</c:when>
 					<%--현재페이지가 3이상 이고 마지막페이지가 현재페이지+2미만 --%>					
-					<c:when test="${curPage>=3 && curPage+2>pageCount } ">
+					<c:when test="${curPage>=3 && curPage+2>pageCount }">
 						<c:forEach var="i" begin="${curPage-2 }" end="${pageCount }">
 							<td>&nbsp;<a href="page.go?p=${i }">${i }</a></td>
 						</c:forEach>
 					</c:when>
 					<%--현재페이지가 3이상 이고 마지막페이지가 현재페이지+2이상 --%>					
-					<c:when test="${curPage>=3 && curPage+2>pageCount } ">
+					<c:when test="${curPage>=3 && curPage+2>pageCount }">
 						<c:forEach var="i" begin="${curPage-2 }" end="${curPage+2 }">
 							<td>&nbsp;<a href="page.go?p=${i }">${i }</a></td>
 						</c:forEach>

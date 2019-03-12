@@ -73,6 +73,7 @@ public class SnsDAO {
 		
 		
 		double count = 3; //한페이지에 보여지는 sns갯수
+		request.setAttribute("count", count);
 		request.setAttribute("curPage", pageNo);
 		request.setAttribute("allMsgCount", allMsgCount);
 		
