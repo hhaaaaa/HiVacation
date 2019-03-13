@@ -9,7 +9,7 @@
 <body>
 	<div id="snsWriteTotalDiv">
 		<div id="goSnsListDiv" onclick="goSns();">목록으로</div>
-		<form action="do.sns.write" name="snsWriteForm" onsubmit="" method="post" enctype="multipart/form-data">
+		<form action="do.sns.write" name="snsWriteForm" onsubmit="return snsWrite();" method="post" enctype="multipart/form-data">
 			<table id="snsWriteTable">
 				<tr><td></td></tr>
 				<tr>

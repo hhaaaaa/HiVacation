@@ -275,9 +275,9 @@ function printDetailInfo(searchedResult) {
 				var tr4 = $("<tr></tr>").append(td4);
 				
 				// 테이블 클릭하면 맵 중앙 이동
-				$(document).on("click", td1, function() {
-					map.setCenter(d.geometry.location);
-				});
+//				$(document).on("click", td1, function() {
+//					map.setCenter(d.geometry.location);
+//				});
 				
 				var table = $("<table></table>").append(tr1, tr2, tr3, tr4);
 				
