@@ -69,3 +69,27 @@
 	position: relative;
 	top: 2px;
 }
+.pageCountTableA {
+	text-decoration: none;
+	color: black;
+}
+.pageCountTableA:link {
+	text-decoration: none;
+	color: black;
+}
+.pageCountTableA:visited {
+	text-decoration: none;
+	color: black;
+}
+.pageCountTableCurrentA {
+	text-decoration: underline;
+	color: black;
+}
+.pageCountTableCurrentA:link {
+	text-decoration: underline;
+	color: black;
+}
+.pageCountTableCurrentA:visited {
+	text-decoration: underline;
+	color: black;
+}

@@ -37,6 +37,11 @@ body {
 #goAboutUs:hover {
 	cursor: pointer;
 	text-shadow: 1px 1px 1px black;
+}
+#imgAboutUs {
+	width: 70px;
+	position: fixed;
+	top: 5px;
 }       
 #goSns:hover {
 	cursor: pointer;

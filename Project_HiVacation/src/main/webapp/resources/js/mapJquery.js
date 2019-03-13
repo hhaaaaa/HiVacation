@@ -266,7 +266,7 @@ function printDetailInfo(searchedResult) {
 				$(td2).attr("align", "right").css("padding-right", "5px").css("font-size", "10pt");
 				var tr2 = $("<tr></tr>").append(td2);
 				
-				var td3 = $("<td></td>").text(d.website);
+				var td3 = $("<td></td>").html("<a href=\"" + d.website + "\" class=\"websiteAtag\">" + d.website + "</a>");
 				$(td3).css("font-size", "10pt").css("padding-left", "5px");
 				var tr3 = $("<tr></tr>").append(td3);
 				
@@ -296,53 +296,6 @@ function printDetailInfo(searchedResult) {
 			}
 		});
 	}
-	
-//[1] 10개씩 detail 요청하기
-//	var resultLength = searchedResult.length;
-//	var start = 0;
-//	var end = 10;
-//	for (var j = 0; j < 6; j++) {
-//    	for (var i = start; i < end; i++) {
-//    		if (i > resultLength) {
-//				break;
-//			}
-//    		requestsForDetail[i] = {
-//    			placeId: searchedResult[i].place_id,
-//    			fields: ['name', 'rating', 'formatted_phone_number', 'international_phone_number',  
-//    					'formatted_address', 'adr_address', 'url', 'website', 'geometry']
-//    		};
-//    		serviceForDetail.getDetails(requestsForDetail[i], function(place, status) {
-//    			if (status == google.maps.places.PlacesServiceStatus.OK) {
-//    				alert(place.formatted_phone_number + ", " + place.international_phone_number);
-//    			}
-//    		});
-//		}
-//    	start += 10;
-//    	end += 10;
-//	}
-	
-//[2] 한번에 다 요청받기
-//	for (var i = 0; i < searchedResult.length; i++) {
-//		requestsForDetail[i] = {
-//				placeId: searchedResult[i].place_id,
-//				fields: ['name', 'rating', 'formatted_phone_number', 'international_phone_number',  
-//					'formatted_address', 'adr_address', 'url', 'website', 'geometry']
-//		};
-//		serviceForDetail.getDetails(requestsForDetail[i], function(place, status) {
-//			// status가 OVER_QUERY_LIMIT일 때(빠른시간내 너무 많은 정보 요청), 1) 시간 텀을 둘 수 있게(요청당 2초?)
-//			// 													 2) 24시 이후에 요청
-//			//													 3) 새로운 응답만 DB로 저장해서, DB 데이터 사용
-//			if (status == google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {    
-//				setTimeout(function() {
-//					// ???
-//				}, 200);
-//			} else if (status == google.maps.places.PlacesServiceStatus.OK) {
-//				alert(place.formatted_phone_number + ", " + place.international_phone_number);
-//			}
-//		});
-//	}
-	
-
 }
 
 // ### 찜하기 버튼 클릭했을 때 ###

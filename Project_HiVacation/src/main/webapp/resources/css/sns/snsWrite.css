@@ -3,6 +3,18 @@
 	width: 1000px;
 	margin-top: 10px;
 }
+#goSnsListDiv {
+	border: black solid 1px;
+	font-weight: 900;
+	cursor: pointer;
+	width: 80px;
+	height: 21px;
+	font-size: 10pt;
+	padding-top: 2px;
+	position: relative;
+	left: 307px;
+	margin-bottom: 10px;
+}
 #snsWriteTable {
 	width: 700px;
 	border-spacing: 0px;
@@ -40,16 +52,4 @@
 	cursor: pointer;
 	width: 70px;
 	height: 25px;
-}
-#goSnsListDiv {
-	border: black solid 1px;
-	font-weight: 900;
-	cursor: pointer;
-	width: 80px;
-	height: 21px;
-	font-size: 10pt;
-	padding-top: 2px;
-	position: fixed;
-	top: 574px;
-	left: 513px;
 }

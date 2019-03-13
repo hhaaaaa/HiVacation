@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div id="snsWriteTotalDiv">
+		<div id="goSnsListDiv" onclick="goSns();">목록으로</div>
 		<form action="do.sns.write" name="snsWriteForm" onsubmit="" method="post" enctype="multipart/form-data">
 			<table id="snsWriteTable">
 				<tr><td></td></tr>
@@ -24,7 +25,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="center" class="snsWriteMenu">사진</td>
+					<td align="center" class="snsWriteMenu">
+						<img src="resources/img/plus_button.png" style="width: 35px;">
+					</td>
 					<td align="center" class="snsWriteMenu" style="padding-left: 40px;">
 						<input type="file" id="snsImage" name="hs_img">
 					</td>
@@ -37,7 +40,6 @@
 				</tr>
 			</table>
 		</form>
-		<div id="goSnsListDiv" onclick="goSns();">목록으로</div>
 	</div>
 </body>
 </html>

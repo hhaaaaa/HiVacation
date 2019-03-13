@@ -38,9 +38,13 @@ public class SnsDAO {
 			smsg.setHs_text(mr.getParameter("hs_text"));
 			
 			String hs_img = mr.getFilesystemName("hs_img");
-			hs_img = URLEncoder.encode(hs_img, "utf-8");
-			hs_img = hs_img.replace("+", " ");
-			smsg.setHs_img(mr.getFilesystemName("hs_img"));
+			if (hs_img != null) {
+				hs_img = URLEncoder.encode(hs_img, "utf-8");
+				hs_img = hs_img.replace("+", " ");
+				smsg.setHs_img(mr.getFilesystemName("hs_img"));
+			}else {
+				smsg.setHs_img("noImg");
+			}
 			
 			if(sm.write(smsg)==1){
 				request.setAttribute("r","글쓰기 완료");

@@ -23,6 +23,7 @@ public class SnsController {
 	@RequestMapping(value = "/go.sns", method = RequestMethod.GET)
 	public String goSns(Member m, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
+		sDAO.clearSearch(request, response);
 		sDAO.paging(1, request, response);
 		request.setAttribute("contentPage", "sns/sns.jsp");
 		return "index"; 

@@ -136,3 +136,19 @@
 	font-weight: 900;
 	font-size: 10pt;
 }
+.websiteAtag {
+	text-decoration: none;
+	color: black;
+}
+.websiteAtag:link {
+	text-decoration: none;
+	color: black;
+}
+.websiteAtag:visited {
+	text-decoration: none;
+	color: black;
+}
+.websiteAtag:hover {
+	text-decoration: underline;
+	color: black;
+}
