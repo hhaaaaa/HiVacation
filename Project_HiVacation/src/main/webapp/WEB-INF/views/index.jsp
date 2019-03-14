@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hi Vacation</title>  
+<title>Hi Vacation</title>
+<link rel="shortcut icon" href="resources/img/title_plane.jpg">
 <link rel="stylesheet" href="resources/css/index.css">     
 <link rel="stylesheet" href="resources/css/member/login.css">
 <link rel="stylesheet" href="resources/css/member/beforeLogin.css">
@@ -34,7 +35,6 @@
 		myMenuLocationControl();
 		searchLocationByQuery();
 		searchDetailByKeyword();
-		clickHeartImage();
 	});
 </script>
 </head>
@@ -73,7 +73,7 @@
 										<jsp:include page="${contentPage }"/>
 									</td>
 								</tr>
-							</table>
+							</table><p><br><br><br>
 						</td>
 					</tr>
 				</table>

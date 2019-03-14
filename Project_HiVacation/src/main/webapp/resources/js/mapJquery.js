@@ -148,7 +148,7 @@ function addMarkerWithTimeout(data) {
 		var request = {
 				placeId: data.place_id,
 				fields: ['name', 'rating', 'formatted_phone_number',  
-					'formatted_address', 'url', 'website', 'geometry']
+					'formatted_address', 'url', 'website', 'geometry', 'types']
 		};
 		serviceForDetail.getDetails(request, function(place, status) {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -167,7 +167,6 @@ function clearMarkers() {
 }
 
 // ### 마커 클릭했을 때, InfoWindow 뜨도록 설정 ###
-// 찜하면 어떻게 처리???????????????????????????????????????????????????????????
 function showPlaceInfo(marker, data, place) {
 	var name = data.name;
 	var rate = data.rating;
@@ -176,6 +175,7 @@ function showPlaceInfo(marker, data, place) {
 	var address = place.formatted_address;
 	var url = place.url;
 	var website = place.website;
+	var type;
 	
 	if (name == null) {name = "[장소명 정보 없음]";}
 	if (rate == null) {rate = "[별점 정보 없음]";} 
@@ -226,15 +226,30 @@ function showPlaceInfo(marker, data, place) {
 				"</table>",
 		maxWidth: 330
 	});
-	infowindow.open(map, marker);	// .open 공부 필요, markers 자리 어떻게 처리해야??
+	infowindow.open(map, marker);
+	
+	var typeStr = place.types.join(' ');
+	if (typeStr.indexOf("lodging") >= 0) {
+		type = "자자";
+	} else if (typeStr.indexOf("restaurant") >= 0 || typeStr.indexOf("food") >= 0) {
+		type = "먹자";
+	} else {
+		type = "가자";
+	}
+	
+	// 찜하기
+	clickHeartImage(type, data, place);
 }
 
-// 상세 검색 출력??
+// ### 상세 검색 출력 ###
+// 		주소까지 출력하고 싶었지만, [주소 포기]
+//			google maps api에서 제공해주는 method를 사용 -> 한번에 너무 많은 정보를 요청해서 10개 이외에는 결과가 안나오고,
+//			proxy 서버로 ajax 요청보내고 응답 받기 -> 모든 결과는 나오지만 주소 값이 영어로만 받아짐...
 function printDetailInfo(searchedResult) {
 	var requestsForDetail = []; 
 	serviceForDetail = new google.maps.places.PlacesService(map);
 	
-//	[3] ajax 직접
+	var detailData = [];
 	for (var i = 0; i < searchedResult.length; i++) {
 		requestsForDetail[i] = {
 				placeId: searchedResult[i].place_id,
@@ -248,12 +263,16 @@ function printDetailInfo(searchedResult) {
 			dataType: 'json',
 			data: {placeid: searchedResult[i].place_id, 
 					key: "AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY"},
-//			async: false,		// 동기식으로 ajax 요청하기
+			//async: false,		// 동기식으로 ajax 요청하기
 			success: function(data) {
 				var d = data.result;
+				detailData[i] = d;
 				
 				var td1 = $("<td></td>").text(d.name);
 				$(td1).css("font-weight", "900").css("cursor", "pointer").css("padding-left", "5px");
+				$(td1).attr("class", "clickableResultTd");
+				// 테이블 클릭하면 맵 중앙 이동
+				$(td1).attr("onclick", "moveToResultData(" + d.geometry.location.lat + "," + d.geometry.location.lng + ")");
 				$(td1).mouseenter(function() {
 					$(td1).css("text-shadow", "1px 1px 1px black");
 				});
@@ -266,18 +285,20 @@ function printDetailInfo(searchedResult) {
 				$(td2).attr("align", "right").css("padding-right", "5px").css("font-size", "10pt");
 				var tr2 = $("<tr></tr>").append(td2);
 				
-				var td3 = $("<td></td>").html("<a href=\"" + d.website + "\" class=\"websiteAtag\">" + d.website + "</a>");
+				var website = d.website;
+				var td3;
+				if (d.website==null) {
+					website = "사이트 정보 없음";
+					td3 = $("<td></td>").text(website);
+				} else {
+					td3 = $("<td></td>").html("<a href=\"" + website + "\" class=\"websiteAtag\">" + website + "</a>");
+				}
 				$(td3).css("font-size", "10pt").css("padding-left", "5px");
 				var tr3 = $("<tr></tr>").append(td3);
 				
 				var td4 = $("<td></td>").text(d.place_id);
 				$(td4).attr("align", "center").css("font-size", "5pt");
 				var tr4 = $("<tr></tr>").append(td4);
-				
-				// 테이블 클릭하면 맵 중앙 이동
-//				$(document).on("click", td1, function() {
-//					map.setCenter(d.geometry.location);
-//				});
 				
 				var table = $("<table></table>").append(tr1, tr2, tr3, tr4);
 				
@@ -298,15 +319,28 @@ function printDetailInfo(searchedResult) {
 	}
 }
 
+// ### 검색 결과 목록의 장소명을 클릭했을 때, 해당 장소로 지도 중앙 이동 ###
+function moveToResultData(lat, lng) {
+	var resultLatLng = new google.maps.LatLng({lat: lat, lng: lng});
+	map.setCenter(resultLatLng);
+}
+
 // ### 찜하기 버튼 클릭했을 때 ###
-function clickHeartImage() {
+function clickHeartImage(type, data, detail) {
 	$(document).on("click", ".ifLikeImg1", function() {
 		$(".ifLikeImg1").css("opacity", "0").css("top", "-20px").css("z-index", "1");
 		$(".ifLikeImg2").css("opacity", "1").css("top", "0px").css("z-index", "5");
+		
+//		찜영역에 목록추가 하기
+		
+//		alert("찜 목록에 추가 됐습니다.");
 	});
 	$(document).on("click", ".ifLikeImg2", function() {
 		$(".ifLikeImg1").css("opacity", "1").css("top", "0px").css("z-index", "5");
 		$(".ifLikeImg2").css("opacity", "0").css("top", "-20px").css("z-index", "1");
+		alert("찜 목록에서 삭제 됐습니다.");
 	});
+	
+	
 }
 

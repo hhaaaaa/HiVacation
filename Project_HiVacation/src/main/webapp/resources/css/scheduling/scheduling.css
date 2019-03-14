@@ -46,7 +46,32 @@
 	width: 1000px;
 	border: grey solid 2px;
 	background-color: white;
+	margin-bottom: 40px;
 }
+#step2Div {
+	padding-top: 5px;
+	border: grey solid 2px;
+	margin-bottom: 40px;
+}
+#step3Div {
+	padding-top: 5px;
+	border: grey solid 2px;
+	margin-bottom: 40px;
+}
+.saveButtonScheDiv {
+	cursor: pointer;
+}
+.cannotSeeFirstDiv {
+	position: absolute;
+	top: 195px;
+	left: -1200px;
+	width: 1000px;
+	background-color: white;
+}
+
+
+
+/* ##### Step1. 여행 검색 ##### */
 #step1Map {
 	width: 950px;
 	height: 400px;
@@ -73,27 +98,6 @@
 	width: 100%;
 	padding-left: 15px;
 }
-#step2Div {
-	padding-top: 5px;
-	border: grey solid 2px;
-}
-#step3Div {
-	padding-top: 5px;
-	border: grey solid 2px;
-}
-.saveButtonScheDiv {
-	cursor: pointer;
-}
-.cannotSeeFirstDiv {
-	position: absolute;
-	top: 195px;
-	left: -1200px;
-	width: 1000px;
-	background-color: white;
-}
-
-
-
 .ifTable {
 	width: 250px;
 }
@@ -152,3 +156,68 @@
 	text-decoration: underline;
 	color: black;
 }
+
+
+/* ##### Step2. 찜 목록 & 여행 저장 ##### */
+#step2Map {
+	width: 950px;
+	height: 400px;
+	border: black solid 1px;
+}
+#step2SaveScheduleTable {
+	width: 950px;
+}
+.step2MenuTd {
+	
+}
+#step2EmptyTd {
+	
+}
+#step2GoArea {
+	height: 150px;
+	border: black solid 1px;
+}
+#step2EatArea {
+	height: 150px;
+	border: black solid 1px;
+}
+#step2SleepArea {
+	height: 150px;
+	border: black solid 1px;
+}
+#step2DoArea {
+	border: black solid 1px;
+}
+#step2DoList {
+	height: 500px;
+	border: black solid 1px;
+	border-radius: 7px;
+}
+#step2DoSaveMenu {
+	
+}
+.step2SaveDate {
+	outline: none;
+	width: 80px;
+	height: 22px;
+}
+#step2SaveButton {
+	outline: none;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	font-weight: 900;
+	margin-bottom: 5px;
+}
+#step2SaveButton:hover {
+	text-shadow: 1px 1px 1px black;
+}
+
+
+
+
+
+
+
+
+
