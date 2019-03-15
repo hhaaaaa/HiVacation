@@ -43,8 +43,9 @@ create table hv_plan(
 	hp_date date not null,
 	hp_city varchar2(20 char) not null,
 	hp_placeid varchar2(27 char) not null,
-	hp_store varchar2(100 char) not null,
-	hp_location varchar2(200 char) not null,
+	hp_pname varchar2(100 char) not null,
+	hp_rating number(2, 1) not null,
+	hp_paddress varchar2(200 char) not null,
 	hp_url varchar2(200 char) not null,
 	hp_website varchar2(200 char) not null,
 	hp_phone varchar2(20 char) not null,
@@ -54,6 +55,24 @@ create table hv_plan(
 		on delete cascade
 );
 create sequence hp_no;
+
+
+-----------------------------------------
+
+select * from hv_member;
+select * from hv_sns;
+select * from hv_reply;
+select * from hv_plan;
+
+-----------------------------------------
+
+select * from hv_cart;
+
+
+drop table hv_cart cascade constraint purge;
+drop table hv_plan cascade constraint purge;
+
+
 
 create table hv_cart(
 	hc_no number(5) primary key,
@@ -71,19 +90,3 @@ create table hv_cart(
 		on delete cascade
 );
 create sequence hc_no;
-
------------------------------------------
-
-select * from hv_member;
-select * from hv_sns;
-select * from hv_reply;
-select * from hv_cart;
-select * from hv_plan;
-
------------------------------------------
-
-
-drop table hv_cart cascade constraint purge;
-drop table hv_plan cascade constraint purge;
-
-

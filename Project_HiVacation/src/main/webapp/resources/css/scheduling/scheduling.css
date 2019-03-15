@@ -47,6 +47,7 @@
 	border: grey solid 2px;
 	background-color: white;
 	margin-bottom: 40px;
+	padding-bottom: 30px;
 }
 #step2Div {
 	padding-top: 5px;
@@ -191,7 +192,6 @@
 #step2DoList {
 	height: 500px;
 	border: black solid 1px;
-	border-radius: 7px;
 }
 #step2DoSaveMenu {
 	
@@ -211,6 +211,15 @@
 }
 #step2SaveButton:hover {
 	text-shadow: 1px 1px 1px black;
+}
+#step2GoAreaTable {
+	
+}
+#step2EatAreaTable {
+	
+}
+#step2SleepAreaTable {
+	
 }
 
 

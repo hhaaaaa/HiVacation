@@ -43,7 +43,7 @@
 				</tr>
 				<tr>
 					<td id="step2GoArea">
-						<!-- 가자영역 -->
+						<table id="step2GoAreaTable"><!-- 가자영역 --></table>
 					</td>
 					<td rowspan="7" id="step2DoArea">
 						<table style="width: 100%;">
@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td id="step2EatArea">
-						<!-- 먹자영역 -->
+						<table id="step2EatAreaTable"><!-- 먹자영역 --></table>
 					</td>
 				</tr>
 				<tr><td></td></tr>
@@ -86,7 +86,7 @@
 				</tr>
 				<tr>
 					<td id="step2SleepArea">
-						<!-- 자자영역 -->
+						<table id="step2SleepAreaTable"><!-- 자자영역 --></table>
 					</td>
 				</tr>
 			</table><p>

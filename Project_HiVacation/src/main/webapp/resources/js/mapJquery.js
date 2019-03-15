@@ -8,6 +8,7 @@ var searchedResult = [];
 var detailedResult = [];
 var srIndex;
 
+// ################################### Step1 ###################################
 // ### 홈 페이지 화면 조정 ###
 function schedulingPaging() {
 	$("#step1Menu").click(function() {
@@ -238,7 +239,7 @@ function showPlaceInfo(marker, data, place) {
 	}
 	
 	// 찜하기
-	clickHeartImage(type, data, place);
+	clickHeartImage(type, place);
 }
 
 // ### 상세 검색 출력 ###
@@ -249,7 +250,6 @@ function printDetailInfo(searchedResult) {
 	var requestsForDetail = []; 
 	serviceForDetail = new google.maps.places.PlacesService(map);
 	
-	var detailData = [];
 	for (var i = 0; i < searchedResult.length; i++) {
 		requestsForDetail[i] = {
 				placeId: searchedResult[i].place_id,
@@ -266,7 +266,7 @@ function printDetailInfo(searchedResult) {
 			//async: false,		// 동기식으로 ajax 요청하기
 			success: function(data) {
 				var d = data.result;
-				detailData[i] = d;
+				detailedResult[i] = d;
 				
 				var td1 = $("<td></td>").text(d.name);
 				$(td1).css("font-weight", "900").css("cursor", "pointer").css("padding-left", "5px");
@@ -326,21 +326,78 @@ function moveToResultData(lat, lng) {
 }
 
 // ### 찜하기 버튼 클릭했을 때 ###
-function clickHeartImage(type, data, detail) {
+//		여행일정 저장하고 나면 배열들 초기화하도록??????????????????????????????
+var likedPlaceid = [];
+var likedPname = [];
+var likedRating = [];
+var likedPaddress = [];
+var likedUrl = [];
+var likedWebsite = [];
+var likedPhone = [];
+var likedType = [];
+function clickHeartImage(type, detail) {
 	$(document).on("click", ".ifLikeImg1", function() {
 		$(".ifLikeImg1").css("opacity", "0").css("top", "-20px").css("z-index", "1");
 		$(".ifLikeImg2").css("opacity", "1").css("top", "0px").css("z-index", "5");
 		
-//		찜영역에 목록추가 하기
+		// 찜영역에 목록추가 하기
+		likedPlaceid.push(detail.place_id);
+		likedPname.push(detail.name);
+		likedRating.push(detail.rating);
+		likedPaddress.push(detail.formatted_address);
+		likedUrl.push(detail.url);
+		likedWebsite.push(detail.website);
+		likedPhone.push(detail.formatted_phone_number);
+		likedType.push(type);
 		
-//		alert("찜 목록에 추가 됐습니다.");
+//		printLikedPlaceIntoEachArea();
+		
+		alert("찜 목록에 추가 됐습니다.");
+		alert(likedPlaceid.length);
 	});
 	$(document).on("click", ".ifLikeImg2", function() {
 		$(".ifLikeImg1").css("opacity", "1").css("top", "0px").css("z-index", "5");
 		$(".ifLikeImg2").css("opacity", "0").css("top", "-20px").css("z-index", "1");
+		
+		var i = likedPlaceid.indexOf(detail.place_id);
+		if (i > -1) {
+			likedPlaceid.splice(i, 1);
+			likedPname.splice(i, 1);
+			likedRating.splice(i, 1);
+			likedPaddress.splice(i, 1);
+			likedUrl.splice(i, 1);
+			likedWebsite.splice(i, 1);
+			likedPhone.splice(i, 1);
+			likedType.splice(i, 1);
+		}
+		
 		alert("찜 목록에서 삭제 됐습니다.");
 	});
-	
-	
 }
+
+
+
+//################################### Step2 ###################################
+
+// ### 각 찜목록 영역에 데이터 추가하기 ###
+function printLikedPlaceIntoEachArea() {
+	for (var i = 0; i < likedPlaceid.length; i++) {
+		if (likedType.equals("가자")) {
+			var td1 = $("<td></td>").text(likedPname);
+			var td1 = $("<td></td>").text(likedPhone);
+			var td1 = $("<td></td>").text("x");
+			var tr1 = $("<tr></tr>").append(td1);
+			$("#step2GoAreaTable").append(td1);
+			
+		} else if (likedType.equals("먹자")) {
+			
+		} else if (likedType.equals("자자")) {
+			
+		}
+	}
+}
+
+
+
+
 
