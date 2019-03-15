@@ -16,7 +16,34 @@ create table hv_sns(
 		foreign key(hs_id) 
 		references hv_member(hm_id) 
 		on delete cascade
-);
+); ->삭제 : 아래 코드실행
+drop table hv_sns cascade constraint purge;
+
+create table hv_sns(
+	hs_no number(5) primary key,
+	hs_id varchar2(15 char) not null,
+	hs_title varchar2(150 char) not null,
+	hs_text varchar2(2500 char) not null,
+	hs_date date not null,
+	constraint c_sns 
+		foreign key(hs_id) 
+		references hv_member(hm_id) 
+		on delete cascade
+);->생성
+
+
+create table hv_image(
+	hi_no number(5) primary key,
+	hi_sno number(5) not null,
+	hi_fname varchar2(150 char) not null,
+	constraint c_image 
+		foreign key(hi_sno) 
+		references hv_sns(hs_no) 
+		on delete cascade
+); ->생성
+create sequence hi_seq; ->생성
+
+
 create sequence hs_seq;
 
 create table hv_reply(

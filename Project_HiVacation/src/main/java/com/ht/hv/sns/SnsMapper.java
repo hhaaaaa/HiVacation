@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.ht.hv.member.Member;
 
-
 public interface SnsMapper {
 	public abstract int write(SNSMsg s);
 	public abstract Integer getAllSNSMsgCount();
@@ -14,4 +13,7 @@ public interface SnsMapper {
 	public abstract List<SNSMsg> searchId(Search s); 
 	public abstract List<SNSMsg> searchTitle(Search s); 
 	public abstract List<SNSMsg> searchText(Search s);  
+	
+	public abstract int imageWrite(Image i);
+	public abstract int getSNStoNO();
 }

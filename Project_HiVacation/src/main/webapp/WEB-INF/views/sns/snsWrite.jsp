@@ -28,8 +28,13 @@
 					<td align="center" class="snsWriteMenu">
 						<img src="resources/img/plus_button.png" style="width: 35px;">
 					</td>
-					<td align="center" class="snsWriteMenu" style="padding-left: 40px;">
-						<input type="file" id="snsImage" name="hs_img">
+					<td align="center" class="snsWriteMenu" style="padding-left: 40px;" id="fileTD">
+						<%--Img file추가 되는 부분 --%>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="hidden" id="fileIndex" name="fileI">
 					</td>
 				</tr>
 				<tr><td><br></td></tr>

@@ -35,6 +35,8 @@
 		myMenuLocationControl();
 		searchLocationByQuery();
 		searchDetailByKeyword();
+		addFile();
+		getFileIndex();
 	});
 </script>
 </head>

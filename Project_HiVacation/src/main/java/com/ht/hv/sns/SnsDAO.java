@@ -25,34 +25,52 @@ public class SnsDAO {
 	@Autowired 
 	private SqlSession ss;	 
 	
-	public void write(SNSMsg smsg, HttpServletRequest request, HttpServletResponse response){
+	public void write(SNSMsg smsg, HttpServletRequest request, HttpServletResponse response) {
 		SnsMapper sm = ss.getMapper(SnsMapper.class);
 		Member mb = (Member) request.getSession().getAttribute("loginMember");
 		try {
+
 			String path = request.getSession().getServletContext().getRealPath("resources/img");
 			MultipartRequest mr = new MultipartRequest(request, path, 30 * 1024 * 1024, "utf-8",
 					new DefaultFileRenamePolicy());
-			
+
 			smsg.setHs_id(mb.getHm_id());
 			smsg.setHs_title(mr.getParameter("hs_title"));
 			smsg.setHs_text(mr.getParameter("hs_text"));
-			
-			String hs_img = mr.getFilesystemName("hs_img");
-			if (hs_img != null) {
-				hs_img = URLEncoder.encode(hs_img, "utf-8");
-				hs_img = hs_img.replace("+", " ");
-				smsg.setHs_img(mr.getFilesystemName("hs_img"));
-			}else {
-				smsg.setHs_img("noImg");
-			}
-			
-			if(sm.write(smsg)==1){
-				request.setAttribute("r","글쓰기 완료");
+
+			int fileIndex = Integer.parseInt(mr.getParameter("fileI"));
+
+			if (sm.write(smsg) == 1) {
+				request.setAttribute("r", "글쓰기 완료");
 				allMsgCount++;
+				int hs_no = sm.getSNStoNO(); // select문으로 hs_no가져옴
+				BigDecimal Bhs_no = new BigDecimal(hs_no); // bigDecimal로변경
+				List<Image> is = new ArrayList<Image>();//해당 sns에 들어가는 파일들의 list
+				int imgI = 0; //이미지 인풋폼 갯수
+				int imgC = 0;//실제 추가된 이미지 갯수
+				if (fileIndex != 0) { //인풋폼이 하나라도 있을때
+					for (int i = 0; i < fileIndex; i++) { //인풋폼  갯수만큼
+						String img = mr.getFilesystemName("file" + imgI);
+						imgI = imgI + 1;
+						if (img != null) { //인풋폼에 이미지가 있을때
+							img = URLEncoder.encode(img, "utf-8");
+							img = img.replace("+", " ");
+							is.add(new Image(null, Bhs_no, img));
+							if (sm.imageWrite(is.get(imgC)) == 1) {
+								imgC = imgC+1;
+								request.setAttribute("r", (imgC) + "개 이미지 포함글쓰기 완료");
+							}
+						}  
+					}
+				} else {//sns글에 이미지가 아예없을때
+					is.add(new Image(null, Bhs_no, "no_img"));
+				}
+				if(imgC == 0){ //인풋 폼은 있는데 이미지추가가 0개
+					is.add(new Image(null, Bhs_no, "no_img"));
+				}
 			}
-			
 		} catch (Exception e) {
-			request.setAttribute("r","글쓰기 실패");
+			request.setAttribute("r", "글쓰기 실패");
 			e.printStackTrace();
 		}
 	}

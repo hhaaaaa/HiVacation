@@ -29,4 +29,11 @@
 	<select id="searchText" parameterType="com.ht.hv.sns.Search" resultType="com.ht.hv.sns.SNSMsg">
 		select * from hv_member,hv_sns where hm_id=hs_id and hs_text like '%'||#{search}||'%' order by hs_date 
 	</select>
+	
+	<insert id="imageWrite" parameterType="com.ht.hv.sns.Image">
+		insert into hv_image values(hi_seq.nextval,#{hi_sno},#{hi_fname})
+	</insert> 
+	<select id="getSNStoNO" resultType="java.lang.Integer">
+		select max(hs_no) from hv_sns 
+	</select> 
 </mapper>

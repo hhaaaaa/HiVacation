@@ -2,6 +2,7 @@ package com.ht.hv.sns;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class SNSMsg {
 	private BigDecimal hs_no;
@@ -9,19 +10,19 @@ public class SNSMsg {
 	private String hs_title;
 	private String hs_text;
 	private Date hs_date;
-	private String hs_img;
+private List<Image> hv_image;
 	
 	public SNSMsg() {
 	}
 
-	public SNSMsg(BigDecimal hs_no, String hs_id, String hs_title, String hs_text, Date hs_date, String hs_img) {
+	public SNSMsg(BigDecimal hs_no, String hs_id, String hs_title, String hs_text, Date hs_date, List<Image> hv_image) {
 		super();
 		this.hs_no = hs_no;
 		this.hs_id = hs_id;
 		this.hs_title = hs_title;
 		this.hs_text = hs_text;
 		this.hs_date = hs_date;
-		this.hs_img = hs_img;
+		this.hv_image = hv_image;
 	}
 
 	public BigDecimal getHs_no() {
@@ -64,11 +65,12 @@ public class SNSMsg {
 		this.hs_date = hs_date;
 	}
 
-	public String getHs_img() {
-		return hs_img;
+	public List<Image> getHv_image() {
+		return hv_image;
 	}
 
-	public void setHs_img(String hs_img) {
-		this.hs_img = hs_img;
+	public void setHv_image(List<Image> hv_image) {
+		this.hv_image = hv_image;
 	}
+
 }

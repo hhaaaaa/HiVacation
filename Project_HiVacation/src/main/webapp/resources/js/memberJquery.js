@@ -50,3 +50,27 @@ function myMenuLocationControl() {
 		isMyMenuClicked *= -1;
 	});
 }
+
+//sns 글쓸때 file받아오기
+var imgInputC = 0;
+var imgI = 0;
+function addFile(){
+	$("#addFile").click(function(){
+		imgInputC = imgInputC + 1;
+		var input = $("<input>").attr("type","file").attr("name","file"+imgI).css("margin-left","-251px");
+		imgI=imgI+1;
+		var aTag = $("<a></a>").text("삭제");
+		$(aTag).attr("onclick", "deleteFile(this)");
+		var div = $("<div></div>").append(input,aTag);
+		$("#fileTD").append(div);
+	});
+}
+
+function deleteFile(addedFile){
+	$(addedFile).parent().remove();
+}
+function getFileIndex(){
+	$("#snsWriteButton").click(function(){
+		$("#fileIndex").attr("value", imgInputC);
+	});
+}
