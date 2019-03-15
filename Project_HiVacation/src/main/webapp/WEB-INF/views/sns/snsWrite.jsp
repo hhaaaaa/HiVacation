@@ -26,7 +26,7 @@
 				</tr>
 				<tr>
 					<td align="center" class="snsWriteMenu">
-						<img src="resources/img/plus_button.png" style="width: 35px;">
+						<img src="resources/img/plus_button.png" style="width: 35px;" id="addFile">
 					</td>
 					<td align="center" class="snsWriteMenu" style="padding-left: 40px;" id="fileTD">
 						<%--Img file추가 되는 부분 --%>

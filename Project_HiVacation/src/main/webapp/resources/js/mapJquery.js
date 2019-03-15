@@ -28,6 +28,9 @@ function schedulingPaging() {
 		$("#step" + no + "Div").css("left", "300px");
 		$("#step" + no + "Menu").css("background-color", "grey");
 		$("#step" + no + "Menu").css("color", "white");
+		
+		// 각 찜 영역의 데이터 출력
+		printLikedPlaceIntoEachArea();
 	});
 	$("#step3Menu").click(function() {
 		$("#step" + no + "Div").css("left", "-1200px");
@@ -266,6 +269,9 @@ function printDetailInfo(searchedResult) {
 			//async: false,		// 동기식으로 ajax 요청하기
 			success: function(data) {
 				var d = data.result;
+				
+				// 모든 detail 검색 결과에 찜 했는지 여부 넣기(객체에 동적으로 값 할당)
+				d.like = false;
 				detailedResult[i] = d;
 				
 				var td1 = $("<td></td>").text(d.name);
@@ -327,33 +333,17 @@ function moveToResultData(lat, lng) {
 
 // ### 찜하기 버튼 클릭했을 때 ###
 //		여행일정 저장하고 나면 배열들 초기화하도록??????????????????????????????
-var likedPlaceid = [];
-var likedPname = [];
-var likedRating = [];
-var likedPaddress = [];
-var likedUrl = [];
-var likedWebsite = [];
-var likedPhone = [];
-var likedType = [];
+var likedResult = [];
 function clickHeartImage(type, detail) {
 	$(document).on("click", ".ifLikeImg1", function() {
 		$(".ifLikeImg1").css("opacity", "0").css("top", "-20px").css("z-index", "1");
 		$(".ifLikeImg2").css("opacity", "1").css("top", "0px").css("z-index", "5");
 		
-		// 찜영역에 목록추가 하기
-		likedPlaceid.push(detail.place_id);
-		likedPname.push(detail.name);
-		likedRating.push(detail.rating);
-		likedPaddress.push(detail.formatted_address);
-		likedUrl.push(detail.url);
-		likedWebsite.push(detail.website);
-		likedPhone.push(detail.formatted_phone_number);
-		likedType.push(type);
-		
-//		printLikedPlaceIntoEachArea();
+//		 찜 목록 추가하기 (detail객체에 type 동적 할당해서) 되나?????????????????????????????????
+		detail.type = type;
+		likedResult.push(detail);
 		
 		alert("찜 목록에 추가 됐습니다.");
-		alert(likedPlaceid.length);
 	});
 	$(document).on("click", ".ifLikeImg2", function() {
 		$(".ifLikeImg1").css("opacity", "1").css("top", "0px").css("z-index", "5");
@@ -381,20 +371,20 @@ function clickHeartImage(type, detail) {
 
 // ### 각 찜목록 영역에 데이터 추가하기 ###
 function printLikedPlaceIntoEachArea() {
-	for (var i = 0; i < likedPlaceid.length; i++) {
-		if (likedType.equals("가자")) {
-			var td1 = $("<td></td>").text(likedPname);
-			var td1 = $("<td></td>").text(likedPhone);
-			var td1 = $("<td></td>").text("x");
-			var tr1 = $("<tr></tr>").append(td1);
-			$("#step2GoAreaTable").append(td1);
-			
-		} else if (likedType.equals("먹자")) {
-			
-		} else if (likedType.equals("자자")) {
-			
-		}
-	}
+//	for (var i = 0; i < likedPlaceid.length; i++) {
+//		if (likedType.equals("가자")) {
+//			var td1 = $("<td></td>").text(likedPname);
+//			var td1 = $("<td></td>").text(likedPhone);
+//			var td1 = $("<td></td>").text("x");
+//			var tr1 = $("<tr></tr>").append(td1);
+//			$("#step2GoAreaTable").append(td1);
+//			
+//		} else if (likedType.equals("먹자")) {
+//			
+//		} else if (likedType.equals("자자")) {
+//			
+//		}
+//	}
 }
 
 

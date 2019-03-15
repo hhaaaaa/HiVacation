@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ht.hv.sns.SnsMapper">
 	<insert id="write" parameterType="com.ht.hv.sns.SNSMsg">
-		insert into hv_sns values(hs_seq.nextval, #{hs_id}, #{hs_title}, #{hs_text}, sysdate, #{hs_img})
+		insert into hv_sns values(hs_seq.nextval, #{hs_id}, #{hs_title}, #{hs_text}, sysdate)
 	</insert>
 	<select id="getAllSNSMsgCount" resultType="java.lang.Integer">
 		select count(*) from hv_member,hv_sns where hm_id=hs_id
@@ -14,7 +14,7 @@
 	</select> 
 	<select id="getSNSMsg" parameterType="com.ht.hv.sns.SNSMsgNo" resultType="com.ht.hv.sns.SNSMsg">
 		select * from 
-		 	(select rownum as rn, hs_no, hs_id, hs_title, hs_text, hs_date, hs_img from
+		 	(select rownum as rn, hs_no, hs_id, hs_title, hs_text, hs_date from
 				(select * from hv_member, hv_sns where hm_id=hs_id order by hs_date ))
 		where rn &lt;=#{start} and rn &gt;=#{end}
 		order by rn desc
