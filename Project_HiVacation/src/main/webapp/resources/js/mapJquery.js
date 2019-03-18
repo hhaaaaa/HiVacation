@@ -349,17 +349,17 @@ function clickHeartImage(type, detail) {
 		$(".ifLikeImg1").css("opacity", "1").css("top", "0px").css("z-index", "5");
 		$(".ifLikeImg2").css("opacity", "0").css("top", "-20px").css("z-index", "1");
 		
-		var i = likedPlaceid.indexOf(detail.place_id);
-		if (i > -1) {
-			likedPlaceid.splice(i, 1);
-			likedPname.splice(i, 1);
-			likedRating.splice(i, 1);
-			likedPaddress.splice(i, 1);
-			likedUrl.splice(i, 1);
-			likedWebsite.splice(i, 1);
-			likedPhone.splice(i, 1);
-			likedType.splice(i, 1);
-		}
+//		var i = likedPlaceid.indexOf(detail.place_id);
+//		if (i > -1) {
+//			likedPlaceid.splice(i, 1);
+//			likedPname.splice(i, 1);
+//			likedRating.splice(i, 1);
+//			likedPaddress.splice(i, 1);
+//			likedUrl.splice(i, 1);
+//			likedWebsite.splice(i, 1);
+//			likedPhone.splice(i, 1);
+//			likedType.splice(i, 1);
+//		}
 		
 		alert("찜 목록에서 삭제 됐습니다.");
 	});
