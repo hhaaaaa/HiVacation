@@ -32,7 +32,7 @@
 		<c:set var="no" value="${allMsgCount+1-((curPage-1)*count) }" />
 		<table id="snsContentTable">
 			<c:forEach items="${msgs }" var="m">
-				<tr>
+				<tr onclick="goSnsView(${m.hs_no });">
 					<td align="center" id="snsContentNo">
 					 	<c:set var="no" value="${no-1 }" /> <fmt:formatNumber value="${no }" pattern="#"/>
 					</td>
@@ -52,8 +52,8 @@
 		</table><p>
 		
 		<table id="pageCountTalbe">
-			<tr>   
-				<c:choose>     
+			<tr>
+				<c:choose>
 					<%--현재페이지가 1 이고 마지막페이지가 현재페이지+2미만 --%>
 					<c:when test="${curPage==1 && curPage+2>pageCount }">
 						<c:forEach var="i" begin="1" end="${pageCount }">

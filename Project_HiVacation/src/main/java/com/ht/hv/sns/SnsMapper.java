@@ -5,7 +5,7 @@ import java.util.List;
 import com.ht.hv.member.Member;
 
 public interface SnsMapper {
-	public abstract int write(SNSMsg s);
+	public abstract int write(SNSMsg sm);
 	public abstract Integer getAllSNSMsgCount();
 	public abstract Integer getMySNSMsgCount(Member m);
 	public abstract List<SNSMsg> getSNSMsg(SNSMsgNo smn);
@@ -16,4 +16,9 @@ public interface SnsMapper {
 	
 	public abstract int imageWrite(Image i);
 	public abstract int getSNStoNO();
+	
+	public abstract SNSMsg snsView(SNSMsg sm);
+	public abstract List<Image> snsViewImg(SNSMsg sm);
+	
+	public abstract int snsDelete(SNSMsg sm);
 }

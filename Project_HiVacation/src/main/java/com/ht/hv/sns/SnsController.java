@@ -63,4 +63,21 @@ public class SnsController {
 		request.setAttribute("contentPage", "sns/sns.jsp");       
 		return "index"; 
 	}
+	
+	@RequestMapping(value = "/go.snsView", method = RequestMethod.GET)
+	public String goSnsView(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
+		sDAO.view(sm, request, response);
+		request.setAttribute("contentPage", "sns/snsRead.jsp");       
+		return "index"; 
+	}
+	
+	@RequestMapping(value = "/do.snsDelete", method = RequestMethod.GET)
+	public String doSNSDelete(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
+		sDAO.delete(sm, request, response);
+		sDAO.paging(1, request, response);
+		request.setAttribute("contentPage", "sns/sns.jsp");       
+		return "index"; 
+	}
 }

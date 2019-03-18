@@ -30,6 +30,19 @@ function goUpdate() {
 	location.href="go.update";
 }
 
+function goSnsView(hs_no){  
+	location.href="go.snsView?hs_no="+hs_no;
+}
+
+function doSNSDelete(hs_no){	
+	var ok = confirm("삭제하시겠습니까?");
+	if(ok){
+		location.href="do.snsDelete?hs_no="+hs_no;
+	}else{
+		return false;
+	}
+}
+
 var checkBox = 0;
 function doWithdraw(hm_pw) {
 	if (checkBox == 0) {

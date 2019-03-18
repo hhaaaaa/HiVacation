@@ -155,4 +155,31 @@ public class SnsDAO {
 	public void clearSearch(HttpServletRequest request, HttpServletResponse response){
 		request.getSession().setAttribute("searchMsgs", null);
 	}
+	
+	public void view(SNSMsg s, HttpServletRequest request, HttpServletResponse response){
+		SnsMapper sm = ss.getMapper(SnsMapper.class);
+		SNSMsg selectSNS = new SNSMsg();
+		List<Image> selectImg = new ArrayList<Image>();
+		
+		BigDecimal hs_no = new BigDecimal(request.getParameter("hs_no"));
+		s.setHs_no(hs_no);
+		
+		selectSNS = sm.snsView(s);
+		selectImg = sm.snsViewImg(s); 
+		selectSNS.setHv_image(selectImg);
+		
+		request.setAttribute("selectSNS", selectSNS);
+	}
+	
+	public void delete(SNSMsg s, HttpServletRequest request, HttpServletResponse response){
+		SnsMapper sm = ss.getMapper(SnsMapper.class);
+		
+		BigDecimal hs_no = new BigDecimal(request.getParameter("hs_no"));
+		s.setHs_no(hs_no);
+		
+		if(sm.snsDelete(s)==1){
+			request.setAttribute("r", "게시글 삭제");
+			allMsgCount--;
+		}
+	}
 }
