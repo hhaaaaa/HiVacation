@@ -27,6 +27,8 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"> 
 	$(function() {
+		addFile();
+		getFileIndex();
 		connectSummonAddInputEventJoin();
 		connectSummonAddInputEventUpdate();
 		connectIdCheckEvent();
@@ -35,8 +37,6 @@
 		myMenuLocationControl();
 		searchLocationByQuery();
 		searchDetailByKeyword();
-		addFile();
-		getFileIndex();
 	});
 </script>
 </head>

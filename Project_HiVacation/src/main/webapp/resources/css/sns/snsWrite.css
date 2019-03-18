@@ -53,3 +53,6 @@
 	width: 70px;
 	height: 25px;
 }
+#addFile {
+	cursor: pointer;
+}

@@ -10,7 +10,7 @@ public class SNSMsg {
 	private String hs_title;
 	private String hs_text;
 	private Date hs_date;
-private List<Image> hv_image;
+	private List<Image> hv_image;
 	
 	public SNSMsg() {
 	}
