@@ -71,6 +71,7 @@ create sequence hp_no;
 
 select * from hv_member;
 select * from hv_sns;
+select * from hv_image;
 select * from hv_reply;
 select * from hv_plan;
 

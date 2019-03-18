@@ -1,12 +1,12 @@
 var no = 1;
 var map;
 var service;
-var serviceForDetail;
-var locLatLng;
-var markers = [];
-var searchedResult = [];
-var detailedResult = [];
-var srIndex;
+var serviceForDetail;			
+var locLatLng;					// 지역 검색 위도경도 저장
+var markers = [];				// 검색 결과들 한번에 마커 프린트 하기위한 배열
+var searchedResult = [];		// nearby 검색 결과
+var srIndex;					// nearby 검색 결과 저장 위한 index
+var detailedResult = [];		// type, like 속성이 포함된 찜 목록 관리용 detail 데이터
 
 // ################################### Step1 ###################################
 // ### 홈 페이지 화면 조정 ###
@@ -29,8 +29,6 @@ function schedulingPaging() {
 		$("#step" + no + "Menu").css("background-color", "grey");
 		$("#step" + no + "Menu").css("color", "white");
 		
-		// 각 찜 영역의 데이터 출력
-		printLikedPlaceIntoEachArea();
 	});
 	$("#step3Menu").click(function() {
 		$("#step" + no + "Div").css("left", "-1200px");
@@ -73,7 +71,6 @@ function searchLocationByQuery() {
 		service.findPlaceFromQuery(request, function(results, status) {
 	    	if (status === google.maps.places.PlacesServiceStatus.OK) {
 	    		map.setCenter(results[0].geometry.location);
-	    		// results[0].name/geometry/place_id 로 접근가능!
 	    		locLatLng = new google.maps.LatLng({lat:map.getCenter().lat(), lng:map.getCenter().lng() });
 	    	}
 		});
@@ -92,7 +89,6 @@ function searchDetailByKeyword() {
 	var detail;
 	$("#step1SearchImg").click(function() {
 		searchedResult = [];
-		detailedResult = [];
 		srIndex = 0;
 		
 		clearMarkers();
@@ -122,11 +118,11 @@ function searchDetailByKeyword() {
 			    if (getNextPage) {
 			    	getNextPage();
 			    } else {		// 더 이상 Nearby 검색 결과 페이지가 없을 경우에 다음과 같은 코드 수행
-			    	// 모든 검색 결과 마커로 출력
-			    	dropAllMarker(searchedResult);
-
 			    	// 상세 정보 요청해서 테이블 출력
 			    	printDetailInfo(searchedResult);
+
+			    	// 모든 검색 결과 마커로 출력
+			    	dropAllMarker(searchedResult);
 			    }
 			    
 			}
@@ -151,15 +147,16 @@ function addMarkerWithTimeout(data) {
 	google.maps.event.addListener(marker, 'click', function() {
 		var request = {
 				placeId: data.place_id,
-				fields: ['name', 'rating', 'formatted_phone_number',  
+				fields: ['name', 'rating', 'formatted_phone_number', 'place_id',   
 					'formatted_address', 'url', 'website', 'geometry', 'types']
 		};
-		serviceForDetail.getDetails(request, function(place, status) {
-			if (status == google.maps.places.PlacesServiceStatus.OK) {
-				// marker, nearby검색, detail응답 정보 파라미터로
-				showPlaceInfo(marker, data, place);
+
+		for (var i = 0; i < detailedResult.length; i++) {
+			if (data.place_id == detailedResult[i].place_id) {
+				showPlaceInfo(marker, data, detailedResult[i], i);
+				break;
 			}
-		});
+		}
 	});
 }
 	// 검색 끝나면 마커 초기화
@@ -171,7 +168,7 @@ function clearMarkers() {
 }
 
 // ### 마커 클릭했을 때, InfoWindow 뜨도록 설정 ###
-function showPlaceInfo(marker, data, place) {
+function showPlaceInfo(marker, data, place, index) {
 	var name = data.name;
 	var rate = data.rating;
 	var placeid = data.place_id;
@@ -179,7 +176,6 @@ function showPlaceInfo(marker, data, place) {
 	var address = place.formatted_address;
 	var url = place.url;
 	var website = place.website;
-	var type;
 	
 	if (name == null) {name = "[장소명 정보 없음]";}
 	if (rate == null) {rate = "[별점 정보 없음]";} 
@@ -205,13 +201,14 @@ function showPlaceInfo(marker, data, place) {
 	}
 	
 	var infowindow = new google.maps.InfoWindow({
-		// 표시하고싶은 정보 참고 : https://developers.google.com/maps/documentation/javascript/examples/infowindow-simple?hl=ko
 		content: "<table class=\"ifTable\">" +
 				"	<tr>" +
 						"<td class=\"ifPlaceName\">" + name + "</td>" +
 						"<td align=\"right\">" +
-							"<img class=\"ifLikeImg2\" src=\"resources/img/heart_full.png\">" +
-							"<img class=\"ifLikeImg1\" src=\"resources/img/heart_outline.png\">   " +
+							"<img id=\"ifLikeImg2_" + index + "\" src=\"resources/img/heart_full.png\" " +
+									"style=\"width: 15px; cursor: pointer; opacity: 0; position: relative; top: -20px; left: 15px; z-index: 1;\">" +
+							"<img id=\"ifLikeImg1_" + index + "\" src=\"resources/img/heart_outline.png\" " +
+									"style=\"width: 15px; cursor: pointer; position: relative; opacity: 1; z-index: 5;\">   " +
 						"</td>" +
 				"	</tr>" +
 				"	<tr>" +
@@ -232,24 +229,52 @@ function showPlaceInfo(marker, data, place) {
 	});
 	infowindow.open(map, marker);
 	
-	var typeStr = place.types.join(' ');
-	if (typeStr.indexOf("lodging") >= 0) {
-		type = "자자";
-	} else if (typeStr.indexOf("restaurant") >= 0 || typeStr.indexOf("food") >= 0) {
-		type = "먹자";
-	} else {
-		type = "가자";
-	}
-	
 	// 찜하기
-	clickHeartImage(type, place);
+	clickHeartImage(place, index);
 }
 
+// ### 찜하기 버튼 클릭했을 때 ###
+function clickHeartImage(detail, index) {
+	$(document).on("click", "#ifLikeImg1_" + index, function() {
+		$("#ifLikeImg1_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
+		$("#ifLikeImg2_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
+		
+		// 찜 목록 추가하기
+		for (var i = 0; i < detailedResult.length; i++) {
+			if (detailedResult[i].place_id == detail.place_id) {
+				detailedResult[i].like = true;
+			}
+		}
+		
+		// 각 찜 영역에 해당 데이터 등록
+		printLikedPlaceIntoEachArea(index);
+		
+		alert("찜 목록에 추가 됐습니다.");
+	});
+	$(document).on("click", "#ifLikeImg2_" + index, function() {
+		$("#ifLikeImg1_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
+		$("#ifLikeImg2_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
+		
+		// 찜 목록 제거하기
+		for (var i = 0; i < detailedResult.length; i++) {
+			if (detailedResult[i].place_id == detail.place_id) {
+				detailedResult[i].like = false;
+			}
+		}
+		
+		// 각 찜 영역에서 해당 데이터 삭제
+		deleteLikedPlaceInEachArea(index);
+		
+		alert("찜 목록에서 삭제 됐습니다.");
+	});
+}
+
+
 // ### 상세 검색 출력 ###
+function printDetailInfo(searchedResult) {
 // 		주소까지 출력하고 싶었지만, [주소 포기]
 //			google maps api에서 제공해주는 method를 사용 -> 한번에 너무 많은 정보를 요청해서 10개 이외에는 결과가 안나오고,
 //			proxy 서버로 ajax 요청보내고 응답 받기 -> 모든 결과는 나오지만 주소 값이 영어로만 받아짐...
-function printDetailInfo(searchedResult) {
 	var requestsForDetail = []; 
 	serviceForDetail = new google.maps.places.PlacesService(map);
 	
@@ -257,7 +282,7 @@ function printDetailInfo(searchedResult) {
 		requestsForDetail[i] = {
 				placeId: searchedResult[i].place_id,
 				fields: ['name', 'rating', 'formatted_phone_number', 'international_phone_number',  
-					'formatted_address', 'adr_address', 'url', 'website', 'geometry']
+					'formatted_address', 'adr_address', 'url', 'website', 'geometry', 'types']
 		};
 		
 		// Proxy서버를 통해 json 파일 ajax요청
@@ -270,9 +295,19 @@ function printDetailInfo(searchedResult) {
 			success: function(data) {
 				var d = data.result;
 				
+				// 모든 detail 검색 결과에 찜 영역 설정하기(객체에 동적으로 값 할당)
+				var typeStr = d.types.join(' ');
+				if (typeStr.indexOf("lodging") >= 0) {
+					d.type = "자자";
+				} else if (typeStr.indexOf("restaurant") >= 0 || typeStr.indexOf("food") >= 0) {
+					d.type = "먹자";
+				} else {
+					d.type = "가자";
+				}
 				// 모든 detail 검색 결과에 찜 했는지 여부 넣기(객체에 동적으로 값 할당)
 				d.like = false;
-				detailedResult[i] = d;
+				
+				detailedResult.push(d);
 				
 				var td1 = $("<td></td>").text(d.name);
 				$(td1).css("font-weight", "900").css("cursor", "pointer").css("padding-left", "5px");
@@ -331,61 +366,54 @@ function moveToResultData(lat, lng) {
 	map.setCenter(resultLatLng);
 }
 
-// ### 찜하기 버튼 클릭했을 때 ###
-//		여행일정 저장하고 나면 배열들 초기화하도록??????????????????????????????
-var likedResult = [];
-function clickHeartImage(type, detail) {
-	$(document).on("click", ".ifLikeImg1", function() {
-		$(".ifLikeImg1").css("opacity", "0").css("top", "-20px").css("z-index", "1");
-		$(".ifLikeImg2").css("opacity", "1").css("top", "0px").css("z-index", "5");
-		
-//		 찜 목록 추가하기 (detail객체에 type 동적 할당해서) 되나?????????????????????????????????
-		detail.type = type;
-		likedResult.push(detail);
-		
-		alert("찜 목록에 추가 됐습니다.");
-	});
-	$(document).on("click", ".ifLikeImg2", function() {
-		$(".ifLikeImg1").css("opacity", "1").css("top", "0px").css("z-index", "5");
-		$(".ifLikeImg2").css("opacity", "0").css("top", "-20px").css("z-index", "1");
-		
-//		var i = likedPlaceid.indexOf(detail.place_id);
-//		if (i > -1) {
-//			likedPlaceid.splice(i, 1);
-//			likedPname.splice(i, 1);
-//			likedRating.splice(i, 1);
-//			likedPaddress.splice(i, 1);
-//			likedUrl.splice(i, 1);
-//			likedWebsite.splice(i, 1);
-//			likedPhone.splice(i, 1);
-//			likedType.splice(i, 1);
-//		}
-		
-		alert("찜 목록에서 삭제 됐습니다.");
-	});
-}
 
 
 
 //################################### Step2 ###################################
 
 // ### 각 찜목록 영역에 데이터 추가하기 ###
-function printLikedPlaceIntoEachArea() {
-//	for (var i = 0; i < likedPlaceid.length; i++) {
-//		if (likedType.equals("가자")) {
-//			var td1 = $("<td></td>").text(likedPname);
-//			var td1 = $("<td></td>").text(likedPhone);
-//			var td1 = $("<td></td>").text("x");
-//			var tr1 = $("<tr></tr>").append(td1);
-//			$("#step2GoAreaTable").append(td1);
-//			
-//		} else if (likedType.equals("먹자")) {
-//			
-//		} else if (likedType.equals("자자")) {
-//			
-//		}
-//	}
+function printLikedPlaceIntoEachArea(index) {
+	var td1 = $("<td></td>").text(detailedResult[index].name).css("width", "57.5%");
+	$(td1).css("cursor", "pointer");
+	var td2 = $("<td></td>").text(detailedResult[index].formatted_phone_number).css("width", "37.5%");
+	$(td2).css("font-weight", "normal").css("font-size", "11pt");
+	var td3 = $("<td></td>").text("x").css("width", "5%").css("cursor", "pointer");
+	$(td3).attr("id", "deleteLikePlace" + index);
+	$(td3).mouseover(function() {$(td3).css("text-shadow", "1px 1px 1px white");});
+	$(td3).mouseleave(function() {$(td3).css("text-shadow", "none");});
+	var tr = $("<tr></tr>").attr("id", "lpTr" + index).append(td1, td2, td3).css("width", "100%");
+	$(tr).mouseleave(function() {$(tr).css("background-color", "transparent").css("color", "black");});
+	var table = $("<table></table>").append(tr).css("width", "100%").css("border-spacing", "0px");
+	$(table).css("padding", "7px");
+	
+	if (detailedResult[index].type == "가자") {
+		$(tr).mouseover(function() {$(tr).css("background-color", "#00AA00").css("color", "white");});
+		$("#step2GoAreaDiv").append(table);
+	} else if (detailedResult[index].type == "먹자") {
+		$(tr).mouseover(function() {$(tr).css("background-color", "#0000FF").css("color", "white");});
+		$("#step2EatAreaDiv").append(table);
+	} else if (detailedResult[index].type == "자자") {
+		$(tr).mouseover(function() {$(tr).css("background-color", "#FF0000").css("color", "white");});
+		$("#step2SleepAreaDiv").append(table);
+	}
+	
+	$(document).on("click", "#deleteLikePlace" + index, function() {
+		deleteLikedPlaceInEachArea(index);
+		$("#ifLikeImg1_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
+		$("#ifLikeImg2_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
+		alert("찜 목록에서 삭제 됐습니다.");
+	});
 }
+
+//### 각 찜목록 영역에 데이터 삭제하기 ###
+function deleteLikedPlaceInEachArea(index) {
+	$("#lpTr" + index).remove();
+}
+
+//function saveMyTravel() {
+//	// 여행 저장하면 찜 목록 초기화시키기 위함
+//	detailedResult = [];
+//}
 
 
 

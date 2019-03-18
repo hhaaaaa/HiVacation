@@ -117,22 +117,7 @@
 .ifTable a:hover {
 	text-decoration: underline;
 }
-.ifLikeImg1 {
-	width: 15px;
-	cursor: pointer;
-	position: relative;
-	opacity: 1;
-	z-index: 5;
-}
-.ifLikeImg2 {
-	width: 15px;
-	cursor: pointer;
-	opacity: 0;
-	position: relative;
-	top: -20px;
-	left: 15px;
-	z-index: 1;
-}
+
 .ifPlaceName {
 	font-weight: 900;
 	font-size: 11pt;
@@ -169,24 +154,28 @@
 	width: 950px;
 }
 .step2MenuTd {
-	
+	width: 48%;
 }
 #step2EmptyTd {
-	
+	width: 4%;
 }
 #step2GoArea {
+	width: 48%;
 	height: 150px;
 	border: black solid 1px;
 }
 #step2EatArea {
+	width: 48%;
 	height: 150px;
 	border: black solid 1px;
 }
 #step2SleepArea {
+	width: 48%;
 	height: 150px;
 	border: black solid 1px;
 }
 #step2DoArea {
+	width: 48%;
 	border: black solid 1px;
 }
 #step2DoList {
@@ -212,14 +201,48 @@
 #step2SaveButton:hover {
 	text-shadow: 1px 1px 1px black;
 }
-#step2GoAreaTable {
-	
+#step2GoAreaDiv {
+	width: 100%;
+	height: 136px;
+	overflow: auto;
 }
-#step2EatAreaTable {
-	
+#step2GoAreaDiv::-webkit-scrollbar {
+	background: transparent;
+	width: 6px;
 }
-#step2SleepAreaTable {
-	
+#step2GoAreaDiv::-webkit-scrollbar-thumb {
+	background-color: #f0f0f5;
+}
+#step2EatAreaDiv {
+	width: 100%;
+	height: 136px;
+	overflow: auto;
+}
+#step2EatAreaDiv::-webkit-scrollbar {
+	background: transparent;
+	width: 6px;
+}
+#step2EatAreaDiv::-webkit-scrollbar-thumb {
+	background-color: #f0f0f5;
+}
+#step2SleepAreaDiv {
+	width: 100%;
+	height: 136px;
+	overflow: auto;
+}
+#step2SleepAreaDiv::-webkit-scrollbar {
+	background: transparent;
+	width: 6px;
+}
+#step2SleepAreaDiv::-webkit-scrollbar-thumb {
+	background-color: #f0f0f5;
+}
+#step2DoList::-webkit-scrollbar {
+	background: transparent;
+	width: 6px;
+}
+#step2DoList::-webkit-scrollbar-thumb {
+	background-color: #f0f0f5;
 }
 
 

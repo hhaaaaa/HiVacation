@@ -30,20 +30,20 @@
 		
 		<div id="step2Div" class="cannotSeeFirstDiv">
 			Step2. 찜 목록 &amp; 일정 저장<p>
-			<div id=step2Map>지도</div><p>
-			<table id=step2SaveScheduleTable>
+			<div id="step2Map">지도</div><p>
+			<table id="step2SaveScheduleTable">
 				<tr>
-					<td class="step2MenuTd" style="width: 48%;">
-						<img src="resources/img/yellow_marker.png" style="position: relative; top: 2px;">가자
+					<td class="step2MenuTd">
+						<img src="resources/img/green_marker.png" style="position: relative; top: 2px;">가자
 					</td>
-					<td id="step2EmptyTd" rowspan="8" style="width: 4%;"></td>
-					<td class="step2MenuTd" style="width: 48%;">
+					<td id="step2EmptyTd" rowspan="8"></td>
+					<td class="step2MenuTd">
 						&nbsp;<img src="resources/img/save_icon.png" style="position: relative; top: 2px;"> 하자
 					</td>
 				</tr>
 				<tr>
-					<td id="step2GoArea">
-						<table id="step2GoAreaTable"><!-- 가자영역 --></table>
+					<td id="step2GoArea" valign="top">
+						<div id="step2GoAreaDiv"><!-- 가자영역 --></div>
 					</td>
 					<td rowspan="7" id="step2DoArea">
 						<table style="width: 100%;">
@@ -74,8 +74,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td id="step2EatArea">
-						<table id="step2EatAreaTable"><!-- 먹자영역 --></table>
+					<td id="step2EatArea" valign="top">
+						<div id="step2EatAreaDiv"><!-- 먹자영역 --></div>
 					</td>
 				</tr>
 				<tr><td></td></tr>
@@ -85,8 +85,8 @@
 					</td>
 				</tr>
 				<tr>
-					<td id="step2SleepArea">
-						<table id="step2SleepAreaTable"><!-- 자자영역 --></table>
+					<td id="step2SleepArea" valign="top">
+						<div id="step2SleepAreaDiv"><!-- 자자영역 --></div>
 					</td>
 				</tr>
 			</table><p>
