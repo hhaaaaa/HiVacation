@@ -52,7 +52,7 @@
 		</table><p>
 		
 		<table id="pageCountTalbe">
-			<tr>
+			<tr>   
 				<c:choose>  
 					<%--현재페이지가 1 이고 마지막페이지가 현재페이지+2미만 --%>
 					<c:when test="${curPage==1 && curPage+2>pageCount }">
