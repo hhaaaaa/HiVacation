@@ -29,6 +29,7 @@ function schedulingPaging() {
 		$("#step" + no + "Menu").css("background-color", "grey");
 		$("#step" + no + "Menu").css("color", "white");
 		
+		initMap2();
 	});
 	$("#step3Menu").click(function() {
 		$("#step" + no + "Div").css("left", "-1200px");
@@ -370,6 +371,7 @@ function moveToResultData(lat, lng) {
 
 
 //################################### Step2 ###################################
+var map2;
 
 // ### 각 찜목록 영역에 데이터 추가하기 ###
 function printLikedPlaceIntoEachArea(index) {
@@ -408,6 +410,18 @@ function printLikedPlaceIntoEachArea(index) {
 //### 각 찜목록 영역에 데이터 삭제하기 ###
 function deleteLikedPlaceInEachArea(index) {
 	$("#lpTr" + index).remove();
+}
+
+//### step2 지도 불러오기 ###
+function initMap2() {
+	var loadMap = document.getElementById('step2Map');
+	if (loadMap != null) {
+		map2 = new google.maps.Map(loadMap, {
+			center: locLatLng,
+			zoom: 15,
+			mapTypeControl: false
+		});
+	}
 }
 
 //function saveMyTravel() {
