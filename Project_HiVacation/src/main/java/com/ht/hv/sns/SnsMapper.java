@@ -21,4 +21,6 @@ public interface SnsMapper {
 	public abstract List<Image> snsViewImg(SNSMsg sm);
 	
 	public abstract int snsDelete(SNSMsg sm);
+	public abstract int snsUpdate(SNSMsg sm);
+	public abstract int snsImgDelete(Image i);
 }

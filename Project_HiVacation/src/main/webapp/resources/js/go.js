@@ -43,6 +43,29 @@ function doSNSDelete(hs_no){
 	}
 }
 
+function goSNSUpdate(hs_no){	
+	location.href="go.sns.update?hs_no="+hs_no;
+}
+
+function doSNSUpdate(){	
+location.href="do.sns.update";
+}
+
+function eachIMGdelete(hi_no) {
+$(".imgDeletButton").click(function(){
+	var btn = $(this)
+	$.ajax({
+		url : "do.img.delete?hi_no="+btn.attr("rel"),
+		success : function(data){
+			if(data=='1'){
+				console.log(btn)
+				btn.parent().parent().remove();
+			}
+		}
+	});
+})
+}
+
 var checkBox = 0;
 function doWithdraw(hm_pw) {
 	if (checkBox == 0) {
