@@ -143,18 +143,12 @@ function addMarkerWithTimeout(data) {
 		position: data.geometry.location,
 		map: map,
 		title: data.name
-	})
+	});
 	markers.push(marker);
 	google.maps.event.addListener(marker, 'click', function() {
-		var request = {
-				placeId: data.place_id,
-				fields: ['name', 'rating', 'formatted_phone_number', 'place_id',   
-					'formatted_address', 'url', 'website', 'geometry', 'types']
-		};
-
 		for (var i = 0; i < detailedResult.length; i++) {
 			if (data.place_id == detailedResult[i].place_id) {
-				showPlaceInfo(marker, data, detailedResult[i], i);
+				showPlaceInfo(marker, detailedResult[i], i);
 				break;
 			}
 		}
@@ -169,10 +163,10 @@ function clearMarkers() {
 }
 
 // ### 마커 클릭했을 때, InfoWindow 뜨도록 설정 ###
-function showPlaceInfo(marker, data, place, index) {
-	var name = data.name;
-	var rate = data.rating;
-	var placeid = data.place_id;
+function showPlaceInfo(marker, place, index) {
+	var name = place.name;
+	var rate = place.rating;
+	var placeid = place.place_id;
 	var phoneNo = place.formatted_phone_number;
 	var address = place.formatted_address;
 	var url = place.url;
@@ -187,6 +181,7 @@ function showPlaceInfo(marker, data, place, index) {
 	if (website == null) {website = "[사이트 정보 없음]";} 
 		else {website = "<a href=\"" + website + "\">" + website + "</a>";}
 	
+	// 별점 소수점 버림해서 별 갯수로 표시
 	if (rate == 5) {
 		rate = "<img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\">";
 	} else if (rate >= 4) {
@@ -372,22 +367,29 @@ function moveToResultData(lat, lng) {
 
 //################################### Step2 ###################################
 var map2;
+var doListCount = 0;
 
 // ### 각 찜목록 영역에 데이터 추가하기 ###
 function printLikedPlaceIntoEachArea(index) {
-	var td1 = $("<td></td>").text(detailedResult[index].name).css("width", "57.5%");
-	$(td1).css("cursor", "pointer");
-	var td2 = $("<td></td>").text(detailedResult[index].formatted_phone_number).css("width", "37.5%");
-	$(td2).css("font-weight", "normal").css("font-size", "11pt");
-	var td3 = $("<td></td>").text("x").css("width", "5%").css("cursor", "pointer");
-	$(td3).attr("id", "deleteLikePlace" + index);
-	$(td3).mouseover(function() {$(td3).css("text-shadow", "1px 1px 1px white");});
-	$(td3).mouseleave(function() {$(td3).css("text-shadow", "none");});
-	var tr = $("<tr></tr>").attr("id", "lpTr" + index).append(td1, td2, td3).css("width", "100%");
+	// 각 찜 영역 데이터 form 설정
+	var td1 = $("<td></td>").text(detailedResult[index].name).css("width", "53%").css("font-size", "11pt").css("height", "23px");
+	$(td1).css("cursor", "pointer").attr("id", "setMapByName" + index);
+	var td2 = $("<td></td>").text(detailedResult[index].formatted_phone_number).css("width", "33%").css("height", "23px");
+	$(td2).css("font-weight", "normal").css("font-size", "10pt");
+	var td3 = $("<td></td>").text("+").css("width", "7%").css("cursor", "pointer").css("font-size", "13pt").css("height", "23px");
+	$(td3).attr("id", "saveLikePlace" + index).attr("align", "center");
+	$(td3).mouseover(function() {$(td3).text("추가").css("font-size", "8pt").css("text-shadow", "0px 0px 10px white");});
+	$(td3).mouseleave(function() {$(td3).text("+").css("font-size", "13pt").css("text-shadow", "none");});
+	var td4 = $("<td></td>").text("x").css("width", "7%").css("cursor", "pointer").css("height", "23px");
+	$(td4).attr("id", "deleteLikePlace" + index).attr("align", "center");
+	$(td4).mouseover(function() {$(td4).text("삭제").css("font-size", "8pt").css("text-shadow", "0px 0px 10px white");});
+	$(td4).mouseleave(function() {$(td4).text("x").css("font-size", "12pt").css("text-shadow", "none");});
+	var tr = $("<tr></tr>").append(td1, td2, td3, td4).css("width", "100%");
 	$(tr).mouseleave(function() {$(tr).css("background-color", "transparent").css("color", "black");});
 	var table = $("<table></table>").append(tr).css("width", "100%").css("border-spacing", "0px");
-	$(table).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
+	$(table).attr("id", "lpTable" + index).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
 	
+	// 각 찜 영역 hover 시에 각 영역의 색으로 변하도록
 	if (detailedResult[index].type == "가자") {
 		$(tr).mouseover(function() {$(tr).css("background-color", "#00AA00").css("color", "white");});
 		$("#step2GoAreaDiv").append(table);
@@ -399,20 +401,67 @@ function printLikedPlaceIntoEachArea(index) {
 		$("#step2SleepAreaDiv").append(table);
 	}
 	
+	// 찜 목록 장소명 클릭하면 지도 중앙 이동
+	$(document).on("click", "#setMapByName" + index, function() {
+		map2.setCenter(detailedResult[index].geometry.location);
+	});
+	
+	// 찜 목록 + 누르면 하자 영역에 등록
+	$(document).on("click", "#saveLikePlace" + index, function() {
+		var arrowTd;
+		var arrowTr;
+		var img = "<img src=\"resources/img/down_arrow.png\" style=\"width: 15px;\">";
+		var saveTd1 = $("<td></td>").text(detailedResult[index].name).attr("align", "center").css("width", "90%");
+		var saveTd2 = $("<td></td>").text("x").attr("id", "deleteDoList" + index).attr("align", "center").css("width", "10%").css("cursor", "pointer");
+		var saveTable;
+		
+		$(saveTd2).mouseover(function() {$(saveTd2).text("삭제").css("font-size", "8pt").css("text-shadow", "0px 0px 10px white");});
+		$(saveTd2).mouseleave(function() {$(saveTd2).text("x").css("font-size", "12pt").css("text-shadow", "none");});
+		var saveTr1 = $("<tr></tr>").append(saveTd1, saveTd2);
+		
+		if (doListCount == 0) {
+			saveTable = $("<table></table>").append(saveTr1).css("width", "100%");
+			
+		} else {
+			arrowTd = $("<td></td>").html(img).attr("align", "center").attr("colspan", "2");
+			arrowTr = $("<tr></tr>").attr("id", "dlTr" + index).append(arrowTd);
+			saveTable = $("<table></table>").append(arrowTr, saveTr1).css("width", "100%");
+		}
+		$(saveTable).attr("id", "dlTable" + index).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
+		$("#step2DoListDiv").append(saveTable);
+		doListCount += 1;
+		
+	});
+	
+	// 찜 목록 x 누르면 찜 목록 삭제
 	$(document).on("click", "#deleteLikePlace" + index, function() {
 		deleteLikedPlaceInEachArea(index);
 		$("#ifLikeImg1_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
 		$("#ifLikeImg2_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
 		alert("찜 목록에서 삭제 됐습니다.");
 	});
+	
+	// 하자 영역 x 누르면 목록 삭제
+	$(document).on("click", "#deleteDoList" + index, function() {
+//		// 똑같은거 중복해서 하자영역에 올렸을 경우엔, 삭제할 때 가장 상위의 것이 삭제됨
+//		// index로 아이디를 줘서 그런것 같음 다시 생각해보기
+		
+//		// 첫번째부터 지울 경우 다음번째의 화살표가 남아있어서 보기 싫음 -> 처리방법? 
+		$("#dlTable" + index).remove();
+		doListCount -= 1;
+	});
 }
 
 //### 각 찜목록 영역에 데이터 삭제하기 ###
 function deleteLikedPlaceInEachArea(index) {
-	$("#lpTr" + index).remove();
+	$("#lpTable" + index).remove();
 }
 
+
 //### step2 지도 불러오기 ###
+var goMarkers = [];
+var eatMarkers = [];
+var sleepMarkers = [];
 function initMap2() {
 	var loadMap = document.getElementById('step2Map');
 	if (loadMap != null) {
@@ -421,12 +470,124 @@ function initMap2() {
 			zoom: 14,
 			mapTypeControl: false
 		});
+		
+		// 각 찜 영역 마커 불러오기
+		printEachColorMarkers();
 	}
 }
+
+// ### 각 찜 영역의 마커들 step2 지도에 출력 ###
+function printEachColorMarkers() {
+	for (var i = 0; i < detailedResult.length; i++) {
+		if (detailedResult[i].like) {
+			var marker = new google.maps.Marker({
+				position: detailedResult[i].geometry.location,
+				map: map2,
+				title: detailedResult[i].name
+			});
+			
+			// 찜 영역 별로 초록(가자), 파랑(먹자), 빨강(자자)으로 마커 색 설정
+			if (detailedResult[i].type == "가자") {
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+				goMarkers.push(marker);
+			} else if (detailedResult[i].type == "먹자") {
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+				eatMarkers.push(marker);
+			} else if (detailedResult[i].type == "자자") {
+				marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+				sleepMarkers.push(marker);
+			}
+			
+			// 반복문 안에 직접 click listener 설정하면, 해당 index에 대한 값이 전달되지 않아서 따로 함수로 만들어서 처리!
+			listenClickEventMarker(marker, detailedResult[i]);
+		}
+	}
+}
+
+// ### 마커 클릭하면 infowindow 출력 ###
+function listenClickEventMarker(marker, place) {
+	google.maps.event.addListener(marker, 'click', function() {
+		// infowindow 표시
+		showPlaceInfo2(marker, place);
+	});
+}
+
+	// InfoWindow 설정
+function showPlaceInfo2(marker, place) {
+	var name = place.name;
+	var rate = place.rating;
+	var phoneNo = place.formatted_phone_number;
+	var address = place.formatted_address;
+	var url = place.url;
+	var website = place.website;
+
+	if (name == null) {name = "[장소명 정보 없음]";}
+	if (rate == null) {rate = "[별점 정보 없음]";} 
+	if (phoneNo == null) {phoneNo = "[전화번호 정보 없음]";} 
+	if (address == null) {address = "[주소 정보 없음]";} 
+	if (url == null) {url = "[구글url 정보 없음]";} 
+		else {url = "<a href=\"" + url + "\">" + url + "</a>";}
+	if (website == null) {website = "[사이트 정보 없음]";} 
+		else {website = "<a href=\"" + website + "\">" + website + "</a>";}
+	
+	// 별점 소수점 버림해서 별 갯수로 표시
+	if (rate == 5) {
+		rate = "<img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\">";
+	} else if (rate >= 4) {
+		rate = "<img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\">";
+	} else if (rate >= 3) {
+		rate = "<img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\">";
+	} else if (rate >= 2) {
+		rate = "<img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\">";
+	} else if (rate >= 1) {
+		rate = "<img src=\"resources/img/rating_star.png\">";
+	} else if (rate < 1) {
+		rate = "<img src=\"resources/img/outline_star.png\">";
+	}
+	
+	var infowindow = new google.maps.InfoWindow({
+		content: "<table class=\"ifTable\">" +
+				"	<tr>" +
+						"<td colspan=\"2\" class=\"ifPlaceName\">" + name + "</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td>" + rate + "</td>" +
+				"		<td align=\"right\"  class=\"ifPlacePhone\">" + phoneNo + "  </td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"2\">" + address + "</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"2\">" + url + "</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"2\">" + website + "</td>" +
+				"	</tr>" +
+				"</table>",
+		maxWidth: 330
+	});
+	infowindow.open(map2, marker);
+}
+
+//function clearStep2Markers() {
+//	for (var i = 0; i < goMarkers.length; i++) {
+//		goMarkers[i].setMap(null);
+//	}
+//	for (var i = 0; i < eatMarkers.length; i++) {
+//		eatMarkers[i].setMap(null);
+//	}
+//	for (var i = 0; i < sleepMarkers.length; i++) {
+//		sleepMarkers[i].setMap(null);
+//	}
+//	goMarkers = [];
+//	eatMarkers = [];
+//	sleepMarkers = [];
+//}
 
 //function saveMyTravel() {
 //	// 여행 저장하면 찜 목록 초기화시키기 위함
 //	detailedResult = [];
+//	clearStep2Markers();
 //}
 
 

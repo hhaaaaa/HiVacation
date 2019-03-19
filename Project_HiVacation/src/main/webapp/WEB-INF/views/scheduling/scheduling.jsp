@@ -48,7 +48,9 @@
 					<td rowspan="7" id="step2DoArea">
 						<table style="width: 100%;">
 							<tr>
-								<td id="step2DoList"></td>
+								<td id="step2DoList" valign="top" align="center">
+									<div id="step2DoListDiv"><!-- 하자영역 --></div>
+								</td>
 							</tr>
 							<tr>
 								<td id="step2DoSaveMenu" align="center">
