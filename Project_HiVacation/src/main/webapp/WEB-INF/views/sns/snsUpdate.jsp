@@ -46,7 +46,7 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="text" id="fileIndex" name="fileI">
+						<input type="hidden" id="fileIndex" name="fileI">
 					</td>
 				</tr>
 				<tr><td><br></td></tr>
