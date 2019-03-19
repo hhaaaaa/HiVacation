@@ -259,7 +259,7 @@ function clickHeartImage(detail, index) {
 		}
 		
 		// 각 찜 영역에서 해당 데이터 삭제
-		deleteLikedPlaceInEachArea(index);
+		clearLikePlaceList(index);
 		
 		alert("찜 목록에서 삭제 됐습니다.");
 	});
@@ -407,29 +407,23 @@ function printLikedPlaceIntoEachArea(index) {
 		$("#step2SleepAreaDiv").append(table);
 	}
 	
-	// 찜 목록 장소명 클릭하면 지도 중앙 이동
+	// 찜 목록 장소명 클릭
 	moveMapCenterToLikePlace(index);
 	
-	// 찜 목록 + 누르면 하자 영역에 등록
+	// 찜 목록 + 클릭
 	registerIntoDoList(index);
 	
-	// 찜 목록 x 누르면 찜 목록 삭제 ((+)step1 infowindow 빈 하트로)
-	$(document).on("click", "#deleteLikePlace" + index, function() {
-		deleteLikedPlaceInEachArea(index);
-		$("#ifLikeImg1_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
-		$("#ifLikeImg2_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
-		alert("찜 목록에서 삭제 됐습니다.");
-	});
-	
+	// 찜 목록 x 클릭
+	clearLikePlaceListInStep2(index);
 }
 
-//### 각 찜목록 영역에 데이터 삭제하기 ###
-function deleteLikedPlaceInEachArea(index) {
+// ### 각 찜목록 영역에 데이터 삭제하기 ###
+function clearLikePlaceList(index) {
 	$("#lpTable" + index).remove();
 }
 
 
-//### step2 지도 불러오기 ###
+// ### step2 지도 불러오기 ###
 var goMarkers = [];
 var eatMarkers = [];
 var sleepMarkers = [];
@@ -574,6 +568,19 @@ function registerIntoDoList(index) {
 		doListCount += 1;
 	});
 }
+
+// ### 찜 목록 x 누르면 찜 목록 삭제 ((+)step1 infowindow 빈 하트로) ###
+function clearLikePlaceListInStep2(index) {
+	$(document).on("click", "#deleteLikePlace" + index, function() {
+		clearLikePlaceList(index);
+		$("#ifLikeImg1_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
+		$("#ifLikeImg2_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
+		alert("찜 목록에서 삭제 됐습니다.");
+	});
+}
+
+// ### 하자영역 x 누르면 목록 삭제 ###
+// ?????????????????????????????????????????????????????????????????????????????????????????????????????
 
 //function clearStep2Markers() {
 //	for (var i = 0; i < goMarkers.length; i++) {
