@@ -37,6 +37,7 @@
 		myMenuLocationControl();
 		searchLocationByQuery();
 		searchDetailByKeyword();
+		eachIMGdelete();
 	});
 </script>
 </head>

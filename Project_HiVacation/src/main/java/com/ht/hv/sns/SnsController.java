@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ht.hv.member.Member;
 import com.ht.hv.member.MemberDAO;
@@ -79,5 +80,28 @@ public class SnsController {
 		sDAO.paging(1, request, response);
 		request.setAttribute("contentPage", "sns/sns.jsp");       
 		return "index"; 
+	}
+	
+	@RequestMapping(value = "/go.sns.update", method = RequestMethod.GET)
+	public String goSNSUpdate(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
+		sDAO.view(sm, request, response);
+		request.setAttribute("contentPage", "sns/snsUpdate.jsp");       
+		return "index"; 
+	}
+	
+	@RequestMapping(value = "/do.sns.update", method = RequestMethod.POST)
+	public String doSNSUpdate(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
+		mDAO.loginCheck(m, request, response);
+		sDAO.update(sm, request, response);
+		sDAO.paging(1, request, response);
+		request.setAttribute("contentPage", "sns/sns.jsp");       
+		return "index"; 
+	}
+	
+	@RequestMapping(value = "/do.img.delete", method = RequestMethod.GET,
+			produces = "application/json; charset=utf-8")
+	public @ResponseBody String doImgDelete(Image i, HttpServletRequest  request,HttpServletResponse response ) {
+		return sDAO.imgDelete(i, request, response);
 	}
 }

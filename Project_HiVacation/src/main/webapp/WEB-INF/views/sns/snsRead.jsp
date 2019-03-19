@@ -13,7 +13,7 @@
 		<c:if test="${sessionScope.loginMember.hm_id == selectSNS.hs_id }">
 			<tr>
 			<td align="right" colspan="3" style="padding-right: 20px; height: 25px; border-bottom: grey solid 1px;">
-				<span id="snsUdpateSpan">수정</span>
+				<span id="snsUdpateSpan" onclick="goSNSUpdate(${selectSNS.hs_no });">수정</span>
 				<span>&nbsp;</span>
 				<span id="snsDeleteSpan" onclick="doSNSDelete(${selectSNS.hs_no });">삭제</span>
 			</td>

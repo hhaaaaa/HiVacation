@@ -36,7 +36,7 @@
 	<select id="getSNStoNO" resultType="java.lang.Integer">
 		select max(hs_no) from hv_sns 
 	</select> 
-	
+	 
 	<select id="snsView" parameterType="com.ht.hv.sns.SNSMsg" resultType="com.ht.hv.sns.SNSMsg">
 		select * from hv_sns where hs_no=#{hs_no}
 	</select>
@@ -46,5 +46,11 @@
 	
 	<delete id="snsDelete" parameterType="com.ht.hv.sns.SNSMsg">
 		delete from hv_sns where hs_no=#{hs_no}
+	</delete>
+		<update id="snsUpdate" parameterType="com.ht.hv.sns.SNSMsg"> 
+		update hv_sns set hs_title=#{hs_title}, hs_text=#{hs_text} where hs_no=#{hs_no}
+	</update>
+	<delete id="snsImgDelete" parameterType="com.ht.hv.sns.Image">
+		delete from hv_image where hi_no=#{hi_no} 
 	</delete>
 </mapper>
