@@ -386,7 +386,7 @@ function printLikedPlaceIntoEachArea(index) {
 	var tr = $("<tr></tr>").attr("id", "lpTr" + index).append(td1, td2, td3).css("width", "100%");
 	$(tr).mouseleave(function() {$(tr).css("background-color", "transparent").css("color", "black");});
 	var table = $("<table></table>").append(tr).css("width", "100%").css("border-spacing", "0px");
-	$(table).css("padding", "7px");
+	$(table).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
 	
 	if (detailedResult[index].type == "가자") {
 		$(tr).mouseover(function() {$(tr).css("background-color", "#00AA00").css("color", "white");});
@@ -418,7 +418,7 @@ function initMap2() {
 	if (loadMap != null) {
 		map2 = new google.maps.Map(loadMap, {
 			center: locLatLng,
-			zoom: 15,
+			zoom: 14,
 			mapTypeControl: false
 		});
 	}
