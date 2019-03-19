@@ -302,6 +302,7 @@ function printDetailInfo(searchedResult) {
 				}
 				// 모든 detail 검색 결과에 찜 했는지 여부 넣기(객체에 동적으로 값 할당)
 				d.like = false;
+				d.order = 0;
 				
 				detailedResult.push(d);
 				
@@ -366,30 +367,35 @@ function moveToResultData(lat, lng) {
 
 
 //################################### Step2 ###################################
-var map2;
-var doListCount = 0;
+var map2;					// step2 지도
+var doListCount = 0;		// 하자영역 갯수 세기위한 변수
 
 // ### 각 찜목록 영역에 데이터 추가하기 ###
 function printLikedPlaceIntoEachArea(index) {
 	// 각 찜 영역 데이터 form 설정
 	var td1 = $("<td></td>").text(detailedResult[index].name).css("width", "53%").css("font-size", "11pt").css("height", "23px");
 	$(td1).css("cursor", "pointer").attr("id", "setMapByName" + index);
+	
 	var td2 = $("<td></td>").text(detailedResult[index].formatted_phone_number).css("width", "33%").css("height", "23px");
 	$(td2).css("font-weight", "normal").css("font-size", "10pt");
+	
 	var td3 = $("<td></td>").text("+").css("width", "7%").css("cursor", "pointer").css("font-size", "13pt").css("height", "23px");
 	$(td3).attr("id", "saveLikePlace" + index).attr("align", "center");
 	$(td3).mouseover(function() {$(td3).text("추가").css("font-size", "8pt").css("text-shadow", "0px 0px 10px white");});
 	$(td3).mouseleave(function() {$(td3).text("+").css("font-size", "13pt").css("text-shadow", "none");});
+	
 	var td4 = $("<td></td>").text("x").css("width", "7%").css("cursor", "pointer").css("height", "23px");
 	$(td4).attr("id", "deleteLikePlace" + index).attr("align", "center");
 	$(td4).mouseover(function() {$(td4).text("삭제").css("font-size", "8pt").css("text-shadow", "0px 0px 10px white");});
 	$(td4).mouseleave(function() {$(td4).text("x").css("font-size", "12pt").css("text-shadow", "none");});
+	
 	var tr = $("<tr></tr>").append(td1, td2, td3, td4).css("width", "100%");
 	$(tr).mouseleave(function() {$(tr).css("background-color", "transparent").css("color", "black");});
+	
 	var table = $("<table></table>").append(tr).css("width", "100%").css("border-spacing", "0px");
 	$(table).attr("id", "lpTable" + index).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
 	
-	// 각 찜 영역 hover 시에 각 영역의 색으로 변하도록
+	// 각 찜 영역 hover시에 각 영역의 색으로 변하도록
 	if (detailedResult[index].type == "가자") {
 		$(tr).mouseover(function() {$(tr).css("background-color", "#00AA00").css("color", "white");});
 		$("#step2GoAreaDiv").append(table);
@@ -402,38 +408,12 @@ function printLikedPlaceIntoEachArea(index) {
 	}
 	
 	// 찜 목록 장소명 클릭하면 지도 중앙 이동
-	$(document).on("click", "#setMapByName" + index, function() {
-		map2.setCenter(detailedResult[index].geometry.location);
-	});
+	moveMapCenterToLikePlace(index);
 	
 	// 찜 목록 + 누르면 하자 영역에 등록
-	$(document).on("click", "#saveLikePlace" + index, function() {
-		var arrowTd;
-		var arrowTr;
-		var img = "<img src=\"resources/img/down_arrow.png\" style=\"width: 15px;\">";
-		var saveTd1 = $("<td></td>").text(detailedResult[index].name).attr("align", "center").css("width", "90%");
-		var saveTd2 = $("<td></td>").text("x").attr("id", "deleteDoList" + index).attr("align", "center").css("width", "10%").css("cursor", "pointer");
-		var saveTable;
-		
-		$(saveTd2).mouseover(function() {$(saveTd2).text("삭제").css("font-size", "8pt").css("text-shadow", "0px 0px 10px white");});
-		$(saveTd2).mouseleave(function() {$(saveTd2).text("x").css("font-size", "12pt").css("text-shadow", "none");});
-		var saveTr1 = $("<tr></tr>").append(saveTd1, saveTd2);
-		
-		if (doListCount == 0) {
-			saveTable = $("<table></table>").append(saveTr1).css("width", "100%");
-			
-		} else {
-			arrowTd = $("<td></td>").html(img).attr("align", "center").attr("colspan", "2");
-			arrowTr = $("<tr></tr>").attr("id", "dlTr" + index).append(arrowTd);
-			saveTable = $("<table></table>").append(arrowTr, saveTr1).css("width", "100%");
-		}
-		$(saveTable).attr("id", "dlTable" + index).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
-		$("#step2DoListDiv").append(saveTable);
-		doListCount += 1;
-		
-	});
+	registerIntoDoList(index);
 	
-	// 찜 목록 x 누르면 찜 목록 삭제
+	// 찜 목록 x 누르면 찜 목록 삭제 ((+)step1 infowindow 빈 하트로)
 	$(document).on("click", "#deleteLikePlace" + index, function() {
 		deleteLikedPlaceInEachArea(index);
 		$("#ifLikeImg1_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
@@ -441,15 +421,6 @@ function printLikedPlaceIntoEachArea(index) {
 		alert("찜 목록에서 삭제 됐습니다.");
 	});
 	
-	// 하자 영역 x 누르면 목록 삭제
-	$(document).on("click", "#deleteDoList" + index, function() {
-//		// 똑같은거 중복해서 하자영역에 올렸을 경우엔, 삭제할 때 가장 상위의 것이 삭제됨
-//		// index로 아이디를 줘서 그런것 같음 다시 생각해보기
-		
-//		// 첫번째부터 지울 경우 다음번째의 화살표가 남아있어서 보기 싫음 -> 처리방법? 
-		$("#dlTable" + index).remove();
-		doListCount -= 1;
-	});
 }
 
 //### 각 찜목록 영역에 데이터 삭제하기 ###
@@ -567,6 +538,41 @@ function showPlaceInfo2(marker, place) {
 		maxWidth: 330
 	});
 	infowindow.open(map2, marker);
+}
+
+// ### 찜 목록 장소명 클릭하면 지도 중앙 이동 ###
+function moveMapCenterToLikePlace(index) {
+	$(document).on("click", "#setMapByName" + index, function() {
+		map2.setCenter(detailedResult[index].geometry.location);
+	});
+}
+
+// ### 찜목록 + 누르면 하자영역에 등록
+function registerIntoDoList(index) {
+	$(document).on("click", "#saveLikePlace" + index, function() {
+		var arrowTd;
+		var arrowTr;
+		var img = "<img src=\"resources/img/down_arrow.png\" style=\"width: 15px;\">";
+		var saveTd1 = $("<td></td>").text(detailedResult[index].name).attr("align", "center").css("width", "90%");
+		var saveTd2 = $("<td></td>").text("x").attr("id", "deleteDoList" + doListCount).attr("align", "center").css("width", "10%").css("cursor", "pointer");
+		$(saveTd2).mouseover(function() {$(saveTd2).text("삭제").css("font-size", "8pt").css("text-shadow", "0px 0px 10px white");});
+		$(saveTd2).mouseleave(function() {$(saveTd2).text("x").css("font-size", "12pt").css("text-shadow", "none");});
+		var saveTr1 = $("<tr></tr>").append(saveTd1, saveTd2);
+		var saveTable;
+		
+		if (doListCount == 0) {
+			saveTable = $("<table></table>").append(saveTr1).css("width", "100%");
+			
+		} else {
+			arrowTd = $("<td></td>").html(img).attr("align", "center").attr("colspan", "2");
+			arrowTr = $("<tr></tr>").attr("id", "dlTr" + doListCount).append(arrowTd);
+			saveTable = $("<table></table>").append(arrowTr, saveTr1).css("width", "100%");
+		}
+		$(saveTable).attr("id", "dlTable" + doListCount).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
+		$("#step2DoListDiv").append(saveTable);
+		
+		doListCount += 1;
+	});
 }
 
 //function clearStep2Markers() {
