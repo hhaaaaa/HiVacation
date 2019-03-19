@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,30 +10,40 @@
 </head>
 <body>
 	<table id="snsReadTable">
-		<tr>
+		<c:if test="${sessionScope.loginMember.hm_id == selectSNS.hs_id }">
+			<tr>
 			<td align="right" colspan="3" style="padding-right: 20px; height: 25px; border-bottom: grey solid 1px;">
 				<span id="snsUdpateSpan">수정</span>
 				<span>&nbsp;</span>
-				<span id="snsDeleteSpan">삭제</span>
+				<span id="snsDeleteSpan" onclick="doSNSDelete(${selectSNS.hs_no });">삭제</span>
 			</td>
 		</tr>
+		
+		</c:if>
 		<tr>
 			<td align="center" class="snsReadMenu">제목</td>
 			<td id="snsReadTitle">
-				제목자리
+				${selectSNS.hs_title }
 			</td>
 			<td align="right" id="snsReadDate">
-				날짜자리&nbsp;&nbsp;&nbsp;&nbsp;
+				<fmt:formatDate value="${selectSNS.hs_date }" pattern="yyyy-MM-dd a hh:mm"/>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td align="right" colspan="3" id="snsReadId">
-				ID자리&nbsp;&nbsp;&nbsp;&nbsp;
+				${selectSNS.hs_id }&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
+		<c:forEach items="${selectSNS.hv_image }" var="Simg">
+			<tr>
+				<td>
+					<img src="resources/img/${Simg.hi_fname }" style="width : 200px; height : 200px;" >
+				</td>
+			</tr>
+		</c:forEach>
 		<tr>
 			<td align="center" id="snsReadText" colspan="3">
-				내용자리
+				${selectSNS.hs_text}
 			</td>
 		</tr>
 		<tr>
