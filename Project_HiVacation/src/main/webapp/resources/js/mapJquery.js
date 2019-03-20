@@ -286,7 +286,7 @@ function printDetailInfo(searchedResult) {
 			url: "get.detail.search",
 			dataType: 'json',
 			data: {placeid: searchedResult[i].place_id, 
-					key: "AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY"},
+					key: "AIzaSyAnIve1J3a9dk9LpwOvpXbKDW0fCSk_8wM"},
 			//async: false,		// 동기식으로 ajax 요청하기
 			success: function(data) {
 				var d = data.result;
@@ -543,35 +543,42 @@ function moveMapCenterToLikePlace(index) {
 
 // ### 찜목록 + 누르면 하자영역에 등록
 var doListCount = 0;		// 하자영역 갯수 세기위한 변수
+//var doListNo = 0;			// 하자영역 목록 번호
+var doList = [];
+var doListIndex = 0;
 function registerIntoDoList(index) {
 	$(document).on("click", "#saveLikePlace" + index, function() {
 		doListCount += 1;
+//		doListNo += 1;
 		
 		var arrowTd;
 		var arrowTr;
 		var img = "<img src=\"resources/img/down_arrow.png\" style=\"width: 15px;\">";
 		var saveTd1 = $("<td></td>").text(detailedResult[index].name).attr("align", "center").css("width", "90%");
-		var saveTd2 = $("<td></td>").text("x").attr("id", "deleteDoList" + doListCount).attr("align", "center").css("width", "10%").css("cursor", "pointer");
+		var saveTd2 = $("<td></td>").text("x").attr("id", "deleteDoList" + doListIndex).attr("align", "center").css("width", "10%").css("cursor", "pointer");
 		$(saveTd2).mouseover(function() {$(saveTd2).text("삭제").css("font-size", "8pt").css("text-shadow", "0px 0px 10px white");});
 		$(saveTd2).mouseleave(function() {$(saveTd2).text("x").css("font-size", "12pt").css("text-shadow", "none");});
 		var saveTr1 = $("<tr></tr>").append(saveTd1, saveTd2);
 		var saveTable;
 		
 		if (doListCount == 1) {
-			saveTable = $("<table></table>").attr("id", "dlTable" + doListCount).append(saveTr1).css("width", "100%");
+			saveTable = $("<table></table>").append(saveTr1).css("width", "100%");
 		} else {
 			arrowTd1 = $("<td></td>").html(img).attr("align", "center").css("width", "90%");
 			arrowTd2 = $("<td></td>").html("&nbsp;").attr("align", "center").css("width", "10%");
-			arrowTr = $("<tr></tr>").attr("id", "dlTr" + doListCount).append(arrowTd1, arrowTd2);
-			saveTable = $("<table></table>").attr("id", "dlTable" + doListCount).append(arrowTr, saveTr1).css("width", "100%");
+			arrowTr = $("<tr></tr>").attr("id", "dlTr" + doListIndex).append(arrowTd1, arrowTd2);
+			saveTable = $("<table></table>").append(arrowTr, saveTr1).css("width", "100%");
 		}
-		$(saveTable).attr("id", "dlTable" + doListCount).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
+		$(saveTable).attr("id", "dlTable" + doListIndex).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
 		$("#step2DoListDiv").append(saveTable);
 		
-		detailedResult[index].order = doListCount;
+//		detailedResult[index].order = doListIndex;
+		doList.push(detailedResult[index]);
 		
 		// 하자 영역의 x를 클릭했을 때
-		deletePlaceInDoList(index);
+//		deletePlaceInDoList(index);
+		deletePlaceInDoList(doListIndex);
+		doListIndex += 1;
 	});
 }
 
@@ -617,25 +624,58 @@ function clearLikePlaceListInStep2(index) {
 }
 
 // ### 하자영역 x 누르면 목록 삭제 ###
-function deletePlaceInDoList(index) {
-	$(document).on("click", "#deleteDoList" + detailedResult[index].order, function() {
-		var min = detailedResult[0].order;
-		for (var i = 1; i < detailedResult.length; i++) {
-			if (min > detailedResult[i].order) {
-				min = detailedResult[i].order;
+var minIndex = 0;
+function deletePlaceInDoList(doListIndex) {
+	$(document).on("click", "#deleteDoList" + doListIndex, function() {
+		for (var i = 1; i < doList.length; i++) {
+			if (minIndex > doListIndex) {
+				minIndex = i;
 			}
 		}
 		
-		if (detailedResult[index].order == (min + 1)) {
-			$("#dlTable" + detailedResult[index].order).remove();
-			$("#dlTr" + (detailedResult[index].order + 1)).remove();
-			
+		if (doListIndex == minIndex) {
+			$("#dlTable" + doListIndex).remove();
+			$("#dlTr" + (doListIndex+1)).remove();
 		} else {
-			$("#dlTable" + detailedResult[index].order).remove();
+			$("#dlTable" + doListIndex).remove();
 		}
+		doList.splice(doListIndex, 1);
+		doListCount -= 1;
+		alert(doListIndex);
 	});
 }
+//var min = 1;
+//var second;
+//function deletePlaceInDoList(index) {
+//	$(document).on("click", "#deleteDoList" + detailedResult[index].order, function() {
+//		// 하자 영역 목록 중 가장 상위에 있는 index 찾기
+//		for (var i = 0; i < detailedResult.length; i++) {
+//			if (detailedResult[i].order > 1 && min > detailedResult[i].order) {
+//				min = detailedResult[i].order;
+//			}
+//		}
+//		
+//		// 하자 영역 목록 중 상위 두번째에 있는 index 찾기
+//		
+//		if (detailedResult[index].order == min) {
+//			$("#dlTable" + detailedResult[index].order).remove();
+//			$("#dlTr" + (detailedResult[index].order + 1)).remove();
+//			min += 1;
+//		} else {
+//			$("#dlTable" + detailedResult[index].order).remove();
+//		}
+//		
+//		detailedResult[index].order = 0;
+//		doListCount -= 1;
+//		
+//		if (doListCount == 0) {
+//			min = 1;
+//		}
+//		alert(min);
+//	});
+//}
 
+// ###
 //function clearStep2Markers() {
 //	for (var i = 0; i < goMarkers.length; i++) {
 //		goMarkers[i].setMap(null);

@@ -22,13 +22,15 @@
 <script type="text/javascript" src="resources/js/memberJquery.js"></script>
 <script type="text/javascript" src="resources/js/mapJquery.js"></script>
 <script type="text/javascript" src="resources/js/go.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY&language=ko&region=KO"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCrYnDphc_WgUlfkKoTWY3KbrE-IufZjY&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnIve1J3a9dk9LpwOvpXbKDW0fCSk_8wM&language=ko&region=KO"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnIve1J3a9dk9LpwOvpXbKDW0fCSk_8wM&libraries=places"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"> 
 	$(function() {
 		addFile();
 		getFileIndex();
+		addUpdateFile();
+		getUpdateFileIndex();
 		connectSummonAddInputEventJoin();
 		connectSummonAddInputEventUpdate();
 		connectIdCheckEvent();
@@ -38,8 +40,6 @@
 		searchLocationByQuery();
 		searchDetailByKeyword();
 		eachIMGdelete();
-		addUpdateFile();
-		getUpdateFileIndex();
 	});
 </script>
 </head>

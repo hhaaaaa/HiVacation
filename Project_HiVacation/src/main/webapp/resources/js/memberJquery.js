@@ -91,7 +91,6 @@ function addUpdateFile(){
 
 function getUpdateFileIndex(){
 	$("#snsUpdateButton").click(function(){
-		alert(imgUpdateC);
 		$("#updateFileIndex").attr("value", imgUpdateC);
 	});
 }
