@@ -368,7 +368,6 @@ function moveToResultData(lat, lng) {
 
 //################################### Step2 ###################################
 var map2;					// step2 지도
-var doListCount = 0;		// 하자영역 갯수 세기위한 변수
 
 // ### 각 찜목록 영역에 데이터 추가하기 ###
 function printLikedPlaceIntoEachArea(index) {
@@ -422,7 +421,6 @@ function clearLikePlaceList(index) {
 	$("#lpTable" + index).remove();
 }
 
-
 // ### step2 지도 불러오기 ###
 var goMarkers = [];
 var eatMarkers = [];
@@ -450,6 +448,8 @@ function printEachColorMarkers() {
 				map: map2,
 				title: detailedResult[i].name
 			});
+			// 찜 목록에 대한 마커 삭제할 때 값 비교 위해 설정해주는 값
+			marker.placeid = detailedResult[i].place_id;
 			
 			// 찜 영역 별로 초록(가자), 파랑(먹자), 빨강(자자)으로 마커 색 설정
 			if (detailedResult[i].type == "가자") {
@@ -542,8 +542,11 @@ function moveMapCenterToLikePlace(index) {
 }
 
 // ### 찜목록 + 누르면 하자영역에 등록
+var doListCount = 0;		// 하자영역 갯수 세기위한 변수
 function registerIntoDoList(index) {
 	$(document).on("click", "#saveLikePlace" + index, function() {
+		doListCount += 1;
+		
 		var arrowTd;
 		var arrowTr;
 		var img = "<img src=\"resources/img/down_arrow.png\" style=\"width: 15px;\">";
@@ -554,33 +557,84 @@ function registerIntoDoList(index) {
 		var saveTr1 = $("<tr></tr>").append(saveTd1, saveTd2);
 		var saveTable;
 		
-		if (doListCount == 0) {
-			saveTable = $("<table></table>").append(saveTr1).css("width", "100%");
-			
+		if (doListCount == 1) {
+			saveTable = $("<table></table>").attr("id", "dlTable" + doListCount).append(saveTr1).css("width", "100%");
 		} else {
-			arrowTd = $("<td></td>").html(img).attr("align", "center").attr("colspan", "2");
-			arrowTr = $("<tr></tr>").attr("id", "dlTr" + doListCount).append(arrowTd);
-			saveTable = $("<table></table>").append(arrowTr, saveTr1).css("width", "100%");
+			arrowTd1 = $("<td></td>").html(img).attr("align", "center").css("width", "90%");
+			arrowTd2 = $("<td></td>").html("&nbsp;").attr("align", "center").css("width", "10%");
+			arrowTr = $("<tr></tr>").attr("id", "dlTr" + doListCount).append(arrowTd1, arrowTd2);
+			saveTable = $("<table></table>").attr("id", "dlTable" + doListCount).append(arrowTr, saveTr1).css("width", "100%");
 		}
 		$(saveTable).attr("id", "dlTable" + doListCount).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
 		$("#step2DoListDiv").append(saveTable);
 		
-		doListCount += 1;
+		detailedResult[index].order = doListCount;
+		
+		// 하자 영역의 x를 클릭했을 때
+		deletePlaceInDoList(index);
 	});
 }
 
-// ### 찜 목록 x 누르면 찜 목록 삭제 ((+)step1 infowindow 빈 하트로) ###
+// ### 찜 목록 x 누르면 => [찜 목록 삭제, step1 infowindow 빈 하트로, step2 마커 제거] ###
 function clearLikePlaceListInStep2(index) {
 	$(document).on("click", "#deleteLikePlace" + index, function() {
+		// 찜 영역에서 제거
 		clearLikePlaceList(index);
+		
+		// step1 infowindow 빈 하트로
 		$("#ifLikeImg1_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
 		$("#ifLikeImg2_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
+		
+		// step2 찜 마커 제거
+		if (detailedResult[index].type == "가자") {
+			for (var i = 0; i < goMarkers.length; i++) {
+				if (goMarkers[i].placeid == detailedResult[index].place_id) {
+					goMarkers[i].setMap(null);
+					goMarkers.splice(i, 1);
+					break;
+				}
+			}
+		} else if (detailedResult[index].type == "먹자") {
+			for (var i = 0; i < eatMarkers.length; i++) {
+				if (eatMarkers[i].placeid == detailedResult[index].place_id) {
+					eatMarkers[i].setMap(null);
+					eatMarkers.splice(i, 1);
+					break;
+				}
+			}
+		} else if (detailedResult[index].type == "자자") {
+			for (var i = 0; i < sleepMarkers.length; i++) {
+				if (sleepMarkers[i].placeid == detailedResult[index].place_id) {
+					sleepMarkers[i].setMap(null);
+					sleepMarkers.splice(i, 1);
+					break;
+				}
+			}
+		}
+		
 		alert("찜 목록에서 삭제 됐습니다.");
 	});
 }
 
 // ### 하자영역 x 누르면 목록 삭제 ###
-// ?????????????????????????????????????????????????????????????????????????????????????????????????????
+function deletePlaceInDoList(index) {
+	$(document).on("click", "#deleteDoList" + detailedResult[index].order, function() {
+		var min = detailedResult[0].order;
+		for (var i = 1; i < detailedResult.length; i++) {
+			if (min > detailedResult[i].order) {
+				min = detailedResult[i].order;
+			}
+		}
+		
+		if (detailedResult[index].order == (min + 1)) {
+			$("#dlTable" + detailedResult[index].order).remove();
+			$("#dlTr" + (detailedResult[index].order + 1)).remove();
+			
+		} else {
+			$("#dlTable" + detailedResult[index].order).remove();
+		}
+	});
+}
 
 //function clearStep2Markers() {
 //	for (var i = 0; i < goMarkers.length; i++) {
