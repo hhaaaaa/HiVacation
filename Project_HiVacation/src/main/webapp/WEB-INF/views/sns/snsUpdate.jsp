@@ -29,7 +29,7 @@
 				</tr>
 				<tr>
 					<td align="center" class="snsWriteMenu">
-						<img src="resources/img/plus_button.png" style="width: 35px;" id="addFile">
+						<img src="resources/img/plus_button.png" style="width: 35px;" id="addUpdateFile">
 					</td>
 					<td align="center" class="snsWriteMenu" style="padding-left: 40px;" id="fileTD">
 						<table>
@@ -46,7 +46,7 @@
 				</tr>
 				<tr>
 					<td>
-						<input type="hidden" id="fileIndex" name="fileI">
+						<input type="hidden" id="updateFileIndex" name="updateFileI">
 					</td>
 				</tr>
 				<tr><td><br></td></tr>

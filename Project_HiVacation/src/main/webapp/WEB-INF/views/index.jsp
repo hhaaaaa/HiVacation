@@ -38,6 +38,8 @@
 		searchLocationByQuery();
 		searchDetailByKeyword();
 		eachIMGdelete();
+		addUpdateFile();
+		getUpdateFileIndex();
 	});
 </script>
 </head>

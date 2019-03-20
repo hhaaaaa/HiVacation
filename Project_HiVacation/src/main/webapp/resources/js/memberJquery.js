@@ -74,3 +74,24 @@ function getFileIndex(){
 		$("#fileIndex").attr("value", imgInputC);
 	});
 }
+
+var imgUpdateC = 0; //카운트
+var imgUpdateI = 0; //인덱스
+function addUpdateFile(){
+	$("#addUpdateFile").click(function(){
+		imgUpdateC = imgUpdateC + 1;
+		var input = $("<input>").attr("type","file").attr("name","updateFile"+imgUpdateI).css("margin-left","-251px");
+		imgUpdateI=imgUpdateI+1;
+		var aTag = $("<a></a>").text("삭제");
+		$(aTag).attr("onclick", "deleteFile(this)");
+		var div = $("<div></div>").append(input,aTag);
+		$("#fileTD").append(div);
+	});
+}
+
+function getUpdateFileIndex(){
+	$("#snsUpdateButton").click(function(){
+		alert(imgUpdateC);
+		$("#updateFileIndex").attr("value", imgUpdateC);
+	});
+}
