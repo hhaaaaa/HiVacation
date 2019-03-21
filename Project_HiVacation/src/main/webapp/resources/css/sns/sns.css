@@ -32,22 +32,25 @@
 #snsDateMenu {
 	width: 140px;
 }
-#snsContentNo{
+.snsContentNo{
 	width: 70px;
 }
-#snsContentTitle{
+.snsContentTitle{
 	width: 650px;
+	cursor: pointer;
 }
-#snsContentId{
+.snsContentId{
 	width: 140px;
 }
-#snsContentDate{
+.snsContentDate{
 	width: 140px;
+	font-size: 10pt;
 }
      
 #snsContentTable {
 	border: none;
-	border-bottom: grey solid 1px;
+	border-bottom: black solid 2px;
+	font-weight: normal;
 }
 
 #searchSnsSelect {

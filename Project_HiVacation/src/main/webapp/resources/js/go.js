@@ -31,7 +31,7 @@ function goUpdate() {
 }
 
 function goSnsView(hs_no){  
-	location.href="go.snsView?hs_no="+hs_no;
+	location.href="go.sns.view?hs_no="+hs_no;
 }
 
 function doSNSDelete(hs_no){	

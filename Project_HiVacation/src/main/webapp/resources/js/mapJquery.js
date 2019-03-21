@@ -199,8 +199,8 @@ function showPlaceInfo(marker, place, index) {
 	var infowindow = new google.maps.InfoWindow({
 		content: "<table class=\"ifTable\">" +
 				"	<tr>" +
-						"<td class=\"ifPlaceName\">" + name + "</td>" +
-						"<td align=\"right\">" +
+						"<td class=\"ifPlaceName\" style=\"width: 210px;\" colspan=\"2\">" + name + "</td>" +
+						"<td align=\"right\" style=\"width: 40px;\">" +
 							"<img id=\"ifLikeImg2_" + index + "\" src=\"resources/img/heart_full.png\" " +
 									"style=\"width: 15px; cursor: pointer; opacity: 0; position: relative; top: -20px; left: 15px; z-index: 1;\">" +
 							"<img id=\"ifLikeImg1_" + index + "\" src=\"resources/img/heart_outline.png\" " +
@@ -208,17 +208,17 @@ function showPlaceInfo(marker, place, index) {
 						"</td>" +
 				"	</tr>" +
 				"	<tr>" +
-				"		<td>" + rate + "</td>" +
-				"		<td align=\"right\"  class=\"ifPlacePhone\">" + phoneNo + "  </td>" +
+				"		<td style=\"width: 90px; font-size: 9pt;\">" + rate + "</td>" +
+				"		<td align=\"right\" class=\"ifPlacePhone\" style=\"width: 160px;\" colspan=\"2\">" + phoneNo + "  </td>" +
 				"	</tr>" +
 				"	<tr>" +
-				"		<td colspan=\"2\">" + address + "</td>" +
+				"		<td colspan=\"3\" style=\"word-break: break-all;\">" + address + "</td>" +
 				"	</tr>" +
 				"	<tr>" +
-				"		<td colspan=\"2\">" + url + "</td>" +
+				"		<td colspan=\"3\" style=\"word-break: break-all;\">" + url + "</td>" +
 				"	</tr>" +
 				"	<tr>" +
-				"		<td colspan=\"2\">" + website + "</td>" +
+				"		<td colspan=\"3\" style=\"word-break: break-all;\">" + website + "</td>" +
 				"	</tr>" +
 				"</table>",
 		maxWidth: 330
@@ -238,14 +238,20 @@ function clickHeartImage(detail, index) {
 		// 찜 목록 추가하기
 		for (var i = 0; i < detailedResult.length; i++) {
 			if (detailedResult[i].place_id == detail.place_id) {
-				detailedResult[i].like = true;
+				if (detailedResult[i].like == true) {
+					alert("이미 찜한 곳입니다.");
+					break;
+				} else {
+					detailedResult[i].like = true;
+					
+					// 각 찜 영역에 해당 데이터 등록
+					printLikedPlaceIntoEachArea(index);
+					alert("찜 목록에 추가 됐습니다.");
+					break;
+				}
 			}
 		}
 		
-		// 각 찜 영역에 해당 데이터 등록
-		printLikedPlaceIntoEachArea(index);
-		
-		alert("찜 목록에 추가 됐습니다.");
 	});
 	$(document).on("click", "#ifLikeImg2_" + index, function() {
 		$("#ifLikeImg1_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
@@ -514,20 +520,20 @@ function showPlaceInfo2(marker, place) {
 	var infowindow = new google.maps.InfoWindow({
 		content: "<table class=\"ifTable\">" +
 				"	<tr>" +
-						"<td colspan=\"2\" class=\"ifPlaceName\">" + name + "</td>" +
+						"<td colspan=\"2\" class=\"ifPlaceName\" style=\"width: 250px;\">" + name + "</td>" +
 				"	</tr>" +
 				"	<tr>" +
-				"		<td>" + rate + "</td>" +
-				"		<td align=\"right\"  class=\"ifPlacePhone\">" + phoneNo + "  </td>" +
+				"		<td style=\"width: 90px; font-size: 9pt;\">" + rate + "</td>" +
+				"		<td align=\"right\" class=\"ifPlacePhone\" style=\"width: 160px;\">" + phoneNo + "  </td>" +
 				"	</tr>" +
 				"	<tr>" +
-				"		<td colspan=\"2\">" + address + "</td>" +
+				"		<td colspan=\"2\" style=\"word-break: break-all;\">" + address + "</td>" +
 				"	</tr>" +
 				"	<tr>" +
-				"		<td colspan=\"2\">" + url + "</td>" +
+				"		<td colspan=\"2\" style=\"word-break: break-all;\">" + url + "</td>" +
 				"	</tr>" +
 				"	<tr>" +
-				"		<td colspan=\"2\">" + website + "</td>" +
+				"		<td colspan=\"2\" style=\"word-break: break-all;\">" + website + "</td>" +
 				"	</tr>" +
 				"</table>",
 		maxWidth: 330
@@ -660,36 +666,7 @@ function deletePlaceInDoList(clickIndex) {
 		doListCount -= 1;
 	});
 }
-//var min = 1;
-//var second;
-//function deletePlaceInDoList(index) {
-//	$(document).on("click", "#deleteDoList" + detailedResult[index].order, function() {
-//		// 하자 영역 목록 중 가장 상위에 있는 index 찾기
-//		for (var i = 0; i < detailedResult.length; i++) {
-//			if (detailedResult[i].order > 1 && min > detailedResult[i].order) {
-//				min = detailedResult[i].order;
-//			}
-//		}
-//		
-//		// 하자 영역 목록 중 상위 두번째에 있는 index 찾기
-//		
-//		if (detailedResult[index].order == min) {
-//			$("#dlTable" + detailedResult[index].order).remove();
-//			$("#dlTr" + (detailedResult[index].order + 1)).remove();
-//			min += 1;
-//		} else {
-//			$("#dlTable" + detailedResult[index].order).remove();
-//		}
-//		
-//		detailedResult[index].order = 0;
-//		doListCount -= 1;
-//		
-//		if (doListCount == 0) {
-//			min = 1;
-//		}
-//		alert(min);
-//	});
-//}
+
 
 // ###
 //function clearStep2Markers() {
@@ -707,6 +684,7 @@ function deletePlaceInDoList(clickIndex) {
 //	sleepMarkers = [];
 //}
 
+// ###
 //function saveMyTravel() {
 //	// 여행 저장하면 찜 목록 초기화시키기 위함
 //	detailedResult = [];

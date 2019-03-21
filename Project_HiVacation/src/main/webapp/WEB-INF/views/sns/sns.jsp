@@ -32,17 +32,17 @@
 		<c:set var="no" value="${allMsgCount+1-((curPage-1)*count) }" />
 		<table id="snsContentTable">
 			<c:forEach items="${msgs }" var="m">
-				<tr onclick="goSnsView(${m.hs_no });">
-					<td align="center" id="snsContentNo">
+				<tr>
+					<td align="center" class="snsContentNo">
 					 	<c:set var="no" value="${no-1 }" /> <fmt:formatNumber value="${no }" pattern="#"/>
 					</td>
-					<td id="snsContentTitle">
-						&nbsp;&nbsp;${m.hs_title }
+					<td class="snsContentTitle" onclick="goSnsView(${m.hs_no });">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${m.hs_title }
 					</td>
-					<td align="center" id="snsContentId">
+					<td align="center" class="snsContentId">
 						${m.hs_id }
 					</td>
-					<td align="center" id="snsContentDate">
+					<td align="center" class="snsContentDate">
 						<fmt:formatDate value="${m.hs_date }" pattern="yyyy-MM-dd"/>
 						<br>
 						<fmt:formatDate value="${m.hs_date }" pattern="a hh:mm"/>

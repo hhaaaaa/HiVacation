@@ -25,29 +25,33 @@
 	width: 100px;
 	height: 25px;
 	font-weight: 900;
-	border-bottom: grey solid 1px;
+	border-bottom: black solid 1px;
+	border-top: black solid 2px;
 }
 #snsReadTitle {
 	padding-left: 10px;
-	border-bottom: grey solid 1px;
+	border-bottom: black solid 1px;
 	height: 25px;
+	width: 700px;
+	border-top: black solid 2px;
 }
 #snsReadId {
 	padding-left: 10px;
 	height: 25px;
-	width: 400px;
-	border-bottom: grey solid 1px;
+	width: 200px;
+	border-bottom: black solid 2px;
 }
 #snsReadDate {
 	padding-left: 10px;
 	height: 25px;
-	width: 400px;
-	border-bottom: grey solid 1px;
+	width: 200px;
+	border-bottom: black solid 1px;
+	border-top: black solid 2px;
 }
 #snsReadText {
 	height: 60px;
 	font-size: 11pt;
-	border-bottom: grey solid 1px;
+	border-bottom: black solid 1px;
 }
 #snsReadReplyWrite {
 	height: 25px;
@@ -68,8 +72,39 @@
 #snsReadReplyButton:hover {
 	text-shadow: 1px 1px 1px black;
 }
-#snsReadReply {
+.snsReadReply {
 	height: 25px;
-	border-bottom: grey solid 1px;
+	border-bottom: black solid 1px;
 	padding-bottom: 20px;
+}
+.replyTable {
+	width: 900px;
+	margin-left: 100px;
+	margin-right: 50px;
+}
+.replyId {
+	width: 100px;
+}
+.replyText {
+	width: 500px;
+}
+.replyDate {
+	width: 200px;
+	font-size: 10pt;
+}
+.replyUpdateButton {
+	width: 30px;
+	font-size: 10pt;
+	cursor: pointer;
+}
+.replyUpdateButton:hover {
+	text-shadow: 1px 1px 1px black;
+}
+.replyDeleteButton {
+	width: 30px;
+	font-size: 10pt;
+	cursor: pointer;
+}
+.replyDeleteButton:hover {
+	text-shadow: 1px 1px 1px black;
 }
