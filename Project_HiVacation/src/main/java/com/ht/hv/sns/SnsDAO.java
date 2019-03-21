@@ -235,9 +235,16 @@ public class SnsDAO {
 					is.add(new Image(null, hs_no, "no_img"));
 					sm.setHv_image(is);
 				}
-
+				
+				SNSMsg selectSNS = new SNSMsg();
+				List<Image> selectImg = new ArrayList<Image>();
+				
+				selectSNS = smp.snsView(sm);
+				selectImg = smp.snsViewImg(sm);
+				selectSNS.setHv_image(selectImg);
+				
+				request.setAttribute("selectSNS", selectSNS);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

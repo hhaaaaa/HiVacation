@@ -100,7 +100,6 @@ public class SnsController {
 	public String doSNSUpdate(Member m, SNSMsg sm, SnsReply sr, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
 		sDAO.update(sm, request, response);
-		sDAO.view(sm, request, response);
 		srDAO.snsReplyView(sm, sr, request, response);
 		request.setAttribute("contentPage", "sns/snsRead.jsp");       
 		return "index"; 
