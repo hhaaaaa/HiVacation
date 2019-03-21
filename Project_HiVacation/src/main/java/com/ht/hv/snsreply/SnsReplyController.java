@@ -36,6 +36,12 @@ public class SnsReplyController {
 		return "index"; 
 	}
 	
+	@RequestMapping(value = "/go.snsReply.update", method = RequestMethod.GET,
+			produces = "application/json; charset=utf-8")
+	public @ResponseBody String goSnsReplyUpdate(SnsReply sr, HttpServletRequest  request,HttpServletResponse response ) {
+		return srDAO.snsReplyUpdate(sr, request, response);
+	}
+	
 	@RequestMapping(value = "/do.snsReply.delete", method = RequestMethod.GET,
 			produces = "application/json; charset=utf-8")
 	public @ResponseBody String doSnsReplyDelete(SnsReply sr, HttpServletRequest  request,HttpServletResponse response ) {

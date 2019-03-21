@@ -80,6 +80,25 @@ function doSnsReplyDelete(){
 	});
 }
 
+function goSnsReplyUpdate(){
+	$(".snsReplyUpdateButton").click(function(){
+		var changeText = prompt("댓글 수정");
+		var btn = $(this);
+		$.ajax({
+			url : "go.snsReply.update?hr_no="+btn.attr("rel")+"&hr_text="+changeText,
+			success : function(data){
+				if(data=='1'){
+					if(changeText!=null){
+						btn.parent().parent().find(".replyText").text(changeText);
+					}else{
+						return false;
+					}
+				}
+			}
+		})
+	});
+}
+
 var checkBox = 0;
 function doWithdraw(hm_pw) {
 	if (checkBox == 0) {

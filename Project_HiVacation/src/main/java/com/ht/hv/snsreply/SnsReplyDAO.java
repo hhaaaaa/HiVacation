@@ -39,6 +39,18 @@ public class SnsReplyDAO {
 		request.setAttribute("snsReplys", snsReplys);
 	}
 	
+	public String snsReplyUpdate(SnsReply sr, HttpServletRequest request, HttpServletResponse response){
+		SnsReplyMapper srm = ss.getMapper(SnsReplyMapper.class);
+		BigDecimal hr_no = new BigDecimal(request.getParameter("hr_no"));
+		sr.setHr_no(hr_no);
+		sr.setHr_text(request.getParameter("hr_text"));
+		
+		if(srm.snsReplyUpdate(sr)==1){
+			return "1";
+		}
+		return "0";
+	}
+	
 	public String snsReplyDelete(SnsReply sr, HttpServletRequest request, HttpServletResponse response){
 		SnsReplyMapper srm = ss.getMapper(SnsReplyMapper.class);
 		BigDecimal hr_no = new BigDecimal(request.getParameter("hr_no"));
