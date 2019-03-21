@@ -302,7 +302,8 @@ function printDetailInfo(searchedResult) {
 				}
 				// 모든 detail 검색 결과에 찜 했는지 여부 넣기(객체에 동적으로 값 할당)
 				d.like = false;
-				d.order = 0;
+//				d.order = 0;
+				d.no = -1;
 				
 				detailedResult.push(d);
 				
@@ -573,6 +574,7 @@ function registerIntoDoList(index) {
 		$("#step2DoListDiv").append(saveTable);
 		
 //		detailedResult[index].order = doListIndex;
+		detailedResult[index].no = doListIndex;
 		doList.push(detailedResult[index]);
 		
 		// 하자 영역의 x를 클릭했을 때
@@ -624,24 +626,38 @@ function clearLikePlaceListInStep2(index) {
 }
 
 // ### 하자영역 x 누르면 목록 삭제 ###
-var minIndex = 0;
-function deletePlaceInDoList(doListIndex) {
-	$(document).on("click", "#deleteDoList" + doListIndex, function() {
-		for (var i = 1; i < doList.length; i++) {
-			if (minIndex > doListIndex) {
-				minIndex = i;
+var minValue = 100;
+var deleteCount = 0;
+function deletePlaceInDoList(clickIndex) {
+	$(document).on("click", "#deleteDoList" + clickIndex, function() {
+		deleteCount += 1;
+		
+		// doList[i].no 중 최소값 찾기
+		for (var i = 0; i < doList.length; i++) {
+			if (minValue > doList[i].no && doList[i].no >= 0) {
+				minValue = doList[i].no;
 			}
 		}
+		alert(minValue);
+		alert(doList.length-deleteCount);
+//		alert(deleteCount);
 		
-		if (doListIndex == minIndex) {
-			$("#dlTable" + doListIndex).remove();
-			$("#dlTr" + (doListIndex+1)).remove();
+		if (doList[clickIndex].no == minValue) {
+			$("#dlTable" + doList[clickIndex].no).remove();
+			if (doList.length - deleteCount >= 1) {
+				if (doList[clickIndex+1].no == -1) {
+					$("#dlTr" + doList[clickIndex+2].no).remove();
+				} else {
+					$("#dlTr" + doList[clickIndex+1].no).remove();
+				}
+			}
 		} else {
-			$("#dlTable" + doListIndex).remove();
+			$("#dlTable" + doList[clickIndex].no).remove();
 		}
-		doList.splice(doListIndex, 1);
+		doList[clickIndex].no = -1;
+//		doList.splice(clickIndex, 1);
+		minValue = 100;
 		doListCount -= 1;
-		alert(doListIndex);
 	});
 }
 //var min = 1;
