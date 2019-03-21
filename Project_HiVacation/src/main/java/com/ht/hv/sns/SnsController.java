@@ -97,11 +97,12 @@ public class SnsController {
 	}
 	
 	@RequestMapping(value = "/do.sns.update", method = RequestMethod.POST)
-	public String doSNSUpdate(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
+	public String doSNSUpdate(Member m, SNSMsg sm, SnsReply sr, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
 		sDAO.update(sm, request, response);
-		sDAO.paging(1, request, response);
-		request.setAttribute("contentPage", "sns/sns.jsp");       
+		sDAO.view(sm, request, response);
+		srDAO.snsReplyView(sm, sr, request, response);
+		request.setAttribute("contentPage", "sns/snsRead.jsp");       
 		return "index"; 
 	}
 	

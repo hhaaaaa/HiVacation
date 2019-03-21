@@ -233,7 +233,10 @@ function showPlaceInfo(marker, place, index) {
 	
 	// x버튼 눌렀을 때 infowindow 삭제
 	$(document).on("click", ".gm-ui-hover-effect", function() {
-		alert("hi");
+		alert(infowindow.content);
+//		infowindow.close();
+		infowindow = null;
+		alert(infowindow.content);
 	});
 
 	// 찜하기
