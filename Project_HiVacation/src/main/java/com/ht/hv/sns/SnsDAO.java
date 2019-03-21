@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ht.hv.member.Member;
+import com.ht.hv.snsreply.SnsReply;
+import com.ht.hv.snsreply.SnsReplyMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -191,6 +193,7 @@ public class SnsDAO {
 
 	public void update(SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
 		SnsMapper smp = ss.getMapper(SnsMapper.class);
+		SnsReplyMapper srm = ss.getMapper(SnsReplyMapper.class);
 
 		try {
 			String path = request.getSession().getServletContext().getRealPath("resources/img");
@@ -244,6 +247,9 @@ public class SnsDAO {
 				selectSNS.setHv_image(selectImg);
 				
 				request.setAttribute("selectSNS", selectSNS);
+				
+				List<SnsReply> snsReplys = srm.snsReplyView(sm);
+				request.setAttribute("snsReplys", snsReplys);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
