@@ -13,7 +13,7 @@
 	<table id="snsReadTable">
 		<c:if test="${sessionScope.loginMember.hm_id == selectSNS.hs_id }">
 			<tr>
-			<td align="right" colspan="3" style="padding-right: 20px; height: 25px; border-bottom: grey solid 1px;">
+			<td align="right" colspan="5" style="padding-right: 20px; height: 25px; border-bottom: grey solid 1px;">
 				<span id="snsUdpateSpan" onclick="goSNSUpdate(${selectSNS.hs_no });">수정</span>
 				<span>&nbsp;</span>
 				<span id="snsDeleteSpan" onclick="doSNSDelete(${selectSNS.hs_no });">삭제</span>
@@ -22,7 +22,7 @@
 		
 		</c:if>
 		<tr>
-			<td align="center" class="snsReadMenu">제목</td>
+			<td align="center" class="snsReadMenu" colspan="3">제목</td>
 			<td id="snsReadTitle">
 				${selectSNS.hs_title }
 			</td>
@@ -31,25 +31,25 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right" colspan="3" id="snsReadId">
+			<td align="right" colspan="4" id="snsReadId">
 				${selectSNS.hs_id }&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td><input type="hidden" name="hs_no" value="${selectSNS.hs_no }"></td>
 		</tr>
 		<c:forEach items="${selectSNS.hv_image }" var="Simg">
 			<tr>
-				<td>
+				<td colspan="5" align="center">
 					<img src="resources/img/${Simg.hi_fname }" style="width : 200px; height : 200px;" >
 				</td>
 			</tr>
 		</c:forEach>
 		<tr>
-			<td align="center" id="snsReadText" colspan="3">
+			<td align="center" id="snsReadText" colspan="5">
 				${selectSNS.hs_text}
 			</td>
 		</tr>
 		<tr>
-			<td align="center" id="snsReadReplyWrite" colspan="3">
+			<td align="center" id="snsReadReplyWrite" colspan="5">
 				<input id="snsReadReplyInput" name="hr_text" placeholder="&nbsp;&nbsp;댓글 입력">
 				<button id="snsReadReplyButton">입력</button>
 			</td>
@@ -63,7 +63,8 @@
 			<td align="right" class="snsReadReply">
 				<fmt:formatDate value="${sr.hr_date }" pattern="yyyy-MM-dd a hh:mm"/>
 			</td>
-			<td align="center" class="snsReadReply"><a class="snsReplyDeleteButton" rel="${sr.hr_no }">x</a></td>
+			<td><a>수정</a></td>
+			<td align="center" class="snsReadReply"><a class="snsReplyDeleteButton" rel="${sr.hr_no }">삭제</a></td>
 		</tr>			
 		</c:forEach>
 	</table>
