@@ -196,16 +196,22 @@ function showPlaceInfo(marker, place, index) {
 		rate = "<img src=\"resources/img/outline_star.png\">";
 	}
 	
+	var imgPart = "<img id=\"ifLikeImg2_" + index + "\" src=\"resources/img/heart_full.png\" " +
+		"style=\"width: 15px; cursor: pointer; opacity: 0; position: relative; top: -20px; left: 15px; z-index: 1;\">" +
+		"<img id=\"ifLikeImg1_" + index + "\" src=\"resources/img/heart_outline.png\" " +
+		"style=\"width: 15px; cursor: pointer; position: relative; opacity: 1; z-index: 5;\">   ";
+	if (detailedResult[index].like) {
+		imgPart = "<img id=\"ifLikeImg1_" + index + "\" src=\"resources/img/heart_outline.png\" " +
+		"style=\"width: 15px; cursor: pointer; opacity: 0; position: relative; top: -20px; left: 15px; z-index: 1;\">" +
+		"<img id=\"ifLikeImg2_" + index + "\" src=\"resources/img/heart_full.png\" " +
+		"style=\"width: 15px; cursor: pointer; position: relative; opacity: 1; z-index: 5;\">   ";
+	}
+	
 	var infowindow = new google.maps.InfoWindow({
-		content: "<table class=\"ifTable\">" +
+		content: "<table class=\"ifTable ifTable1\">" +
 				"	<tr>" +
 						"<td class=\"ifPlaceName\" style=\"width: 210px;\" colspan=\"2\">" + name + "</td>" +
-						"<td align=\"right\" style=\"width: 40px;\">" +
-							"<img id=\"ifLikeImg2_" + index + "\" src=\"resources/img/heart_full.png\" " +
-									"style=\"width: 15px; cursor: pointer; opacity: 0; position: relative; top: -20px; left: 15px; z-index: 1;\">" +
-							"<img id=\"ifLikeImg1_" + index + "\" src=\"resources/img/heart_outline.png\" " +
-									"style=\"width: 15px; cursor: pointer; position: relative; opacity: 1; z-index: 5;\">   " +
-						"</td>" +
+						"<td align=\"right\" style=\"width: 40px;\">" + imgPart	+ "</td>" +
 				"	</tr>" +
 				"	<tr>" +
 				"		<td style=\"width: 90px; font-size: 9pt;\">" + rate + "</td>" +
@@ -238,17 +244,11 @@ function clickHeartImage(detail, index) {
 		// 찜 목록 추가하기
 		for (var i = 0; i < detailedResult.length; i++) {
 			if (detailedResult[i].place_id == detail.place_id) {
-				if (detailedResult[i].like == true) {
-					alert("이미 찜한 곳입니다.");
-					break;
-				} else {
-					detailedResult[i].like = true;
-					
-					// 각 찜 영역에 해당 데이터 등록
-					printLikedPlaceIntoEachArea(index);
-					alert("찜 목록에 추가 됐습니다.");
-					break;
-				}
+				detailedResult[i].like = true;
+				
+				// 각 찜 영역에 해당 데이터 등록
+				printLikedPlaceIntoEachArea(index);
+				break;
 			}
 		}
 		
@@ -266,9 +266,11 @@ function clickHeartImage(detail, index) {
 		
 		// 각 찜 영역에서 해당 데이터 삭제
 		clearLikePlaceList(index);
-		
-		alert("찜 목록에서 삭제 됐습니다.");
 	});
+	// infowindow x 눌렀을 때 내용 삭제 되도록
+//	$(document).on("click", ".gm-ui-hover-effect", function() {
+//		$(".ifTable1").remove();
+//	});
 }
 
 
