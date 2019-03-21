@@ -231,8 +231,14 @@ function showPlaceInfo(marker, place, index) {
 	});
 	infowindow.open(map, marker);
 	
+	// x버튼 눌렀을 때 infowindow 삭제
+	$(document).on("click", ".gm-ui-hover-effect", function() {
+		alert("hi");
+	});
+
 	// 찜하기
 	clickHeartImage(place, index);
+
 }
 
 // ### 찜하기 버튼 클릭했을 때 ###
