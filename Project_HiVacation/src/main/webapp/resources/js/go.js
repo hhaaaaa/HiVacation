@@ -66,6 +66,20 @@ $(".imgDeletButton").click(function(){
 })
 }
 
+function doSnsReplyDelete(){
+	$(".snsReplyDeleteButton").click(function(){
+		var btn = $(this);
+		$.ajax({
+			url : "do.snsReply.delete?hr_no="+btn.attr("rel"),
+			success : function(data){
+				if(data=='1'){
+					btn.parent().parent().remove();
+				}
+			}
+		})
+	});
+}
+
 var checkBox = 0;
 function doWithdraw(hm_pw) {
 	if (checkBox == 0) {

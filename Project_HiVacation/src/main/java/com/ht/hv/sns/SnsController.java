@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ht.hv.member.Member;
 import com.ht.hv.member.MemberDAO;
-
+import com.ht.hv.snsreply.SnsReply;
+import com.ht.hv.snsreply.SnsReplyDAO;
+ 
 @Controller
 public class SnsController {
 	
@@ -20,6 +22,9 @@ public class SnsController {
 	
 	@Autowired
 	private SnsDAO sDAO;
+	
+	@Autowired
+	private SnsReplyDAO srDAO;
 	
 	@RequestMapping(value = "/go.sns", method = RequestMethod.GET)
 	public String goSns(Member m, HttpServletRequest request, HttpServletResponse response) {
@@ -38,9 +43,9 @@ public class SnsController {
 	}
 	
 	@RequestMapping(value = "/do.sns.write", method = RequestMethod.POST)
-	public String doSnsWrite(Member m, SNSMsg s, HttpServletRequest request, HttpServletResponse response) {
+	public String doSnsWrite(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
-		sDAO.write(s, request, response);
+		sDAO.write(sm, request, response);
 		sDAO.clearSearch(request, response);
 		sDAO.paging(1, request, response);
 		request.setAttribute("contentPage", "sns/sns.jsp");       
@@ -65,15 +70,16 @@ public class SnsController {
 		return "index"; 
 	}
 	
-	@RequestMapping(value = "/go.snsView", method = RequestMethod.GET)
-	public String goSnsView(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/go.sns.view", method = RequestMethod.GET)
+	public String goSnsView(Member m, SNSMsg sm, SnsReply sr, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
 		sDAO.view(sm, request, response);
+		srDAO.snsReplyView(sm, sr, request, response);
 		request.setAttribute("contentPage", "sns/snsRead.jsp");       
 		return "index"; 
 	}
 	
-	@RequestMapping(value = "/do.snsDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "/do.sns.delete", method = RequestMethod.GET)
 	public String doSNSDelete(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
 		sDAO.delete(sm, request, response);

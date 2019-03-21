@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ht.hv.sns.SnsDAO;
+
 @Controller
 public class MemberController {
 	@Autowired private MemberDAO mDAO;
+	@Autowired private SnsDAO sDAO;
 	
 	@RequestMapping(value = "/go.login", method = RequestMethod.GET)
 	public String goLogin(Member m, HttpServletRequest request, HttpServletResponse response) {
@@ -77,6 +80,7 @@ public class MemberController {
 	@RequestMapping(value = "/do.withdraw", method = RequestMethod.GET)
 	public String doWithdraw(Member m, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.withdraw(m, request, response);
+		sDAO.memberDeleteWhithSNS(m, request, response);
 		mDAO.loginCheck(m, request, response);
 		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
 		return "index"; 

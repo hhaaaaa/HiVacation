@@ -252,7 +252,12 @@ public class SnsDAO {
 		if(smp.snsImgDelete(i)==1){
 			return "1";
 		}else{
-			return "2";
+			return "0";
 		}
+	}
+	
+	public void memberDeleteWhithSNS(Member m, HttpServletRequest request, HttpServletResponse response) {
+		getMyMsgCount(m, request, response);
+		allMsgCount = allMsgCount - allMyCount;
 	}
 }

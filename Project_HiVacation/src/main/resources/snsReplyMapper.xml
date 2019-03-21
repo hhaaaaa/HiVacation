@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ht.hv.snsreply.SnsReplyMapper">
+	<insert id="snsReplyWrite" parameterType="com.ht.hv.snsreply.SnsReply">
+		insert into hv_reply values(hr_seq.nextval, #{hr_sno}, #{hr_id}, #{hr_text}, sysdate)
+	</insert>
+	<select id="snsReplyView" parameterType="com.ht.hv.sns.SNSMsg" resultType="com.ht.hv.snsreply.SnsReply">
+		select * from hv_reply where hr_sno=#{hs_no} 
+	</select>
+	<delete id="snsReplyDelete" parameterType="com.ht.hv.snsreply.SnsReply">
+		delete from hv_reply where hr_no=#{hr_no} 
+	</delete>  
+</mapper>

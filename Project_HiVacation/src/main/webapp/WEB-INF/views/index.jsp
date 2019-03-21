@@ -31,6 +31,7 @@
 		getFileIndex();
 		addUpdateFile();
 		getUpdateFileIndex();
+		doSnsReplyDelete();
 		connectSummonAddInputEventJoin();
 		connectSummonAddInputEventUpdate();
 		connectIdCheckEvent();

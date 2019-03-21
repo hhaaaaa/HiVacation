@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<form action="do.snsreply.write">
 	<table id="snsReadTable">
 		<c:if test="${sessionScope.loginMember.hm_id == selectSNS.hs_id }">
 			<tr>
@@ -33,6 +34,7 @@
 			<td align="right" colspan="3" id="snsReadId">
 				${selectSNS.hs_id }&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
+			<td><input type="hidden" name="hs_no" value="${selectSNS.hs_no }"></td>
 		</tr>
 		<c:forEach items="${selectSNS.hv_image }" var="Simg">
 			<tr>
@@ -48,15 +50,23 @@
 		</tr>
 		<tr>
 			<td align="center" id="snsReadReplyWrite" colspan="3">
-				<input id="snsReadReplyInput" placeholder="&nbsp;&nbsp;댓글 입력">
+				<input id="snsReadReplyInput" name="hr_text" placeholder="&nbsp;&nbsp;댓글 입력">
 				<button id="snsReadReplyButton">입력</button>
 			</td>
 		</tr>
-		<tr>
-			<td align="center" id="snsReadReply" colspan="3">
-				댓글들자리
+		<c:forEach items="${snsReplys }" var="sr">
+			<tr>
+			<td align="center" class="snsReadReply">
+				${sr.hr_id }
 			</td>
-		</tr>
+			<td class="snsReadReply">${sr.hr_text }</td>
+			<td align="right" class="snsReadReply">
+				<fmt:formatDate value="${sr.hr_date }" pattern="yyyy-MM-dd a hh:mm"/>
+			</td>
+			<td align="center" class="snsReadReply"><a class="snsReplyDeleteButton" rel="${sr.hr_no }">x</a></td>
+		</tr>			
+		</c:forEach>
 	</table>
+	</form>
 </body>
 </html>

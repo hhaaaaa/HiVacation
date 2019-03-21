@@ -45,6 +45,7 @@
 			<beans:list>
 				<beans:value>classpath:memberMapper.xml</beans:value>
 				<beans:value>classpath:snsMapper.xml</beans:value>
+				<beans:value>classpath:snsReplyMapper.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
