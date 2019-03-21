@@ -7,7 +7,7 @@ function goLogin() {
 }
 
 function goJoin() {
-	location.href="go.join";
+	location.href="go.join"; 
 }
 
 function doLogout() {

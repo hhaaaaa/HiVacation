@@ -13,4 +13,4 @@
 	<delete id="snsReplyDelete" parameterType="com.ht.hv.snsreply.SnsReply">
 		delete from hv_reply where hr_no=#{hr_no} 
 	</delete>  
-</mapper>
+</mapper> 

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body> 
 	<form action="do.snsreply.write">
 		<table id="snsReadTable">
 			<c:if test="${sessionScope.loginMember.hm_id == selectSNS.hs_id }">

@@ -10,3 +10,4 @@ public interface SnsReplyMapper {
 	public abstract int snsReplyUpdate(SnsReply sr);
 	public abstract int snsReplyDelete(SnsReply sr);
 }
+ 

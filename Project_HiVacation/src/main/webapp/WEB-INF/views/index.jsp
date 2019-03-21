@@ -28,7 +28,7 @@
 <script type="text/javascript"> 
 	$(function() {
 		addFile();
-		getFileIndex();
+		getFileIndex(); 
 		addUpdateFile();
 		getUpdateFileIndex();
 		goSnsReplyUpdate();
