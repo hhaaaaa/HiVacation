@@ -232,13 +232,10 @@ function showPlaceInfo(marker, place, index) {
 	infowindow.open(map, marker);
 	
 	// x버튼 눌렀을 때 infowindow 삭제
-	$(document).on("click", ".gm-ui-hover-effect", function() {
-		alert(infowindow.content);
-//		infowindow.close();
-		infowindow = null;
-		alert(infowindow.content);
-	});
-
+//	$(document).on("click", ".gm-ui-hover-effect", function() {
+//		$("#ifLikeImg1_" + index).removeEventListener('click');
+//	});
+	
 	// 찜하기
 	clickHeartImage(place, index);
 
@@ -246,6 +243,8 @@ function showPlaceInfo(marker, place, index) {
 
 // ### 찜하기 버튼 클릭했을 때 ###
 function clickHeartImage(detail, index) {
+	// 중복되는 click 이벤트 제거 후, 동적으로 이벤트 추가 (아래처럼 하면 모든 click 이벤트가 제거돼서 하자영역 추가가 안되는 것 같다!!)
+//	$(document).off("click").on("click", "#ifLikeImg1_" + index, function() {
 	$(document).on("click", "#ifLikeImg1_" + index, function() {
 		$("#ifLikeImg1_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
 		$("#ifLikeImg2_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
@@ -253,10 +252,13 @@ function clickHeartImage(detail, index) {
 		// 찜 목록 추가하기
 		for (var i = 0; i < detailedResult.length; i++) {
 			if (detailedResult[i].place_id == detail.place_id) {
-				detailedResult[i].like = true;
-				
-				// 각 찜 영역에 해당 데이터 등록
-				printLikedPlaceIntoEachArea(index);
+				// 찜 되어있지 않은 것만 찜 목록에 등록하도록 하기 위한 조건문
+				if (detailedResult[i].like == false) {
+					detailedResult[i].like = true;
+					
+					// 각 찜 영역에 해당 데이터 등록
+					printLikedPlaceIntoEachArea(index);
+				}
 				break;
 			}
 		}
@@ -276,10 +278,6 @@ function clickHeartImage(detail, index) {
 		// 각 찜 영역에서 해당 데이터 삭제
 		clearLikePlaceList(index);
 	});
-	// infowindow x 눌렀을 때 내용 삭제 되도록
-//	$(document).on("click", ".gm-ui-hover-effect", function() {
-//		$(".ifTable1").remove();
-//	});
 }
 
 
@@ -610,6 +608,7 @@ function clearLikePlaceListInStep2(index) {
 		// step1 infowindow 빈 하트로
 		$("#ifLikeImg1_" + index).css("opacity", "1").css("top", "0px").css("z-index", "5");
 		$("#ifLikeImg2_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
+		detailedResult[index].like = false;
 		
 		// step2 찜 마커 제거
 		if (detailedResult[index].type == "가자") {
@@ -637,8 +636,6 @@ function clearLikePlaceListInStep2(index) {
 				}
 			}
 		}
-		
-		alert("찜 목록에서 삭제 됐습니다.");
 	});
 }
 
@@ -655,9 +652,6 @@ function deletePlaceInDoList(clickIndex) {
 				minValue = doList[i].no;
 			}
 		}
-		alert(minValue);
-		alert(doList.length-deleteCount);
-//		alert(deleteCount);
 		
 		if (doList[clickIndex].no == minValue) {
 			$("#dlTable" + doList[clickIndex].no).remove();
