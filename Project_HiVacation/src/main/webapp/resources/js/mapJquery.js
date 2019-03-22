@@ -559,41 +559,31 @@ function moveMapCenterToLikePlace(index) {
 
 // ### 찜목록 + 누르면 하자영역에 등록
 var doListCount = 0;		// 하자영역 갯수 세기위한 변수
-//var doListNo = 0;			// 하자영역 목록 번호
 var doList = [];
 var doListIndex = 0;
 function registerIntoDoList(index) {
 	$(document).on("click", "#saveLikePlace" + index, function() {
 		doListCount += 1;
-//		doListNo += 1;
 		
-		var arrowTd;
-		var arrowTr;
 		var img = "<img src=\"resources/img/down_arrow.png\" style=\"width: 15px;\">";
+		var arrowTd1 = $("<td></td>").html(img).attr("align", "center").css("width", "90%");
+		var arrowTd2 = $("<td></td>").html("&nbsp;").attr("align", "center").css("width", "10%");
+		var arrowTr1 = $("<tr></tr>").attr("id", "dlTr" + doListIndex).append(arrowTd1, arrowTd2);
+		
 		var saveTd1 = $("<td></td>").text(detailedResult[index].name).attr("align", "center").css("width", "90%");
 		var saveTd2 = $("<td></td>").text("x").attr("id", "deleteDoList" + doListIndex).attr("align", "center").css("width", "10%").css("cursor", "pointer");
 		$(saveTd2).mouseover(function() {$(saveTd2).text("삭제").css("font-size", "8pt").css("text-shadow", "0px 0px 10px white");});
 		$(saveTd2).mouseleave(function() {$(saveTd2).text("x").css("font-size", "12pt").css("text-shadow", "none");});
 		var saveTr1 = $("<tr></tr>").append(saveTd1, saveTd2);
-		var saveTable;
-		
-		if (doListCount == 1) {
-			saveTable = $("<table></table>").append(saveTr1).css("width", "100%");
-		} else {
-			arrowTd1 = $("<td></td>").html(img).attr("align", "center").css("width", "90%");
-			arrowTd2 = $("<td></td>").html("&nbsp;").attr("align", "center").css("width", "10%");
-			arrowTr = $("<tr></tr>").attr("id", "dlTr" + doListIndex).append(arrowTd1, arrowTd2);
-			saveTable = $("<table></table>").append(arrowTr, saveTr1).css("width", "100%");
-		}
+		var saveTable = $("<table></table>").append(arrowTr1, saveTr1).css("width", "100%");
 		$(saveTable).attr("id", "dlTable" + doListIndex).css("padding-left", "7px").css("padding-right", "7px").css("padding-top", "2px").css("padding-bottom", "2px");
+		
 		$("#step2DoListDiv").append(saveTable);
 		
-//		detailedResult[index].order = doListIndex;
 		detailedResult[index].no = doListIndex;
 		doList.push(detailedResult[index]);
 		
 		// 하자 영역의 x를 클릭했을 때
-//		deletePlaceInDoList(index);
 		deletePlaceInDoList(doListIndex);
 		doListIndex += 1;
 	});
@@ -644,31 +634,29 @@ var minValue = 100;
 var deleteCount = 0;
 function deletePlaceInDoList(clickIndex) {
 	$(document).on("click", "#deleteDoList" + clickIndex, function() {
-		deleteCount += 1;
+		// 같은 장소를 하자영역에 여러개 넣으면 문제가 생김... no가 -1이 돼버림
+		// 화살표 안보이게!! z-index 설정했는데 안돼...
+		$("#dlTable" + doList[clickIndex].no).remove();
+		doList[clickIndex].no = -1;
+		
+//		deleteCount += 1;
 		
 		// doList[i].no 중 최소값 찾기
-		for (var i = 0; i < doList.length; i++) {
-			if (minValue > doList[i].no && doList[i].no >= 0) {
-				minValue = doList[i].no;
-			}
-		}
+//		for (var i = 0; i < doList.length; i++) {
+//			if (minValue > doList[i].no && doList[i].no >= 0) {
+//				minValue = doList[i].no;
+//			}
+//		}
 		
-		if (doList[clickIndex].no == minValue) {
-			$("#dlTable" + doList[clickIndex].no).remove();
-			if (doList.length - deleteCount >= 1) {
-				if (doList[clickIndex+1].no == -1) {
-					$("#dlTr" + doList[clickIndex+2].no).remove();
-				} else {
-					$("#dlTr" + doList[clickIndex+1].no).remove();
-				}
-			}
-		} else {
-			$("#dlTable" + doList[clickIndex].no).remove();
-		}
-		doList[clickIndex].no = -1;
-//		doList.splice(clickIndex, 1);
-		minValue = 100;
-		doListCount -= 1;
+//		if (doList[clickIndex].no == minValue) {
+//			$("#dlTable" + doList[clickIndex].no).remove();
+//			$("#dlTr" + doList[clickIndex+1].no).css("opacity", "0");
+//		} else {
+//			$("#dlTable" + doList[clickIndex].no).remove();
+//		}
+//		minValue = 100;
+//		doListCount -= 1;
+//		doList[clickIndex].no = -1;
 	});
 }
 
