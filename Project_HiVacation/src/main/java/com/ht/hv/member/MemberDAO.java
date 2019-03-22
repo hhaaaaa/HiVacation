@@ -18,11 +18,12 @@ public class MemberDAO {
 	
 	public void join(Member m, HttpServletRequest request, HttpServletResponse response){
 		MemberMapper mm = ss.getMapper(MemberMapper.class);
+		
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
 		String address3 = request.getParameter("address3");
 		m.setHm_address(address1+";"+address2+";"+address3);
-		
+
 		if(mm.join(m)==1){
 			request.setAttribute("r", "가입성공");
 		}else{
@@ -31,11 +32,11 @@ public class MemberDAO {
 	}
 	
 	public Members idCheck(Member m){
-		Member dbm = ss.getMapper(MemberMapper.class).getMemberById(m);
+		Member dbM = ss.getMapper(MemberMapper.class).getMemberById(m);
 		ArrayList<Member> alM = new ArrayList<Member>();
-		alM.add(dbm);
+		alM.add(dbM);
 		Members ms = new Members(alM);
-		return ms;		
+		return ms;
 	}
 	
 	public void login(Member m, HttpServletRequest request, HttpServletResponse response){
@@ -46,7 +47,7 @@ public class MemberDAO {
 		if(loginMember != null){
 			if(loginMember.getHm_pw().equals(request.getParameter("hm_pw"))){
 				hs.setAttribute("loginMember", loginMember);
-				hs.getMaxInactiveInterval();
+				hs.setMaxInactiveInterval(60 * 60 * 24);
 				request.setAttribute("r", "로그인 완료");
 				if(hm_auto != null){
 					Cookie autoLoginID = new Cookie("aoutoLoginID", loginMember.getHm_id());
@@ -75,6 +76,7 @@ public class MemberDAO {
 							Member loginMember = mm.getMemberById(m);
 							if(loginMember != null){
 								hs.setAttribute("loginMember", loginMember);
+								hs.setMaxInactiveInterval(60 * 60 * 24);
 							}
 						}
 					}
@@ -96,7 +98,7 @@ public class MemberDAO {
 		request.setAttribute("loginPage", "member/beforeLogin.jsp");
 		return false;
 	}
-
+	
 	public void logout(HttpServletRequest request, HttpServletResponse response){
 		request.getSession().setAttribute("loginMember", null);
 		Cookie[] cookies = request.getCookies();
@@ -121,11 +123,11 @@ public class MemberDAO {
 	}
 	
 	public void update(Member m, HttpServletRequest request, HttpServletResponse response){
-		Member m1 = (Member) request.getSession().getAttribute("loginMember");
+		Member mb = (Member) request.getSession().getAttribute("loginMember");
 		MemberMapper mm = ss.getMapper(MemberMapper.class);
 		HttpSession hs = request.getSession();
 		
-		m.setHm_id(m1.getHm_id());
+		m.setHm_id(mb.getHm_id());
 		
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
@@ -135,11 +137,12 @@ public class MemberDAO {
 		if(mm.update(m)==1){
 			request.setAttribute("r", "정보수정 완료");
 			hs.setAttribute("loginMember", m);
+			hs.setMaxInactiveInterval(60 * 60 * 24);
 		}else{
 			request.setAttribute("r", "정보수정 실패");
 		}
 	}
-
+	
 	public void withdraw(Member m, HttpServletRequest request, HttpServletResponse response){
 		MemberMapper mm = ss.getMapper(MemberMapper.class);
 		
@@ -150,5 +153,4 @@ public class MemberDAO {
 			request.setAttribute("r", "탈퇴 완료");
 		}
 	}
-	
 }
