@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="resources/css/sns/sns.css">
 <link rel="stylesheet" href="resources/css/sns/snsWrite.css">
 <link rel="stylesheet" href="resources/css/sns/snsRead.css">
+<link rel="stylesheet" href="resources/css/calendar/fullcalendar.css" />
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
 <script type="text/javascript" src="resources/js/validCheck.js"></script>
@@ -25,6 +26,9 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnIve1J3a9dk9LpwOvpXbKDW0fCSk_8wM&language=ko&region=KO"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnIve1J3a9dk9LpwOvpXbKDW0fCSk_8wM&libraries=places"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="resources/js/moment.min.js"></script>
+<script type="text/javascript" src="resources/js/fullcalendar.min.js"></script>
+<script type="text/javascript" src="resources/js/calendarjquery.js"></script>
 <script type="text/javascript"> 
 	$(function() {
 		addFile();
@@ -42,6 +46,7 @@
 		searchLocationByQuery();
 		searchDetailByKeyword();
 		eachIMGdelete();
+		makeCalendar();
 	});
 </script>
 </head>
