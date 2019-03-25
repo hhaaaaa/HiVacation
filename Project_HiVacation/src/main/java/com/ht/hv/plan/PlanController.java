@@ -1,4 +1,4 @@
-package com.ht.hv.map;
+package com.ht.hv.plan;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,15 +8,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+
 @Controller
-public class MapController {
+public class PlanController {
 	
 	@Autowired
-	private MapDAO mDAO;
-
+	private PlanDAO pDAO;
+	
 	@RequestMapping(value = "/get.detail.search", method = RequestMethod.GET, 
 			produces = "application/json; charset=utf-8")
 	public @ResponseBody String getSearchedDetail(HttpServletRequest request) {
-		return mDAO.getSearchedDetail(request);
+		return pDAO.getSearchedDetail(request);
 	}
+	
+	@RequestMapping(value = "/go.save.schedule", method = RequestMethod.GET, 
+			produces = "application/json; charset=utf-8")
+	public @ResponseBody String goSaveSchedule(Plan p, HttpServletRequest request) {
+		return pDAO.saveSchedule(p, request);
+	}
+	
+	
 }

@@ -59,6 +59,7 @@ create table hv_plan(
 	hp_url varchar2(200 char) not null,
 	hp_website varchar2(200 char) not null,
 	hp_phone varchar2(20 char) not null,
+	hp_order number(2) not null,
 	constraint c_plan 
 		foreign key(hp_uid) 
 		references hv_member(hm_id) 

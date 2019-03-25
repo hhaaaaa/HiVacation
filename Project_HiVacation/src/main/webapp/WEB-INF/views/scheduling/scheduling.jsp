@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +41,7 @@
 					<td id="step2EmptyTd" rowspan="8"></td>
 					<td class="step2MenuTd">
 						&nbsp;<img src="resources/img/save_icon.png" style="position: relative; top: 2px;"> 하자
-						<span style="z-index: 90; background-color: white;">
+						<span style="position: relative; left: 1px; z-index: 90; background-color: white;">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -62,16 +64,25 @@
 							</tr>
 							<tr>
 								<td id="step2DoSaveMenu" align="center">
-									<select class="step2SaveDate">
-										<option></option>
+									<select name="saveYear" id="step2SaveYear" class="step2SaveDate">
+										<option value="" selected disabled style="display: none;">년</option>
+										<option value="${year }">${year }</option>
+										<option value="${year+1 }">${year+1 }</option>
+										<option value="${year+2 }">${year+2 }</option>
 									</select>
-									<select class="step2SaveDate">
-										<option></option>
+									<select name="saveMonth" id="step2SaveMonth" class="step2SaveDate">
+										<option value="" selected disabled style="display: none;">월</option>
+										<c:forEach begin="1" end="12" var="i">
+											<option value="${i }">${i }</option>
+										</c:forEach>
 									</select>
-									<select class="step2SaveDate">
-										<option></option>
+									<select name="saveDay" id="step2SaveDay" class="step2SaveDate">
+										<option value="" selected disabled style="display: none;">일</option>
+										<c:forEach begin="1" end="31" var="j">
+											<option value="${j }">${j }</option>
+										</c:forEach>
 									</select>
-									<button id="step2SaveButton">저장</button>
+									<button id="step2SaveButton" onclick="saveDoListInDB('${sessionScope.loginMember.hm_id }');">저장</button>
 								</td>
 							</tr>
 						</table>

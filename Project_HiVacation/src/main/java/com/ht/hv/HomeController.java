@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ht.hv.member.Member;
 import com.ht.hv.member.MemberDAO;
+import com.ht.hv.plan.PlanDAO;
 import com.ht.hv.sns.SnsDAO;
 @Controller
 public class HomeController {
@@ -18,6 +19,9 @@ public class HomeController {
 	
 	@Autowired
 	private SnsDAO sDAO;
+	
+	@Autowired
+	private PlanDAO pDAO;
 	
 	private boolean firstReq;//첫 요청 확인 변수
 	public HomeController(){
@@ -31,6 +35,7 @@ public class HomeController {
 			firstReq = false;
 		}
 		mDAO.loginCheck(m, request, response);
+		pDAO.getTodayDate(request);
 		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
 		return "index"; 
 	}

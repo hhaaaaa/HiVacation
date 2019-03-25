@@ -58,14 +58,14 @@ function initMap() {
 }
 
 // ### 지역 검색 -> 지도 중앙 변경 ###
+var nearbyLocation;
 function searchLocationByQuery() {
-	var location;
 	
 	$("#step1SearchCity").keyup(function(e) {
-		location = $(this).val();
+		nearbyLocation = $(this).val();
 		
 		var request = {
-			query: location,
+			query: nearbyLocation,
 			fields: ['name', 'geometry', 'place_id']
 		};
 		service = new google.maps.places.PlacesService(map);
@@ -231,11 +231,6 @@ function showPlaceInfo(marker, place, index) {
 	});
 	infowindow.open(map, marker);
 	
-	// x버튼 눌렀을 때 infowindow 삭제
-//	$(document).on("click", ".gm-ui-hover-effect", function() {
-//		$("#ifLikeImg1_" + index).removeEventListener('click');
-//	});
-	
 	// 찜하기
 	clickHeartImage(place, index);
 
@@ -243,7 +238,8 @@ function showPlaceInfo(marker, place, index) {
 
 // ### 찜하기 버튼 클릭했을 때 ###
 function clickHeartImage(detail, index) {
-	// 중복되는 click 이벤트 제거 후, 동적으로 이벤트 추가 (아래처럼 하면 모든 click 이벤트가 제거돼서 하자영역 추가가 안되는 것 같다!!)
+	// [방법1]중복되는 click 이벤트 제거 후, 동적으로 이벤트 추가 
+	// 		->아래처럼 하면 모든 click 이벤트가 제거돼서 하자영역 추가가 안되는 것 같다!!
 //	$(document).off("click").on("click", "#ifLikeImg1_" + index, function() {
 	$(document).on("click", "#ifLikeImg1_" + index, function() {
 		$("#ifLikeImg1_" + index).css("opacity", "0").css("top", "-20px").css("z-index", "1");
@@ -252,7 +248,7 @@ function clickHeartImage(detail, index) {
 		// 찜 목록 추가하기
 		for (var i = 0; i < detailedResult.length; i++) {
 			if (detailedResult[i].place_id == detail.place_id) {
-				// 찜 되어있지 않은 것만 찜 목록에 등록하도록 하기 위한 조건문
+				// [방법2]찜 되어있지 않은 것만 찜 목록에 등록하도록 하기 위한 조건문
 				if (detailedResult[i].like == false) {
 					detailedResult[i].like = true;
 					
@@ -283,9 +279,9 @@ function clickHeartImage(detail, index) {
 
 // ### 상세 검색 출력 ###
 function printDetailInfo(searchedResult) {
-// 		주소까지 출력하고 싶었지만, [주소 포기]
-//			google maps api에서 제공해주는 method를 사용 -> 한번에 너무 많은 정보를 요청해서 10개 이외에는 결과가 안나오고,
-//			proxy 서버로 ajax 요청보내고 응답 받기 -> 모든 결과는 나오지만 주소 값이 영어로만 받아짐...
+ 	// 주소까지 출력하고 싶었지만, [주소 포기]
+	//		google maps api에서 제공해주는 method를 사용 -> 한번에 너무 많은 정보를 요청해서 10개 이외에는 결과가 안나오고,
+	//		proxy 서버로 ajax 요청보내고 응답 받기 -> 모든 결과는 나오지만 주소 값이 영어로만 받아짐...
 	var requestsForDetail = []; 
 	serviceForDetail = new google.maps.places.PlacesService(map);
 	
@@ -317,7 +313,6 @@ function printDetailInfo(searchedResult) {
 				}
 				// 모든 detail 검색 결과에 찜 했는지 여부 넣기(객체에 동적으로 값 할당)
 				d.like = false;
-//				d.order = 0;
 				d.no = -1;
 				
 				detailedResult.push(d);
@@ -558,13 +553,10 @@ function moveMapCenterToLikePlace(index) {
 }
 
 // ### 찜목록 + 누르면 하자영역에 등록
-var doListCount = 0;		// 하자영역 갯수 세기위한 변수
 var doList = [];
 var doListIndex = 0;
 function registerIntoDoList(index) {
 	$(document).on("click", "#saveLikePlace" + index, function() {
-		doListCount += 1;
-		
 		var img = "<img src=\"resources/img/down_arrow.png\" style=\"width: 15px;\">";
 		var arrowTd1 = $("<td></td>").html(img).attr("align", "center").css("width", "90%");
 		var arrowTd2 = $("<td></td>").html("&nbsp;").attr("align", "center").css("width", "10%");
@@ -581,7 +573,11 @@ function registerIntoDoList(index) {
 		$("#step2DoListDiv").append(saveTable);
 		
 		detailedResult[index].no = doListIndex;
-		doList.push(detailedResult[index]);
+		// 객체는 call by reference
+		// 직접 detailedRestul[index]를 push하면 주소값으로 참조하기 때문에,
+		// 하자영역에 같은 장소가 있을 때 모두 같은 값을 참조하게 돼서 곤란해짐
+		// -> JSON.parse(JSON.stringify())로 객체 깊은 복사해서 push.
+		doList.push(JSON.parse(JSON.stringify(detailedResult[index])));
 		
 		// 하자 영역의 x를 클릭했을 때
 		deletePlaceInDoList(doListIndex);
@@ -635,31 +631,58 @@ var deleteCount = 0;
 function deletePlaceInDoList(clickIndex) {
 	$(document).on("click", "#deleteDoList" + clickIndex, function() {
 		// 같은 장소를 하자영역에 여러개 넣으면 문제가 생김... no가 -1이 돼버림
-		// 화살표 안보이게!! z-index 설정했는데 안돼...
 		$("#dlTable" + doList[clickIndex].no).remove();
 		doList[clickIndex].no = -1;
-		
-//		deleteCount += 1;
-		
-		// doList[i].no 중 최소값 찾기
-//		for (var i = 0; i < doList.length; i++) {
-//			if (minValue > doList[i].no && doList[i].no >= 0) {
-//				minValue = doList[i].no;
-//			}
-//		}
-		
-//		if (doList[clickIndex].no == minValue) {
-//			$("#dlTable" + doList[clickIndex].no).remove();
-//			$("#dlTr" + doList[clickIndex+1].no).css("opacity", "0");
-//		} else {
-//			$("#dlTable" + doList[clickIndex].no).remove();
-//		}
-//		minValue = 100;
-//		doListCount -= 1;
-//		doList[clickIndex].no = -1;
 	});
 }
 
+function saveDoListInDB(uid) {
+	var year = $("#step2SaveYear").val();
+	var month = $("#step2SaveMonth").val();
+	var day = $("#step2SaveDay").val();
+	
+	var lastDay = (new Date(year, month, 0)).getDate() * 1;
+	
+	if (year == null) {
+		alert("년도를 선택해주세요.");
+		$("#step2SaveYear").find("option:first").prop("selected", true);
+	} else if (month == null) {
+		alert("월을 선택해주세요.");
+		$("#step2SaveMonth").find("option:first").prop("selected", true);
+	} else if (day == null) {
+		alert("일을 선택해주세요.");
+		$("#step2SaveDay").find("option:first").prop("selected", true);
+	} else if (day > lastDay) {
+		alert("일을 다시 선택해주세요.");
+		$("#step2SaveDay").find("option:first").prop("selected", true);
+	} else {
+		if (month < 10) {month = "0" + month;}
+		if (day < 10) {day = "0" + day;}
+		var date = year + "" + month + "" + day;
+		
+		// doList의 목록을 DB로 저장 (서버로 ajax요청)
+		for (var i = 0; i < doList.length; i++) {
+			if (doList[i].no >= 0) {
+				$.ajax({
+					url: "go.save.schedule",
+					data: {hp_uid: uid, hp_date: date, hp_city: nearbyLocation, 
+							hp_placeid: doList[i].place_id, hp_pname: doList[i].name, 
+							hp_rating: doList[i].rating, hp_paddress: doList[i].formatted_address, 
+							hp_url: doList[i].url, hp_website: doList[i].website, 
+							hp_phone: doList[i].formatted_phone_number, hp_order: doList[i].no},
+					success: function(data) {
+						// alert창 안뜸!!!!!!!!
+						alert(data);
+						// 년월일 초기화?
+					}
+				});
+			}
+		}
+		// doList에 있는거 다 DB에 들어가면, alert으로 하나 띄워주게!!!!!!!!!
+	}
+	
+	return false;
+}
 
 // ###
 //function clearStep2Markers() {
