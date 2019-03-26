@@ -31,7 +31,11 @@
 		</div>
 		
 		<div id="step2Div" class="cannotSeeFirstDiv">
-			Step2. 찜 목록 &amp; 일정 저장<p>
+			Step2. 찜 목록 &amp; 일정 저장<br>
+			<span id="step2InitializeAreaSpan">
+				<img src="resources/img/refresh_icon.png" style="position: relative; top: 4px;">
+				찜목록 초기화
+			</span>
 			<div id="step2Map">지도</div><p>
 			<table id="step2SaveScheduleTable">
 				<tr>

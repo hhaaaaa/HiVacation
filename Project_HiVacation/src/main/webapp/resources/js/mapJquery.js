@@ -10,7 +10,7 @@ var detailedResult = [];		// type, like 속성이 포함된 찜 목록 관리용
 
 // ################################### Step1 ###################################
 // ### 홈 페이지 화면 조정 ###
-function schedulingPaging() {
+function schedulingPaging(boolLogin) {
 	$("#step1Menu").click(function() {
 		$("#step" + no + "Div").css("left", "-1200px");
 		$("#step" + no + "Menu").css("background-color", "white");
@@ -21,15 +21,19 @@ function schedulingPaging() {
 		$("#step" + no + "Menu").css("color", "white");
 	});
 	$("#step2Menu").click(function() {
-		$("#step" + no + "Div").css("left", "-1200px");
-		$("#step" + no + "Menu").css("background-color", "white");
-		$("#step" + no + "Menu").css("color", "grey");
-		no = 2;
-		$("#step" + no + "Div").css("left", "300px");
-		$("#step" + no + "Menu").css("background-color", "grey");
-		$("#step" + no + "Menu").css("color", "white");
-		
-		initMap2();
+		if (!boolLogin){
+			alert("로그인 후 이용해주십시오.");
+		} else {
+			$("#step" + no + "Div").css("left", "-1200px");
+			$("#step" + no + "Menu").css("background-color", "white");
+			$("#step" + no + "Menu").css("color", "grey");
+			no = 2;
+			$("#step" + no + "Div").css("left", "300px");
+			$("#step" + no + "Menu").css("background-color", "grey");
+			$("#step" + no + "Menu").css("color", "white");
+			
+			initMap2();
+		} 
 	});
 	$("#step3Menu").click(function() {
 		$("#step" + no + "Div").css("left", "-1200px");
@@ -581,6 +585,7 @@ function registerIntoDoList(index) {
 		
 		// 하자 영역의 x를 클릭했을 때
 		deletePlaceInDoList(doListIndex);
+		
 		doListIndex += 1;
 	});
 }
@@ -626,16 +631,14 @@ function clearLikePlaceListInStep2(index) {
 }
 
 // ### 하자영역 x 누르면 목록 삭제 ###
-var minValue = 100;
-var deleteCount = 0;
 function deletePlaceInDoList(clickIndex) {
 	$(document).on("click", "#deleteDoList" + clickIndex, function() {
-		// 같은 장소를 하자영역에 여러개 넣으면 문제가 생김... no가 -1이 돼버림
 		$("#dlTable" + doList[clickIndex].no).remove();
 		doList[clickIndex].no = -1;
 	});
 }
 
+// ### 하자영역 데이터 DB에 저장 ###
 function saveDoListInDB(uid) {
 	var year = $("#step2SaveYear").val();
 	var month = $("#step2SaveMonth").val();
@@ -659,53 +662,103 @@ function saveDoListInDB(uid) {
 		if (month < 10) {month = "0" + month;}
 		if (day < 10) {day = "0" + day;}
 		var date = year + "" + month + "" + day;
+		var rating; var paddress; var url; var website; var phone;
 		
 		// doList의 목록을 DB로 저장 (서버로 ajax요청)
 		for (var i = 0; i < doList.length; i++) {
 			if (doList[i].no >= 0) {
+				rating = doList[i].rating;
+				paddress = doList[i].formatted_address;
+				url = doList[i].url;
+				website = doList[i].website;
+				phone = doList[i].formatted_phone_number;
+				
+				if (rating == null) { rating = 0; }
+				if (paddress == null) { paddress = "[주소 정보 없음]"; }
+				if (url == null) { url = "[구글url 정보 없음]"; }
+				if (website == null) { website = "[사이트 정보 없음]"; }
+				if (phone == null) { phone = "[전화번호 정보 없음]"; }
+				
 				$.ajax({
 					url: "go.save.schedule",
 					data: {hp_uid: uid, hp_date: date, hp_city: nearbyLocation, 
 							hp_placeid: doList[i].place_id, hp_pname: doList[i].name, 
-							hp_rating: doList[i].rating, hp_paddress: doList[i].formatted_address, 
-							hp_url: doList[i].url, hp_website: doList[i].website, 
-							hp_phone: doList[i].formatted_phone_number, hp_order: doList[i].no},
+							hp_rating: rating, hp_paddress: paddress, hp_url: url, 
+							hp_website: website, hp_phone: phone, hp_order: doList[i].no},
 					success: function(data) {
-						// alert창 안뜸!!!!!!!!
-						alert(data);
-						// 년월일 초기화?
+						// i번째 하자영역, doList 초기화 (data로 doList[i].no 리턴되도록)
+						initializeAfterSaveSchedule(data.result);
+						
+						if (doList.length-1 == data.result) {
+							doList = [];
+							doListIndex = 0;
+						}
 					}
 				});
 			}
 		}
-		// doList에 있는거 다 DB에 들어가면, alert으로 하나 띄워주게!!!!!!!!!
+		
+		alert(uid + " 님, " + year + "년 " + month + "월 " + day + "일 여행 일정이 저장 됐습니다.");
+		
+		// 년, 월, 일 select 초기화
+		$("#step2SaveYear").find("option:first").prop("selected", true);
+		$("#step2SaveMonth").find("option:first").prop("selected", true);
+		$("#step2SaveDay").find("option:first").prop("selected", true);
 	}
 	
 	return false;
 }
 
-// ###
-//function clearStep2Markers() {
-//	for (var i = 0; i < goMarkers.length; i++) {
-//		goMarkers[i].setMap(null);
-//	}
-//	for (var i = 0; i < eatMarkers.length; i++) {
-//		eatMarkers[i].setMap(null);
-//	}
-//	for (var i = 0; i < sleepMarkers.length; i++) {
-//		sleepMarkers[i].setMap(null);
-//	}
-//	goMarkers = [];
-//	eatMarkers = [];
-//	sleepMarkers = [];
-//}
+// 		### DB 저장 후, 하자영역 & doList 초기화 ###
+function initializeAfterSaveSchedule(completeIndex) {
+	$("#dlTable" + completeIndex).remove();
+}
 
-// ###
-//function saveMyTravel() {
-//	// 여행 저장하면 찜 목록 초기화시키기 위함
-//	detailedResult = [];
-//	clearStep2Markers();
-//}
+// ### 찜 목록 초기화 ###
+function initializeLikeArea() {
+	$("#step2InitializeAreaSpan").click(function() {
+		if (doList.length > 0) {
+			$("#step2DoListDiv").empty();
+			doList = [];
+		}
+		if (detailedResult.length > 0) {
+			for (var i = 0; i < detailedResult.length; i++) {
+				if (detailedResult[i].like == true) {
+					// 찜 영역에서 제거
+					clearLikePlaceList(i);
+					
+					// step1 infowindow 빈 하트로
+					$("#ifLikeImg1_" + i).css("opacity", "1").css("top", "0px").css("z-index", "5");
+					$("#ifLikeImg2_" + i).css("opacity", "0").css("top", "-20px").css("z-index", "1");
+				
+					// detailedResult 자체를 초기화 시키려했는데,
+					// 		여행 검색을 하면 detailedResult에 추가되게 했기때문에
+					//		detailedResult를 초기화시키면 step1으로 돌아갔을 때 다시 찜할 수 없게 됨!
+					//		-> like 속성만 false로 ! (다시 홈으로 가면 detailedResult 초기화됨)
+					detailedResult[i].like = false;
+				}
+			}
+			clearStep2Markers();
+		}
+	});
+}
+
+// 		### 찜 목록 마커들 초기화 ###
+function clearStep2Markers() {
+	for (var i = 0; i < goMarkers.length; i++) {
+		goMarkers[i].setMap(null);
+	}
+	for (var i = 0; i < eatMarkers.length; i++) {
+		eatMarkers[i].setMap(null);
+	}
+	for (var i = 0; i < sleepMarkers.length; i++) {
+		sleepMarkers[i].setMap(null);
+	}
+	goMarkers = [];
+	eatMarkers = [];
+	sleepMarkers = [];
+}
+
 
 
 

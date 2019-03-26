@@ -40,13 +40,14 @@
 		connectSummonAddInputEventJoin();
 		connectSummonAddInputEventUpdate();
 		connectIdCheckEvent();
-		schedulingPaging();
+		schedulingPaging(${sessionScope.loginMember != null });
 		initMap();
 		myMenuLocationControl();
 		searchLocationByQuery();
 		searchDetailByKeyword();
 		eachIMGdelete();
 		makeCalendar();
+		initializeLikeArea();
 	});
 </script>
 </head>

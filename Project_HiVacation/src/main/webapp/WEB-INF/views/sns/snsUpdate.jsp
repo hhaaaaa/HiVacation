@@ -52,7 +52,7 @@
 				<tr><td><br></td></tr>
 				<tr>
 					<td align="right" colspan="2">       
-						<button id="snsUpdateButton">수정</button>
+						<button id="snsWriteButton">수정</button>
 					</td>
 				</tr>
 			</table>

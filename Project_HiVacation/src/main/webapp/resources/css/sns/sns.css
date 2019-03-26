@@ -5,14 +5,14 @@
 }
 #snsWriteGoDiv {
 	position: relative;
-	left: 430px;
-	width: 60px;
+	left: 450px;
+	width: 80px;
+	height: 21px;
 	margin-bottom: 10px;
 	cursor: pointer;
-	color: grey;
-}
-#snsWriteGoDiv:hover {
-	text-shadow: 1px 1px 1px grey;
+	font-size: 10pt;
+	border: black solid 1px;
+	padding-top: 2px;
 }
 #snsMenuTable {
 	width: 100%;

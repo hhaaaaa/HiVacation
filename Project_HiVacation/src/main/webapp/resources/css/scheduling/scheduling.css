@@ -145,6 +145,16 @@
 
 
 /* ##### Step2. 찜 목록 & 여행 저장 ##### */
+#step2InitializeAreaSpan {
+	font-size: 10pt;
+	position: relative;
+	left: 400px;
+	top: -15px;
+	cursor: pointer;
+}
+#step2InitializeAreaSpan:hover {
+	text-shadow: 1px 1px 1px black;
+}
 #step2Map {
 	width: 950px;
 	height: 400px;

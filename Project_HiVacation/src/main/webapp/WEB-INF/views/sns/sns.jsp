@@ -11,7 +11,7 @@
 <body>
 	<div id="snsTotalDiv">
 		<c:if test="${sessionScope.loginMember !=null }" >
-			<div id="snsWriteGoDiv" onclick="goSnsWrite();">글쓰기</div>
+			<div id="snsWriteGoDiv" onclick="goSnsWrite();">글 쓰기</div>
 		</c:if>
 		<table id="snsMenuTable">       
 			<tr>
@@ -22,7 +22,7 @@
 					제목
 				</td>
 				<td align="center" id="snsIdMenu">
-					아이디
+					ID
 				</td>
 				<td align="center" id="snsDateMenu">
 					날짜

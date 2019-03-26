@@ -20,17 +20,19 @@ public class PlanDAO {
 	@Autowired
 	private SqlSession ss;
 	
-	// 비동기식으로 DB에 하자영역 데이터 저장
+	// 비동기식(ajax)으로 DB에 하자영역 데이터 저장
 	public String saveSchedule(Plan p, HttpServletRequest request) {
 		try {
 			if (ss.getMapper(PlanMapper.class).saveSchedule(p) == 1) {
-				return "여행 저장 완료됐습니다.";
+				request.setAttribute("r", "여행 저장 완료");
+				return "{\"result\": \"" + p.getHp_order() + "\"}";
 			}
 
 			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "여행 저장에 실패했습니다.";
+			request.setAttribute("r", "여행 저장 실패");
+			return "{\"result\": \"실패.\"}";
 		}
 	}
 	

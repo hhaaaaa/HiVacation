@@ -40,7 +40,7 @@
 				<tr><td><br></td></tr>
 				<tr>
 					<td align="right" colspan="2">       
-						<button id="snsWriteButton">글쓰기</button>
+						<button id="snsWriteButton">글 쓰기</button>
 					</td>
 				</tr>
 			</table>
