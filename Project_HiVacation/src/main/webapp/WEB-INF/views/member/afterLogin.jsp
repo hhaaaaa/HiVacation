@@ -19,7 +19,7 @@
 			<td align="center" class="goMyMenu">MY PAGE</td>
 		</tr>
 		<tr>
-			<td align="center" class="goMyMenu">캘린더</td>
+			<td align="center" class="goMyMenu" onclick="goCalendar();">캘린더</td>
 		</tr>
 		<tr>
 			<td align="center" class="goMyMenu" onclick="goUpdate();">정보수정</td>

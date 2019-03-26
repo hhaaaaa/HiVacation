@@ -48,7 +48,11 @@ function goSNSUpdate(hs_no){
 }
 
 function doSNSUpdate(){	
-location.href="do.sns.update";
+	location.href="do.sns.update";
+}
+
+function goCalendar(){
+	location.href="go.calendar";
 }
 
 function eachIMGdelete(hi_no) {
