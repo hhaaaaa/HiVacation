@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="resources/css/sns/snsWrite.css">
 <link rel="stylesheet" href="resources/css/sns/snsRead.css">
 <link rel="stylesheet" href="resources/css/calendar/fullcalendar.css" />
+<link rel="stylesheet" href="resources/css/scheduling/budget.css" />
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
 <script type="text/javascript" src="resources/js/validCheck.js"></script>
@@ -29,8 +30,10 @@
 <script type="text/javascript" src="resources/js/moment.min.js"></script>
 <script type="text/javascript" src="resources/js/fullcalendar.min.js"></script>
 <script type="text/javascript" src="resources/js/calendarjquery.js"></script>
+<script type="text/javascript" src="resources/js/budgetjquery.js"></script>
 <script type="text/javascript"> 
 	$(function() {
+		budgetAdd();
 		addFile();
 		getFileIndex(); 
 		addUpdateFile();

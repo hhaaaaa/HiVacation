@@ -119,7 +119,77 @@
 		
 		<div id="step3Div" class="cannotSeeFirstDiv">
 			Step3. 예산 짜기<p>
-			<span class="saveButtonScheDiv">저장</span>
+			<table id="budgetTable">
+				<tr>
+					<td id="budgetTableTD1">
+						<table id="tour">
+							<tr>
+								<td align="center" id="tourTD1">
+									관광비
+								</td>
+							</tr>
+							<tr>
+								<td id="tourTD2">
+									<textarea id="tourTextarea" placeholder="엔터로 구분"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td align="right" id="tourTD3">
+									<!-- 관광비총합 -->
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td id="budgetTableTD2">
+						<table id="food">
+							<tr>
+								<td align="center" id="foodTD1">
+									식비
+								</td>
+							</tr>
+							<tr>
+								<td id="foodTD2">
+									<textarea id="foodTextarea" placeholder="엔터로 구분"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td align="right" id="foodTD3">  
+									<!-- 식비총합 -->
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td id="budgetTableTD3">
+						<table id="sleep">
+							<tr>
+								<td align="center" id="sleepTD1">
+									숙박비
+								</td>
+							</tr>
+							<tr>
+								<td id="sleepTD2">
+									<textarea id="sleepTextarea" placeholder="엔터로 구분"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td align="right" id="sleepTD3">
+									<!-- 숙박비총합 -->
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" align="right" >
+						<span id="totalCost"></span> / <input id="numPeople" placeholder="인원"><button id="calculate">계산</button>
+					</td> 
+				</tr>
+				<tr>
+					<td colspan="3" align="right">
+						->인당  <span id="perPerson"></span>원
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </body>
