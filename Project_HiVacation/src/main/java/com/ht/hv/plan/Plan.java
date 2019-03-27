@@ -1,11 +1,12 @@
 package com.ht.hv.plan;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Plan {
 	private BigDecimal hp_no;
 	private String hp_uid;
-	private String hp_date;
+	private Date hp_date;
 	private String hp_city;
 	private String hp_placeid;
 	private String hp_pname;
@@ -20,7 +21,7 @@ public class Plan {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Plan(BigDecimal hp_no, String hp_uid, String hp_date, String hp_city, String hp_placeid, String hp_pname,
+	public Plan(BigDecimal hp_no, String hp_uid, Date hp_date, String hp_city, String hp_placeid, String hp_pname,
 			BigDecimal hp_rating, String hp_paddress, String hp_url, String hp_website, String hp_phone,
 			BigDecimal hp_order) {
 		super();
@@ -54,11 +55,11 @@ public class Plan {
 		this.hp_uid = hp_uid;
 	}
 
-	public String getHp_date() {
+	public Date getHp_date() {
 		return hp_date;
 	}
 
-	public void setHp_date(String hp_date) {
+	public void setHp_date(Date hp_date) {
 		this.hp_date = hp_date;
 	}
 
@@ -133,6 +134,7 @@ public class Plan {
 	public void setHp_order(BigDecimal hp_order) {
 		this.hp_order = hp_order;
 	}
+
 	
 	
 }

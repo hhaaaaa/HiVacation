@@ -7,4 +7,8 @@
 			#{hp_pname}, #{hp_rating}, #{hp_paddress}, #{hp_url}, #{hp_website}, 
 			#{hp_phone}, #{hp_order})
 	</insert>
+	
+	<select id="getMyPlan" parameterType="com.ht.hv.plan.Plan" resultType="com.ht.hv.plan.Plan">
+		select * from hv_plan where hp_uid=#{hp_uid} order by hp_date, hp_city, hp_order
+	</select>
 </mapper>

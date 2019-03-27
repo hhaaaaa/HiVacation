@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+#totalMyPageTable {
+	width: 1000px;
+	height: 570px;
+	margin-top: 5px;
+	border-spacing: 0px;
+}
+#myPageMap {
+	border: black solid 1px;
+	height: 570px;
+}
+#myPlanDiv {
+	margin-top: 5px;
+	overflow: auto;
+	height: 570px;
+}
+#myPlanDiv::-webkit-scrollbar {
+	background: transparent;
+	width: 6px;
+}
+#myPlanDiv::-webkit-scrollbar-thumb {
+	background-color: #f0f0f5;
+}

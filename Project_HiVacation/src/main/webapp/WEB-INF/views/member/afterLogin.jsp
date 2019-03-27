@@ -16,7 +16,7 @@
 	<table id="myMenuTable">
 		<tr><td></td></tr>
 		<tr>
-			<td align="center" class="goMyMenu">MY PAGE</td>
+			<td align="center" id="myPageMenu" class="goMyMenu" onclick="goMyPage();">MY PAGE</td>
 		</tr>
 		<tr>
 			<td align="center" class="goMyMenu" onclick="goCalendar();">캘린더</td>

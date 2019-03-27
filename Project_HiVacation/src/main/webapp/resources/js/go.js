@@ -55,6 +55,10 @@ function goCalendar(){
 	location.href="go.calendar";
 }
 
+function goMyPage() {
+	location.href="go.mypage";
+}
+
 function eachIMGdelete(hi_no) {
 $(".imgDeletButton").click(function(){
 	var btn = $(this)
