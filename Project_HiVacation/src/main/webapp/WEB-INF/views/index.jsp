@@ -16,8 +16,7 @@
 <link rel="stylesheet" href="resources/css/sns/sns.css">
 <link rel="stylesheet" href="resources/css/sns/snsWrite.css">
 <link rel="stylesheet" href="resources/css/sns/snsRead.css">
-<link rel="stylesheet" href="resources/css/menu/fullcalendar.css" />
-<link rel="stylesheet" href="resources/css/menu/mypage.css" />
+<link rel="stylesheet" href="resources/css/calendar/fullcalendar.css" />
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
 <script type="text/javascript" src="resources/js/validCheck.js"></script>

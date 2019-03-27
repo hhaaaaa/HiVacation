@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+#budgetTable{
+	width: 100%;
+}
+#tour{
+	width : 100%;
+	border-right: black solid 1px;
+}
+#food{
+	width : 100%;
+	border-right: black solid 1px;
+}
+#sleep{
+	width : 100%;
+}
+#tourTD2{
+	height: 390px;
+}
+#foodTD2{
+	height: 390px;
+}
+#sleepTD2{
+	height: 390px;
+}
+#budgetTableTD1{
+	width: 33%;
+}
+#budgetTableTD2{
+	width: 33%;
+}
+#budgetTableTD3{
+	width: 33%;
+}
+#tourTextarea{
+	resize: none;
+	width: 98%;
+	height: 380px;
+	text-align: center;
+}
+#foodTextarea{
+	resize: none;
+	width: 98%;
+	height: 380px;
+	text-align: center;
+}
+#sleepTextarea{
+	resize: none;
+	width: 98%;
+	height: 380px;
+	text-align: center;
+}
+#numPeople{
+	width: 30px;
+}
