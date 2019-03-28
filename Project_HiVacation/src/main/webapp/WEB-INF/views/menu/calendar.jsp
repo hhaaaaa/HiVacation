@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<script type="text/javascript">
+		putSchedule();
+	</script>
 	<div id="calendar"></div>
 </body>
 </html>

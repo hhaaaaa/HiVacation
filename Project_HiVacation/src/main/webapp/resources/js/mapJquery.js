@@ -479,13 +479,13 @@ function printEachColorMarkers() {
 			}
 			
 			// 반복문 안에 직접 click listener 설정하면, 해당 index에 대한 값이 전달되지 않아서 따로 함수로 만들어서 처리!
-			listenClickEventMarker(marker, detailedResult[i]);
+			listenClickEventFromMarker(marker, detailedResult[i]);
 		}
 	}
 }
 
 // ### 마커 클릭하면 infowindow 출력 ###
-function listenClickEventMarker(marker, place) {
+function listenClickEventFromMarker(marker, place) {
 	google.maps.event.addListener(marker, 'click', function() {
 		// infowindow 표시
 		showPlaceInfo2(marker, place);
@@ -662,6 +662,7 @@ function saveDoListInDB(uid) {
 		if (month < 10) {month = "0" + month;}
 		if (day < 10) {day = "0" + day;}
 		var date = year + "" + month + "" + day;
+		var date2 = new Date(year, month-1, day);
 		var rating; var paddress; var url; var website; var phone;
 		
 		// doList의 목록을 DB로 저장 (서버로 ajax요청)
@@ -681,7 +682,7 @@ function saveDoListInDB(uid) {
 				
 				$.ajax({
 					url: "go.save.schedule",
-					data: {hp_uid: uid, hp_date: date, hp_city: nearbyLocation, 
+					data: {hp_uid: uid, hp_date: date2, hp_city: nearbyLocation, 
 							hp_placeid: doList[i].place_id, hp_pname: doList[i].name, 
 							hp_rating: rating, hp_paddress: paddress, hp_url: url, 
 							hp_website: website, hp_phone: phone, hp_order: doList[i].no},

@@ -78,7 +78,7 @@ select * from hv_plan;
 
 -----------------------------------------
 
-delete from hv_plan;
+delete from hv_plan where hp_no=84;
 
 drop table hv_plan cascade constraint purge;
 

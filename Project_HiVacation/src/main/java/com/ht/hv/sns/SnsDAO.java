@@ -98,7 +98,7 @@ public class SnsDAO {
 		List<SNSMsg> snsMsgs = new ArrayList<SNSMsg>();
 		List<SNSMsg> searchMsgs = (List<SNSMsg>) request.getSession().getAttribute("searchMsgs");
 
-		double count = 3; // 한페이지에 보여지는 sns갯수
+		double count = 10; // 한페이지에 보여지는 sns갯수
 		request.setAttribute("count", count);
 		request.setAttribute("curPage", pageNo);
 		request.setAttribute("allMsgCount", allMsgCount);

@@ -86,11 +86,21 @@ function changeCssMyPlanTable(index) {
 	});
 }
 
+var placesLoc = [];			// 하루 여행지의 location 받아오기 위한 배열
+var placesName = [];		// 하루 여행지의 이름 받아오기 위한 배열
+var markers3 = [];
 // ### 각 여행 클릭하면 여행 상세정보와 지도 표기 ###
 function printDetailPlanAndMap(eachPlan, index) {
 	var clickBool = false;
+	
 	$(document).on("click", "#mpTable"+index, function() {
 		if (!clickBool) {
+			// 각 여행 클릭하면 마커 초기화
+			for (var i = 0; i < markers3.length; i++) {
+				markers3[i].setMap(null);
+			}
+			markers3 = [];
+			
 			$("#mpTable"+index).css("border", "#2eb8b8 solid 1px");
 			
 			var table = $("<table></table>");
@@ -117,14 +127,8 @@ function printDetailPlanAndMap(eachPlan, index) {
 			// 		placeid로 detail 검색 (location 받아오기 위해)
 			setEachdayPlanToMap(eachPlan);
 			
-			
-			// 내 여행 목록 중 첫번째 위치로 지도 center 이동
-//			setEachPlanCenterToMap(eachPlan[0]);
-			
-			// 내 여행 마커 표시
-//			printEachPlanMarkers(eachPlan);
-			
 			placesLoc = [];
+			placesName = [];
 			
 		} else {
 			$("#mpTable"+index).css("border", "black solid 1px");
@@ -135,7 +139,7 @@ function printDetailPlanAndMap(eachPlan, index) {
 	});
 }
 
-var placesLoc = [];		// 하루 여행지의 location 받아오기 위한 배열
+
 function setEachdayPlanToMap(places) {
 	// proxy 서버로 ajax 요청해서 location 받아오기
 	for (var i = 0; i < places.length; i++) {
@@ -145,30 +149,92 @@ function setEachdayPlanToMap(places) {
 			data: {placeid: places[i].hp_placeid, key: "AIzaSyAnIve1J3a9dk9LpwOvpXbKDW0fCSk_8wM"},
 			success: function(data) {
 				placesLoc.push(data.result.geometry.location);
-				
-				// 지도 center 이동
-				map3.setCenter(placesLoc[0]);
+				placesName.push(data.result.name);
 				
 				// marker 지도에 찍기
-				printEachPlanMarkers(placesLoc[i], data.result.name);
+				printEachPlanMarkers(places);
 			}
 		});
 	}
 }
 
 // ### 1~9 순서로 마커 찍기 ###
-var markers3 = [];
-var labels = '123456789';
-var labelIndex = 0;
-function printEachPlanMarkers(loc, name) {
-	var marker = new google.maps.Marker({
-		position: loc,
-		map: map3,
-		label: labels[labelIndex++ % labels.length],
-		title: name
-	});
-	markers3.push(marker);
+function printEachPlanMarkers(clickedPlan) {
+	var labels = '123456789';
+	var labelIndex = 0;
+	// 지도 center 이동
+	map3.setCenter(placesLoc[0]);
+	
+	for (var i = 0; i < placesLoc.length; i++) {
+		var marker = new google.maps.Marker({
+			position: placesLoc[i],
+			map: map3,
+			label: labels[labelIndex++ % labels.length],
+			title: placesName[i]
+		});
+		markers3.push(marker);
+		
+		// 마커 클릭
+		listenClickEventFromMarker2(marker, i, clickedPlan);
+	}
 }
 
+// ### 마커 클릭하면 infowindow 띄우기 ###
+function listenClickEventFromMarker2(marker, clickIndex, clickedPlan) {
+	google.maps.event.addListener(marker, 'click', function() {
+		// infowindow 표시
+		printMyPlanInfowindow(marker, clickIndex, clickedPlan);
+	});
+}
+function printMyPlanInfowindow(marker, clickIndex, clickedPlan) {
+	var place = clickedPlan[clickIndex];
+	
+	var name = place.hp_pname;
+	var rate = place.hp_rating;
+	var phoneNo = place.hp_phone;
+	var address = place.hp_paddress;
+	var url = place.hp_url;
+	var website = place.hp_website;
 
+	if (url != "[구글url 정보 없음]") { url = "<a href=\"" + url + "\">" + url + "</a>"; }
+	if (website != "[사이트 정보 없음]") { website = "<a href=\"" + website + "\">" + website + "</a>"; } 
+	
+	// 별점 소수점 버림해서 별 갯수로 표시
+	if (rate == 5) {
+		rate = "<img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\">";
+	} else if (rate >= 4) {
+		rate = "<img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\">";
+	} else if (rate >= 3) {
+		rate = "<img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\">";
+	} else if (rate >= 2) {
+		rate = "<img src=\"resources/img/rating_star.png\"><img src=\"resources/img/rating_star.png\">";
+	} else if (rate >= 1) {
+		rate = "<img src=\"resources/img/rating_star.png\">";
+	} else if (rate < 1) {
+		rate = "<img src=\"resources/img/outline_star.png\">";
+	}
+	
+	var infowindow = new google.maps.InfoWindow({
+		content: "<table class=\"ifTable\">" +
+				"	<tr>" +
+						"<td colspan=\"2\" class=\"ifPlaceName\" style=\"width: 250px;\">" + name + "</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td style=\"width: 90px; font-size: 9pt;\">" + rate + "</td>" +
+				"		<td align=\"right\" class=\"ifPlacePhone\" style=\"width: 160px;\">" + phoneNo + "  </td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"2\" style=\"word-break: break-all;\">" + address + "</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"2\" style=\"word-break: break-all;\">" + url + "</td>" +
+				"	</tr>" +
+				"	<tr>" +
+				"		<td colspan=\"2\" style=\"word-break: break-all;\">" + website + "</td>" +
+				"	</tr>" +
+				"</table>",
+		maxWidth: 330
+	});
+	infowindow.open(map3, marker);
+}
 

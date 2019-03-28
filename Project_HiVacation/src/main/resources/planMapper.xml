@@ -3,7 +3,7 @@
 <mapper namespace="com.ht.hv.plan.PlanMapper">
 	<insert id="saveSchedule" parameterType="com.ht.hv.plan.Plan">
 		insert into hv_plan 
-		values(hp_no.nextval, #{hp_uid}, to_date(#{hp_date}, 'yyyyMMdd'), #{hp_city}, #{hp_placeid}, 
+		values(hp_no.nextval, #{hp_uid}, #{hp_date}, #{hp_city}, #{hp_placeid}, 
 			#{hp_pname}, #{hp_rating}, #{hp_paddress}, #{hp_url}, #{hp_website}, 
 			#{hp_phone}, #{hp_order})
 	</insert>

@@ -90,7 +90,7 @@ function addUpdateFile(){
 }
 
 function getUpdateFileIndex(){
-	$("#snsUpdateButton").click(function(){
+	$("#snsWriteButton").click(function(){
 		$("#updateFileIndex").attr("value", imgUpdateC);
 	});
 }
