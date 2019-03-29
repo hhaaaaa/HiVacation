@@ -33,8 +33,9 @@
 		<table id="snsContentTable">
 			<c:forEach items="${msgs }" var="m">
 				<tr>
-					<td align="center" class="snsContentNo">
-					 	<c:set var="no" value="${no-1 }" /> <fmt:formatNumber value="${no }" pattern="#"/>
+					<td align="center" class="snsContentNo" style="font-size: 10pt;">
+					 	<c:set var="no" value="${no-1 }" />
+					 	<fmt:formatNumber value="${no }" pattern="#"/>
 					</td>
 					<td class="snsContentTitle" onclick="goSnsView(${m.hs_no });">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${m.hs_title }

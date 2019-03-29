@@ -30,33 +30,33 @@
 	width: 100px;
 	height: 25px;
 	font-weight: 900;
-	border-bottom: black solid 1px;
 	border-top: black solid 2px;
+	border-bottom: black solid 2px;
 }
 #snsReadTitle {
 	padding-left: 10px;
-	border-bottom: black solid 1px;
 	height: 25px;
-	width: 700px;
+	width: 600px;
 	border-top: black solid 2px;
+	border-bottom: black solid 2px;
 }
 #snsReadId {
 	padding-left: 10px;
 	height: 25px;
 	width: 200px;
-	border-bottom: black solid 2px;
+	border-top: black solid 2px;
+	padding-top: 5px;
 }
 #snsReadDate {
 	padding-left: 10px;
 	height: 25px;
 	width: 200px;
-	border-bottom: black solid 1px;
-	border-top: black solid 2px;
+	border-bottom: black solid 2px;
+	padding-bottom: 5px;
 }
 #snsReadText {
 	height: 60px;
 	font-size: 11pt;
-	border-bottom: black solid 1px;
 }
 #snsReadReplyWrite {
 	height: 25px;

@@ -38,6 +38,12 @@ function budgetAdd() {
 		$("#totalCost").text(tourSum+foodSum+sleepSum);
 	});
 	
+	$("#numPeople").keyup(function(e) {
+		if (e.keyCode == 13) {
+			$("#calculate").trigger("click");
+		}
+	});
+	
 	$("#calculate").click(function(){
 		var numPeople = $("#numPeople").val()*1;
 		if(numPeople!=0){

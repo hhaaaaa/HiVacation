@@ -44,8 +44,9 @@ public class SnsController {
 	
 	@RequestMapping(value = "/do.sns.write", method = RequestMethod.POST)
 	public String doSnsWrite(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.loginCheck(m, request, response);
-		sDAO.write(sm, request, response);
+		if (mDAO.loginCheck(m, request, response)) {
+			sDAO.write(sm, request, response);
+		}
 		sDAO.clearSearch(request, response);
 		sDAO.paging(1, request, response);
 		request.setAttribute("contentPage", "sns/sns.jsp");       
@@ -58,7 +59,7 @@ public class SnsController {
 		mDAO.loginCheck(m, request, response);
 		sDAO.paging(p, request, response);
 		request.setAttribute("contentPage", "sns/sns.jsp");       
-		return "index"; 
+		return "index";
 	}
 	
 	@RequestMapping(value = "/go.search", method = RequestMethod.GET)
@@ -67,7 +68,7 @@ public class SnsController {
 		sDAO.search(s, request, response);
 		sDAO.paging(1, request, response);
 		request.setAttribute("contentPage", "sns/sns.jsp");       
-		return "index"; 
+		return "index";
 	}
 	
 	@RequestMapping(value = "/go.sns.view", method = RequestMethod.GET)
@@ -76,16 +77,17 @@ public class SnsController {
 		sDAO.view(sm, request, response);
 		srDAO.snsReplyView(sm, sr, request, response);
 		request.setAttribute("contentPage", "sns/snsRead.jsp");       
-		return "index"; 
+		return "index";
 	}
 	
 	@RequestMapping(value = "/do.sns.delete", method = RequestMethod.GET)
 	public String doSNSDelete(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.loginCheck(m, request, response);
-		sDAO.delete(sm, request, response);
+		if (mDAO.loginCheck(m, request, response)) {
+			sDAO.delete(sm, request, response);
+		}
 		sDAO.paging(1, request, response);
 		request.setAttribute("contentPage", "sns/sns.jsp");       
-		return "index"; 
+		return "index";
 	}
 	
 	@RequestMapping(value = "/go.sns.update", method = RequestMethod.GET)
@@ -93,15 +95,16 @@ public class SnsController {
 		mDAO.loginCheck(m, request, response);
 		sDAO.view(sm, request, response);
 		request.setAttribute("contentPage", "sns/snsUpdate.jsp");       
-		return "index"; 
+		return "index";
 	}
 	
 	@RequestMapping(value = "/do.sns.update", method = RequestMethod.POST)
 	public String doSNSUpdate(Member m, SNSMsg sm, SnsReply sr, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.loginCheck(m, request, response);
-		sDAO.update(sm, request, response);
+		if (mDAO.loginCheck(m, request, response)) {
+			sDAO.update(sm, request, response);
+		}
 		request.setAttribute("contentPage", "sns/snsRead.jsp");       
-		return "index"; 
+		return "index";
 	} 
 	
 	@RequestMapping(value = "/do.img.delete", method = RequestMethod.GET,

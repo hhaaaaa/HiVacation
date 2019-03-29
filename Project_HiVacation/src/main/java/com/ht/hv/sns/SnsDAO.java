@@ -24,6 +24,7 @@ public class SnsDAO {
 
 	private int allMsgCount;
 	private int allMyCount;
+	
 	@Autowired
 	private SqlSession ss;
 
@@ -33,8 +34,9 @@ public class SnsDAO {
 		try {
 
 			String path = request.getSession().getServletContext().getRealPath("resources/img");
-			MultipartRequest mr = new MultipartRequest(request, path, 30 * 1024 * 1024, "utf-8",
-					new DefaultFileRenamePolicy());
+			MultipartRequest mr = new MultipartRequest(
+					request, path, 30 * 1024 * 1024, "utf-8", new DefaultFileRenamePolicy()
+			);
 
 			sm.setHs_id(mb.getHm_id());
 			sm.setHs_title(mr.getParameter("hs_title"));

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ht.hv.member.Member;
 import com.ht.hv.member.MemberDAO;
 import com.ht.hv.plan.Plan;
+import com.ht.hv.plan.PlanDAO;
 import com.ht.hv.plan.Plans;
 
 
@@ -19,21 +20,30 @@ import com.ht.hv.plan.Plans;
 public class MenuController {
 	
 	@Autowired private MemberDAO mDAO;
+	@Autowired private PlanDAO pDAO;
 	@Autowired private MenuDAO menuDAO;
 	
 	@RequestMapping(value = "/go.calendar", method = RequestMethod.GET)
 	public String goCalendar(Member m, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.loginCheck(m, request, response);
-		request.setAttribute("contentPage", "menu/calendar.jsp");
-		response.setHeader("Access-Control-Allow-Origin","*");
+		if (mDAO.loginCheck(m, request, response)) {
+			request.setAttribute("contentPage", "menu/calendar.jsp");
+			response.setHeader("Access-Control-Allow-Origin","*");
+		} else {
+			pDAO.getTodayDate(request);
+			request.setAttribute("contentPage", "scheduling/scheduling.jsp");
+		}
 		return "index";
 	}
 	
 	@RequestMapping(value = "/go.mypage", method = RequestMethod.GET)
 	public String goMypage(Member m, Plan p, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.loginCheck(m, request, response);
-		menuDAO.select(p, request);
-		request.setAttribute("contentPage", "menu/mypage.jsp");
+		if (mDAO.loginCheck(m, request, response)) {
+			menuDAO.select(p, request);
+			request.setAttribute("contentPage", "menu/mypage.jsp");
+		} else {
+			pDAO.getTodayDate(request);
+			request.setAttribute("contentPage", "scheduling/scheduling.jsp");
+		}
 		return "index";
 	}
 	

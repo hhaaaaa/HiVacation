@@ -37,7 +37,7 @@ function goSnsView(hs_no){
 function doSNSDelete(hs_no){	
 	var ok = confirm("삭제하시겠습니까?");
 	if(ok){
-		location.href="do.snsDelete?hs_no="+hs_no;
+		location.href="do.sns.delete?hs_no="+hs_no;
 	}else{
 		return false;
 	}

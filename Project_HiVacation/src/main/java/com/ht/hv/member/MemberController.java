@@ -76,8 +76,9 @@ public class MemberController {
 	
 	@RequestMapping(value = "/do.update", method = RequestMethod.POST)
 	public String doUpdate(Member m, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.loginCheck(m, request, response);
-		mDAO.update(m, request, response);
+		if (mDAO.loginCheck(m, request, response)) {
+			mDAO.update(m, request, response);
+		}
 		pDAO.getTodayDate(request);
 		request.setAttribute("contentPage", "scheduling/scheduling.jsp");
 		return "index"; 
@@ -85,8 +86,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "/do.withdraw", method = RequestMethod.GET)
 	public String doWithdraw(Member m, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.withdraw(m, request, response);
-		sDAO.memberDeleteWhithSNS(m, request, response);
+		if (mDAO.loginCheck(m, request, response)) {
+			mDAO.withdraw(m, request, response);
+			sDAO.memberDeleteWhithSNS(m, request, response);
+		}
 		mDAO.loginCheck(m, request, response);
 		pDAO.getTodayDate(request);
 		request.setAttribute("contentPage", "scheduling/scheduling.jsp");

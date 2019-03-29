@@ -28,8 +28,9 @@ public class SnsReplyController {
 	
 	@RequestMapping(value = "/do.snsreply.write", method = RequestMethod.GET)
 	public String doSnsReplyWrite(Member m, SNSMsg sm, SnsReply sr, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.loginCheck(m, request, response);
-		srDAO.snsReplyWrite(sr, request, response);
+		if (mDAO.loginCheck(m, request, response)) {
+			srDAO.snsReplyWrite(sr, request, response);
+		}
 		sDAO.view(sm, request, response);
 		srDAO.snsReplyView(sm, sr, request, response);
 		request.setAttribute("contentPage", "sns/snsRead.jsp");       

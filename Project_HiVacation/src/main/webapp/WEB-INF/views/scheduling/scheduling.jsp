@@ -121,58 +121,58 @@
 			Step3. 예산 짜기<p>
 			<table id="budgetTable">
 				<tr>
-					<td id="budgetTableTD1">
+					<td id="budgetTableTD1" align="center">
 						<table id="tour">
 							<tr>
 								<td align="center" id="tourTD1">
-									관광비
+									<img src="resources/img/green_marker.png" style="position: relative; top: 2px;">가자
 								</td>
 							</tr>
 							<tr>
-								<td id="tourTD2">
-									<textarea id="tourTextarea" placeholder="엔터로 구분"></textarea>
+								<td id="tourTD2" align="center">
+									<textarea id="tourTextarea" placeholder="Enter키로 구분"></textarea>
 								</td>
 							</tr>
 							<tr>
-								<td align="right" id="tourTD3">
+								<td align="center" id="tourTD3" style="color: green;">
 									<!-- 관광비총합 -->
 								</td>
 							</tr>
 						</table>
 					</td>
-					<td id="budgetTableTD2">
+					<td id="budgetTableTD2" align="center">
 						<table id="food">
 							<tr>
 								<td align="center" id="foodTD1">
-									식비
+									<img src="resources/img/blue_marker.png" style="position: relative; top: 2px;">먹자
 								</td>
 							</tr>
 							<tr>
-								<td id="foodTD2">
-									<textarea id="foodTextarea" placeholder="엔터로 구분"></textarea>
+								<td id="foodTD2" align="center">
+									<textarea id="foodTextarea" placeholder="Enter키로 구분"></textarea>
 								</td>
 							</tr>
 							<tr>
-								<td align="right" id="foodTD3">  
+								<td align="center" id="foodTD3" style="color: blue;">  
 									<!-- 식비총합 -->
 								</td>
 							</tr>
 						</table>
 					</td>
-					<td id="budgetTableTD3">
+					<td id="budgetTableTD3" align="center">
 						<table id="sleep">
 							<tr>
 								<td align="center" id="sleepTD1">
-									숙박비
+									<img src="resources/img/red_marker.png" style="position: relative; top: 2px;">자자
 								</td>
 							</tr>
 							<tr>
-								<td id="sleepTD2">
-									<textarea id="sleepTextarea" placeholder="엔터로 구분"></textarea>
+								<td id="sleepTD2" align="center">
+									<textarea id="sleepTextarea" placeholder="Enter키로 구분"></textarea>
 								</td>
 							</tr>
 							<tr>
-								<td align="right" id="sleepTD3">
+								<td align="center" id="sleepTD3" style="color: red;">
 									<!-- 숙박비총합 -->
 								</td>
 							</tr>
@@ -180,15 +180,16 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3" align="right" >
-						<span id="totalCost"></span> / <input id="numPeople" placeholder="인원"><button id="calculate">계산</button>
+					<td colspan="3" align="right" style="padding-right: 10px; padding-top: 20px;">
+						총 <span id="totalCost"></span> 원 / <input id="numPeople" placeholder="인원 수 입력"> <button id="calculate">계산</button>
 					</td> 
 				</tr>
 				<tr>
-					<td colspan="3" align="right">
-						->인당  <span id="perPerson"></span>원
+					<td colspan="3" align="right" style="padding-right: 15px;">
+						<img src="resources/img/money_icon.png" style="position: relative; top: 7px;"> 인당  <span id="perPerson"></span> 원
 					</td>
 				</tr>
+				<tr><td style="margin-bottom: 20px;">&nbsp;</td></tr>
 			</table>
 		</div>
 	</div>

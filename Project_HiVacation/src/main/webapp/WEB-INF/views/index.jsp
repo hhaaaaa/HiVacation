@@ -46,7 +46,7 @@
 		connectSummonAddInputEventUpdate();
 		connectIdCheckEvent();
 		schedulingPaging(${sessionScope.loginMember != null });
-		//initMap();
+		initMap();
 		myMenuLocationControl();
 		searchLocationByQuery();
 		searchDetailByKeyword();

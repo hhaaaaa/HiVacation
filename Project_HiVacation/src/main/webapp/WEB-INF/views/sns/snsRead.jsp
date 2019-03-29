@@ -13,74 +13,80 @@
 		<table id="snsReadTable">
 			<c:if test="${sessionScope.loginMember.hm_id == selectSNS.hs_id }">
 				<tr>
-					<td align="right" colspan="3" style="padding-right: 20px; height: 25px; padding-bottom: 10px;">
+					<td align="right" colspan="4" style="padding-right: 20px; height: 25px; padding-bottom: 10px;">
 						<span id="snsUdpateSpan" onclick="goSNSUpdate(${selectSNS.hs_no });">수정</span>
 						<span id="snsDeleteSpan" onclick="doSNSDelete(${selectSNS.hs_no });">삭제</span>
 					</td>
 				</tr>
 			</c:if>
 			<tr>
-				<td align="center" class="snsReadMenu">제목</td>
-				<td id="snsReadTitle">${selectSNS.hs_title }</td>
-				<td align="right" id="snsReadDate"><fmt:formatDate
-						value="${selectSNS.hs_date }" pattern="yyyy-MM-dd a hh:mm" />&nbsp;&nbsp;&nbsp;&nbsp;
+				<td align="center" class="snsReadMenu" rowspan="2">제목</td>
+				<td id="snsReadTitle" rowspan="2">${selectSNS.hs_title }</td>
+				<td align="center" class="snsReadMenu" style="border-top: black solid 2px; border-bottom: none;">글쓴이</td>
+				<td align="center" id="snsReadId">
+					${selectSNS.hs_id }&nbsp;&nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" style="border-bottom: black solid 2px;"></td>
-				<td align="center" id="snsReadId">${selectSNS.hs_id }&nbsp;&nbsp;&nbsp;&nbsp;
+				<td align="center" class="snsReadMenu" style="border-top: none;">날짜</td>
+				<td align="right" id="snsReadDate">
+					<fmt:formatDate value="${selectSNS.hs_date }" pattern="yyyy-MM-dd a hh:mm" />&nbsp;&nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3"><input type="hidden" name="hs_no"
-					value="${selectSNS.hs_no }"></td>
+				<td colspan="4">
+					<input type="hidden" name="hs_no" value="${selectSNS.hs_no }">
+				</td>
 			</tr>
+			<tr><td style="padding-top: 10px;" colspan="4">&nbsp;</td></tr>
 			<c:forEach items="${selectSNS.hv_image }" var="Simg">
 				<tr>
-					<td colspan="3" align="center"><img
-						src="resources/img/${Simg.hi_fname }"
-						style="width: 200px; height: 200px;"></td>
+					<td colspan="4" align="center">
+						<img src="resources/img/${Simg.hi_fname }" style="max-width: 300px; max-height: 300px;">
+					</td>
 				</tr>
 			</c:forEach>
 			<tr>
-				<td align="center" id="snsReadText" colspan="3">
-					${selectSNS.hs_text}</td>
+				<td align="center" id="snsReadText" colspan="4">${selectSNS.hs_text}</td>
 			</tr>
+			<tr><td style="padding-bottom: 10px; border-bottom: black solid 1px;" colspan="4">&nbsp;</td></tr>
+			<c:if test="${sessionScope.loginMember !=null }" >
+				<tr>
+					<td align="center" id="snsReadReplyWrite" colspan="4">
+						<input id="snsReadReplyInput" name="hr_text" placeholder="&nbsp;&nbsp;댓글 입력" autocomplete="off">
+						<button id="snsReadReplyButton">입력</button>
+					</td>
+				</tr>
+			</c:if>
 			<tr>
-				<td align="center" id="snsReadReplyWrite" colspan="3"><input
-					id="snsReadReplyInput" name="hr_text"
-					placeholder="&nbsp;&nbsp;댓글 입력">
-					<button id="snsReadReplyButton">입력</button></td>
-			</tr>
-			<tr>
-				<td align="center"
-					style="width: 100%; border-bottom: black solid 2px; padding-bottom: 20px;"
-					colspan="3"><c:forEach items="${snsReplys }" var="sr">
+				<td align="center" style="width: 100%; border-bottom: black solid 2px; padding-top: 20px; padding-bottom: 20px;" colspan="4">
+					<c:forEach items="${snsReplys }" var="sr">
 						<table class="replyTable">
 							<tr>
-								<td align="center" class="replyId" class="snsReadReply">
-									${sr.hr_id }</td>
-								<td class="replyText" class="snsReadReply">${sr.hr_text }</td>
+								<td align="center" class="replyId" class="snsReadReply" style="font-weight: 900;">
+									${sr.hr_id }
+								</td>
+								<td class="replyText" class="snsReadReply">
+									${sr.hr_text }
+								</td>
 								<td align="center" class="replyDate" class="snsReadReply">
-									<fmt:formatDate value="${sr.hr_date }"
-										pattern="yyyy-MM-dd a hh:mm" />
+									<fmt:formatDate value="${sr.hr_date }" pattern="yyyy-MM-dd a hh:mm" />
 								</td>
 
 								<c:choose>
 									<c:when test="${sessionScope.loginMember.hm_id == sr.hr_id }">
 										<td class="replyUpdateButton"><a class="snsReplyUpdateButton" rel="${sr.hr_no}">수정</a></td>
-										<td align="center" class="replyDeleteButton"
-											class="snsReadReply"><a class="snsReplyDeleteButton"
-											rel="${sr.hr_no }">삭제</a></td>
+										<td align="center" class="replyDeleteButton" class="snsReadReply"><a class="snsReplyDeleteButton" rel="${sr.hr_no }">삭제</a></td>
 									</c:when>
 									<c:otherwise>
 										<td class="replyUpdateButton"></td>
-										<td align="center" class="replyDeleteButton"
-											class="snsReadReply"></td>
+										<td align="center" class="replyDeleteButton" class="snsReadReply"></td>
 									</c:otherwise>
 								</c:choose>
+							</tr>
 						</table>
-					</c:forEach></td>
+					</c:forEach>
+				</td>
 			</tr>
 		</table>
 	</form>

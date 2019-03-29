@@ -26,10 +26,15 @@ function getMyPlan() {
 			var planCount = 1;
 			var onedayPlan = [];
 			onedayPlan.push(plan[0]);
-			for (var i = 1; i < plan.length-1; i++) {
+			for (var i = 1; i < plan.length; i++) {
 				if (plan[i].hp_city == plan[i-1].hp_city
 						&& plan[i].hp_date == plan[i-1].hp_date) {
 					onedayPlan.push(plan[i]);
+					if (i == plan.length - 1) {
+						eachdayPlan[eachdayIndex] = onedayPlan;
+						onedayPlan = [];
+						break;
+					}
 					continue;
 				} else {
 					eachdayPlan[eachdayIndex] = onedayPlan;
@@ -146,6 +151,7 @@ function setEachdayPlanToMap(places) {
 		$.ajax({
 			url: "get.detail.search",
 			dataType: 'json',
+			async: false,		// 동기식 요청! (비동기식으로 하면 order 순서대로 마커 찍히지 않음)
 			data: {placeid: places[i].hp_placeid, key: "AIzaSyAnIve1J3a9dk9LpwOvpXbKDW0fCSk_8wM"},
 			success: function(data) {
 				placesLoc.push(data.result.geometry.location);
@@ -162,6 +168,8 @@ function setEachdayPlanToMap(places) {
 function printEachPlanMarkers(clickedPlan) {
 	var labels = '123456789';
 	var labelIndex = 0;
+	
+	
 	// 지도 center 이동
 	map3.setCenter(placesLoc[0]);
 	
