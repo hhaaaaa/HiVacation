@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class SNSMsgNo {
 	private BigDecimal start;
-	private BigDecimal end;
+	private BigDecimal end; 
 	
 	public SNSMsgNo() {
 	}

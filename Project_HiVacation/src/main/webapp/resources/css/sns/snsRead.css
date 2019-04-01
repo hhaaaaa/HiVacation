@@ -104,10 +104,10 @@
 .replyText {
 	width: 500px;
 }
-.replyDate {
+.replyDate { 
 	width: 200px;
 	font-size: 10pt;
-}
+} 
 .replyUpdateButton {
 	width: 30px;
 	font-size: 10pt;

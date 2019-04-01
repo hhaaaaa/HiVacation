@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ht.hv.sns.SnsMapper">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.ht.hv.sns.SnsMapper"> 
 	<insert id="write" parameterType="com.ht.hv.sns.SNSMsg">
 		insert into hv_sns values(hs_seq.nextval, #{hs_id}, #{hs_title}, #{hs_text}, sysdate)
 	</insert>

@@ -13,4 +13,4 @@
 	<delete id="withdraw" parameterType="com.ht.hv.member.Member">
 		delete from hv_member where hm_id=#{hm_id}
 	</delete>
-</mapper>
+</mapper> 

@@ -1,6 +1,6 @@
 package com.ht.hv.sns;
 
-public class Search {
+public class Search {  
 	private String what;
 	private String search;
 	

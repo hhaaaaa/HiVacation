@@ -99,7 +99,7 @@ function update() {
 		hm_address3.focus();
 		return false;
 	} 
-	return true;
+	return true; 
 }
 
 

@@ -27,7 +27,7 @@ function schedulingPaging(boolLogin) {
 			$("#step" + no + "Div").css("left", "-1200px");
 			$("#step" + no + "Menu").css("background-color", "white");
 			$("#step" + no + "Menu").css("color", "grey");
-			no = 2;
+			no = 2; 
 			$("#step" + no + "Div").css("left", "300px");
 			$("#step" + no + "Menu").css("background-color", "grey");
 			$("#step" + no + "Menu").css("color", "white");

@@ -1,4 +1,4 @@
-package com.ht.hv.member;
+package com.ht.hv.member; 
 
 public class Member {
 	private String hm_id;

@@ -22,14 +22,14 @@
 	width: 50%;
 	height: 30px;
 }
-#loginButton {
+#loginButton { 
 	width: 104%;
 	height: 100%;
 	font-weight: 900;
 	border: grey solid 1px;
 	background-color: transparent;
 	outline: none;
-}
+} 
 #loginButton:hover {
 	cursor: pointer;
 }

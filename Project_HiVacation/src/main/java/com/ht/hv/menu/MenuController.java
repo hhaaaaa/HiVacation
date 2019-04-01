@@ -16,7 +16,7 @@ import com.ht.hv.plan.PlanDAO;
 import com.ht.hv.plan.Plans;
 
 
-@Controller
+@Controller  
 public class MenuController {
 	
 	@Autowired private MemberDAO mDAO;

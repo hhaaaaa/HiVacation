@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div style="margin-top: 200px;">
-		<img src="resources/img/us.jpeg">
+		<img src="resources/img/us.jpeg"> 
 	</div>
 </body>
 </html>

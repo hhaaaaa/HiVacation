@@ -16,7 +16,7 @@ import com.ht.hv.snsreply.SnsReply;
 import com.ht.hv.snsreply.SnsReplyDAO;
  
 @Controller
-public class SnsController {
+public class SnsController { 
 	
 	@Autowired
 	private MemberDAO mDAO;

@@ -59,7 +59,7 @@ public class PlanDAO {
 			String key = request.getParameter("key");
 			
 			URL u = new URL("https://maps.googleapis.com/maps/api/place/details/json?placeid=" + placeId + "&key=" + key);
-			HttpsURLConnection huc = (HttpsURLConnection) u.openConnection();
+			HttpsURLConnection huc = (HttpsURLConnection) u.openConnection(); 
 			InputStream is = huc.getInputStream();
 			
 			InputStreamReader isr = new InputStreamReader(is, "utf-8");

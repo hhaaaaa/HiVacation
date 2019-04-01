@@ -146,7 +146,7 @@ function imgControll(img){
 	else{ 
 		controller="imgControll('"+img+"')"; 
 	     intervalID=setTimeout(controller,20); 
-	} 
+	}  
 }
 function viewImage(img){ 
 	W=img1.width; 

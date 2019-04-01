@@ -97,14 +97,14 @@ public class SnsDAO {
 	@SuppressWarnings("unchecked")
 	public void paging(int pageNo, HttpServletRequest request, HttpServletResponse response) {
 		SnsMapper smp = ss.getMapper(SnsMapper.class);
-
+ 
 		List<SNSMsg> snsMsgs = new ArrayList<SNSMsg>();
 		List<SNSMsg> searchMsgs = (List<SNSMsg>) request.getSession().getAttribute("searchMsgs");
 
 		double count = 10; // 한페이지에 보여지는 sns갯수
 		request.setAttribute("count", count);
 		request.setAttribute("curPage", pageNo);
-		request.setAttribute("allMsgCount", allMsgCount);
+		request.setAttribute("allMsgCount", allMsgCount); 
 
 		if (searchMsgs != null && searchMsgs.size() > 0) {
 			int pageCount = (int) Math.ceil(searchMsgs.size() / count);

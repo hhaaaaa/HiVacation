@@ -14,8 +14,8 @@ import com.ht.hv.member.Member;
 import com.ht.hv.sns.SNSMsg;
 
 @Service
-public class SnsReplyDAO {
-	@Autowired
+public class SnsReplyDAO { 
+	@Autowired 
 	private SqlSession ss;
 	
 	public void snsReplyWrite(SnsReply sr, HttpServletRequest request, HttpServletResponse response){

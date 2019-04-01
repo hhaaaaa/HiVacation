@@ -222,7 +222,7 @@ function printMyPlanInfowindow(marker, clickIndex, clickedPlan) {
 		rate = "<img src=\"resources/img/outline_star.png\">";
 	}
 	
-	var infowindow = new google.maps.InfoWindow({
+	var infowindow = new google.maps.InfoWindow({ 
 		content: "<table class=\"ifTable\">" +
 				"	<tr>" +
 						"<td colspan=\"2\" class=\"ifPlaceName\" style=\"width: 250px;\">" + name + "</td>" +

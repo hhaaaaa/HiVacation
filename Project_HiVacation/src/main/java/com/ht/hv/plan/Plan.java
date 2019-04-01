@@ -3,7 +3,7 @@ package com.ht.hv.plan;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Plan {
+public class Plan { 
 	private BigDecimal hp_no;
 	private String hp_uid;
 	private Date hp_date;

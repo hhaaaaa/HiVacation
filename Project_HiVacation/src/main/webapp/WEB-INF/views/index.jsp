@@ -47,7 +47,7 @@
 		connectIdCheckEvent();
 		schedulingPaging(${sessionScope.loginMember != null });
 		initMap();
-		myMenuLocationControl();
+		myMenuLocationControl(); 
 		searchLocationByQuery();
 		searchDetailByKeyword();
 		eachIMGdelete();

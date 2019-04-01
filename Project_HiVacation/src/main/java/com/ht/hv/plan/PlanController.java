@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PlanController {
 	
 	@Autowired
-	private PlanDAO pDAO;
+	private PlanDAO pDAO; 
 	
 	@RequestMapping(value = "/get.detail.search", method = RequestMethod.GET, 
 			produces = "application/json; charset=utf-8")

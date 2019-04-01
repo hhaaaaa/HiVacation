@@ -1,5 +1,5 @@
 function budgetAdd() {
-	var tourSum=0;
+	var tourSum=0; 
 	var foodSum=0;
 	var sleepSum=0;
 	var totalCost=0;

@@ -77,7 +77,7 @@ function putSchedule() {
 				var day = date.getDate();
 					if (day < 10) {day = "0" + day;}
 				var start = year + "-" + month + "-" + day;
-
+ 
 				var eachEvent = {title : title, start : start, content: content};
 				events[i] = eachEvent;
 			}

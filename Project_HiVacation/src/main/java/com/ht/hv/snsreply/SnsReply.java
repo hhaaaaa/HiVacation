@@ -3,7 +3,7 @@ package com.ht.hv.snsreply;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-public class SnsReply {
+public class SnsReply { 
 	private BigDecimal hr_no;
 	private BigDecimal hr_sno;
 	private String hr_id;

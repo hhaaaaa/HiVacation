@@ -12,7 +12,7 @@ import com.ht.hv.member.Member;
 import com.ht.hv.member.MemberDAO;
 
 @Controller
-public class PageInfoController {
+public class PageInfoController { 
 
 	@Autowired
 	private MemberDAO mDAO;

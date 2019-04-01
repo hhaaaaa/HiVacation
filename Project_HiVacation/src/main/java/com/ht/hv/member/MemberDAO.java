@@ -1,5 +1,5 @@
 package com.ht.hv.member;
- 
+  
 import java.util.ArrayList;
   
 import javax.servlet.http.Cookie;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class MemberDAO {
 	@Autowired
 	private SqlSession ss;	 
-	
+	 
 	public void join(Member m, HttpServletRequest request, HttpServletResponse response){
 		MemberMapper mm = ss.getMapper(MemberMapper.class);
 		

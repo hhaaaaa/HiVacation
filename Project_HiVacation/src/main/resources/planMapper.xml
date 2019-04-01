@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ht.hv.plan.PlanMapper">
-	<insert id="saveSchedule" parameterType="com.ht.hv.plan.Plan">
+	<insert id="saveSchedule" parameterType="com.ht.hv.plan.Plan"> 
 		insert into hv_plan 
 		values(hp_no.nextval, #{hp_uid}, #{hp_date}, #{hp_city}, #{hp_placeid}, 
 			#{hp_pname}, #{hp_rating}, #{hp_paddress}, #{hp_url}, #{hp_website}, 

@@ -1,5 +1,5 @@
 // ### 회원가입 시, 우편검색하면 input에 주소값 들어가게 ###
-function connectSummonAddInputEventJoin() {
+function connectSummonAddInputEventJoin() { 
 	$("#joinAddressSearchButton").click(function(){
 		new daum.Postcode({
 			oncomplete: function(data) {

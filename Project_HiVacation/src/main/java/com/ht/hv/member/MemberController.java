@@ -1,4 +1,4 @@
-package com.ht.hv.member;
+package com.ht.hv.member; 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +14,7 @@ import com.ht.hv.sns.SnsDAO;
 
 @Controller
 public class MemberController {
-	@Autowired private MemberDAO mDAO;
+	@Autowired private MemberDAO mDAO; 
 	@Autowired private SnsDAO sDAO;
 	@Autowired private PlanDAO pDAO;
 	

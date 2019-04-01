@@ -113,7 +113,7 @@
 					<td id="step2SleepArea" valign="top">
 						<div id="step2SleepAreaDiv"><!-- 자자영역 --></div>
 					</td>
-				</tr>
+				</tr> 
 			</table><p>
 		</div>
 		

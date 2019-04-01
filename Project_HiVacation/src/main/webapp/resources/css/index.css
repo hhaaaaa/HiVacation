@@ -55,7 +55,7 @@ body {
 	font-size: 11pt;
 	z-index: 12;
 }
-#titleTable {
+#titleTable { 
 	position: fixed;
 	top: 40px;
 	left: 0px;

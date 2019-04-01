@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SNSMsg {
-	private BigDecimal hs_no;
+	private BigDecimal hs_no; 
 	private String hs_id;
 	private String hs_title;
 	private String hs_text;

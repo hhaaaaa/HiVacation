@@ -13,7 +13,7 @@ import com.ht.hv.plan.Plan;
 import com.ht.hv.plan.PlanMapper;
 import com.ht.hv.plan.Plans;
 
-@Service
+@Service 
 public class MenuDAO {
 
 	@Autowired 

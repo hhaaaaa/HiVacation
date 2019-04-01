@@ -78,7 +78,7 @@
 }
 .pageCountTableA:link {
 	text-decoration: none;
-	color: black;
+	color: black; 
 }
 .pageCountTableA:visited {
 	text-decoration: none;

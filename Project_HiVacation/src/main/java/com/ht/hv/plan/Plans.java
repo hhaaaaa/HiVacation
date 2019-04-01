@@ -2,7 +2,7 @@ package com.ht.hv.plan;
 
 import java.util.List;
 
-public class Plans {
+public class Plans { 
 	private List<Plan> plan;
 	
 	public Plans() {
