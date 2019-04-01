@@ -40,7 +40,8 @@ public class SnsDAO {
 
 			sm.setHs_id(mb.getHm_id());
 			sm.setHs_title(mr.getParameter("hs_title"));
-			sm.setHs_text(mr.getParameter("hs_text"));
+			String text = mr.getParameter("hs_text");
+			sm.setHs_text(text.replace("\r\n", "<br>"));
 
 			int fileIndex = Integer.parseInt(mr.getParameter("fileI"));
 
@@ -63,7 +64,7 @@ public class SnsDAO {
 							is.add(new Image(null, Bhs_no, img));
 							if (smp.imageWrite(is.get(imgC)) == 1) {
 								imgC = imgC + 1;
-								request.setAttribute("r", (imgC) + "개 이미지 포함글쓰기 완료");
+								request.setAttribute("r", (imgC) + "개 이미지 포함, 글쓰기 완료");
 							}
 						}
 					}
@@ -111,25 +112,26 @@ public class SnsDAO {
 
 			int start = (searchMsgs.size() - ((pageNo - 1) * (int) count));
 			int end = (int) ((pageNo == pageCount) ? 1 : (start - (count - 1)));
-			System.out.println(start);
-			System.out.println(end);
+//			System.out.println(start);
+//			System.out.println(end);
 			ArrayList<SNSMsg> msgs = new ArrayList<SNSMsg>();
 			SNSMsg smsg = null;
 
-			for (int i = start - 1; i >= end - 1; i--) {
+			for (int i = start-1; i >= end-1; i--) {
 				smsg = searchMsgs.get(i);
-				System.out.println("--");
-				System.out.println(smsg.getHs_id());
-				System.out.println("--");
+//				System.out.println("--");
+//				System.out.println(smsg.getHs_id());
+//				System.out.println("--");
 				msgs.add(smsg);
 			}
 			request.setAttribute("msgs", msgs);
 		} else if (searchMsgs != null && searchMsgs.size() == 0) {
 			request.setAttribute("msgs", null);
-			System.out.println("search널임");
+//			System.out.println("search널임");
 		} else if (allMsgCount > 0) {
 			int pageCount = (int) Math.ceil(allMsgCount / count);
 			request.setAttribute("pageCount", pageCount);
+			
 			int start = (int) (allMsgCount - ((pageNo - 1) * count));
 			int end = (int) ((pageNo == pageCount) ? 1 : (start - (count - 1)));
 
@@ -180,16 +182,37 @@ public class SnsDAO {
 
 		request.setAttribute("selectSNS", selectSNS);
 	}
-
-	public void delete(SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
+	
+	public void viewUpdate(SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
 		SnsMapper smp = ss.getMapper(SnsMapper.class);
-
+		SNSMsg updateSNS = new SNSMsg();
+		List<Image> selectImg = new ArrayList<Image>();
+		
 		BigDecimal hs_no = new BigDecimal(request.getParameter("hs_no"));
 		sm.setHs_no(hs_no);
+		
+		updateSNS = smp.snsView(sm);
+		updateSNS.setHs_text(updateSNS.getHs_text().replace("<br>", "\r\n"));
+		selectImg = smp.snsViewImg(sm);
+		updateSNS.setHv_image(selectImg);
+		
+		request.setAttribute("updateSNS", updateSNS);
+	}
 
-		if (smp.snsDelete(sm) == 1) {
-			request.setAttribute("r", "게시글 삭제");
-			allMsgCount--;
+	public void delete(SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			SnsMapper smp = ss.getMapper(SnsMapper.class);
+			
+			BigDecimal hs_no = new BigDecimal(request.getParameter("hs_no"));
+			sm.setHs_no(hs_no);
+			
+			if (smp.snsDelete(sm) == 1) {
+				request.setAttribute("r", "게시글 삭제 완료");
+				allMsgCount--;
+			}
+		} catch (Exception e) {
+			request.setAttribute("r", "게시글 삭제 실패");
+			e.printStackTrace();
 		}
 	}
 
@@ -210,10 +233,10 @@ public class SnsDAO {
 			
 			sm.setHs_no(hs_no);
 			sm.setHs_title(hs_title);
-			sm.setHs_text(hs_text);
+			sm.setHs_text(hs_text.replace("\r\n", "<br>"));
 
 			if (smp.snsUpdate(sm) == 1) {
-				request.setAttribute("r", "게시글 수정");
+				request.setAttribute("r", "게시글 수정 완료");
 
 				List<Image> is = new ArrayList<Image>();// 해당 sns에 들어가는 파일들의
 				// list
@@ -254,6 +277,7 @@ public class SnsDAO {
 				request.setAttribute("snsReplys", snsReplys);
 			}
 		} catch (Exception e) {
+			request.setAttribute("r", "게시글 수정 실패");
 			e.printStackTrace();
 		}
 	}
@@ -271,7 +295,7 @@ public class SnsDAO {
 		}
 	}
 	
-	public void memberDeleteWhithSNS(Member m, HttpServletRequest request, HttpServletResponse response) {
+	public void memberDeleteWithSNS(Member m, HttpServletRequest request, HttpServletResponse response) {
 		getMyMsgCount(m, request, response);
 		allMsgCount = allMsgCount - allMyCount;
 	}

@@ -87,8 +87,8 @@ public class MemberController {
 	@RequestMapping(value = "/do.withdraw", method = RequestMethod.GET)
 	public String doWithdraw(Member m, HttpServletRequest request, HttpServletResponse response) {
 		if (mDAO.loginCheck(m, request, response)) {
+			sDAO.memberDeleteWithSNS(m, request, response);
 			mDAO.withdraw(m, request, response);
-			sDAO.memberDeleteWhithSNS(m, request, response);
 		}
 		mDAO.loginCheck(m, request, response);
 		pDAO.getTodayDate(request);

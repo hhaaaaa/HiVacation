@@ -15,13 +15,13 @@
 				<tr>
 					<td align="center" class="snsWriteMenu" style="border-top: black solid 1px;">제목</td>
 					<td align="center" class="snsWriteMenu" style="border-top: black solid 1px; padding-left: 40px;">
-						<input id="snsTitle" name="hs_title" autocomplete="off" autofocus="autofocus" style="">
+						<input id="snsTitle" name="hs_title" autocomplete="off" autofocus="autofocus" maxlength="150">
 					</td>
 				</tr>
 				<tr>
 					<td align="center" class="snsWriteMenu">내용</td>
 					<td align="center" class="snsWriteMenu" style="padding-left: 40px;">
-						<textarea id="snsText" name="hs_text"></textarea>
+						<textarea id="snsText" name="hs_text" maxlength="2500"></textarea>
 					</td>
 				</tr>
 				<tr>

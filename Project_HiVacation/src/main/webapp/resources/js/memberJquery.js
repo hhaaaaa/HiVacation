@@ -29,6 +29,8 @@ function connectIdCheckEvent() {
 		$.getJSON("member.id.check?hm_id="+id,function(data){
 			if (id.length == 0) {
 				$("#joinIdOk").text("미입력").css("color","grey");
+			}else if (id.length < 7) {
+				$("#joinIdOk").text("최소 7글자").css("color","red");
 			}else if (data.member[0] != null ) {
 				$("#joinIdOk").text("id중복").css("color","red");
 			}else{

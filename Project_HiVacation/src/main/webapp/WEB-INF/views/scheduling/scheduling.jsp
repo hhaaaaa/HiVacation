@@ -130,7 +130,7 @@
 							</tr>
 							<tr>
 								<td id="tourTD2" align="center">
-									<textarea id="tourTextarea" placeholder="Enter키로 구분"></textarea>
+									<textarea id="tourTextarea" placeholder="숫자만 입력&#10;Enter키로 구분"></textarea>
 								</td>
 							</tr>
 							<tr>
@@ -149,7 +149,7 @@
 							</tr>
 							<tr>
 								<td id="foodTD2" align="center">
-									<textarea id="foodTextarea" placeholder="Enter키로 구분"></textarea>
+									<textarea id="foodTextarea" placeholder="숫자만 입력&#10;Enter키로 구분"></textarea>
 								</td>
 							</tr>
 							<tr>
@@ -168,7 +168,7 @@
 							</tr>
 							<tr>
 								<td id="sleepTD2" align="center">
-									<textarea id="sleepTextarea" placeholder="Enter키로 구분"></textarea>
+									<textarea id="sleepTextarea" placeholder="숫자만 입력&#10;Enter키로 구분"></textarea>
 								</td>
 							</tr>
 							<tr>

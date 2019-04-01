@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="do.login" name="loginForm" method="post" onsubmit="return login();">
-		<table id="loginDoTable">
+	<table id="loginDoTable">
+		<form action="do.login" name="loginForm" method="post" onsubmit="return login();">
 			<tr>
 				<td align="center" class="loginDoTd" colspan="2">
 					<input id="hm_id" name="hm_id" autocomplete="off" autofocus="autofocus" placeholder="&nbsp;&nbsp;ID" maxlength="15">

@@ -13,6 +13,7 @@ public class SNSMsg {
 	private List<Image> hv_image;
 	
 	public SNSMsg() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public SNSMsg(BigDecimal hs_no, String hs_id, String hs_title, String hs_text, Date hs_date, List<Image> hv_image) {
@@ -72,5 +73,4 @@ public class SNSMsg {
 	public void setHv_image(List<Image> hv_image) {
 		this.hv_image = hv_image;
 	}
-
 }

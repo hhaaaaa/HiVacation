@@ -25,9 +25,9 @@ public class MemberDAO {
 		m.setHm_address(address1+";"+address2+";"+address3);
 
 		if(mm.join(m)==1){
-			request.setAttribute("r", "가입성공");
+			request.setAttribute("r", "가입 성공");
 		}else{
-			request.setAttribute("r", "가입실패");
+			request.setAttribute("r", "가입 실패");
 		}
 	}
 	
@@ -55,10 +55,10 @@ public class MemberDAO {
 					response.addCookie(autoLoginID);
 				}
 			}else{
-				request.setAttribute("r", "pw가 틀렸습니다.");
+				request.setAttribute("r", "pw가 틀렸습니다");
 			}
 		}else{
-			request.setAttribute("r", "존재 하지않는 ID입니다.");
+			request.setAttribute("r", "존재하지 않는 ID입니다");
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class MemberDAO {
 					break;
 				}
 			} catch (Exception e) {
-				request.setAttribute("r", "DB서버문제");
+				request.setAttribute("r", "DB 서버문제로 로그인 실패");
 			}
 		}
 	}

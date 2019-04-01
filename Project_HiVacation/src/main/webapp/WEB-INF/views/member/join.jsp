@@ -12,19 +12,19 @@
 			<tr>
 				<td class="joinTd">
 					<div>      
-						<input id="joinid" name="hm_id" placeholder="&nbsp;&nbsp;ID" class="joinInputSmall" maxlength="15" autocomplete="off" autofocus="autofocus">
+						<input id="joinid" name="hm_id" placeholder="&nbsp;&nbsp;ID (7글자 이상)" class="joinInputSmall" maxlength="15" autocomplete="off" autofocus="autofocus">
 						<span id="joinIdOk" onsubmit="goCheckId();">ID확인</span>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td class="joinTd">
-					<input id="joinpw" name="hm_pw" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW" maxlength="20">
+					<input id="joinpw" name="hm_pw" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW (7글자 이상, 숫자 포함)" maxlength="20">
 				</td>
 			</tr>
 			<tr>
 				<td class="joinTd">
-					<input id="joinpw2" name="hm_pw2" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW확인" maxlength="20">
+					<input id="joinpw2" name="hm_pw2" type="password" class="joinInput" placeholder="&nbsp;&nbsp;PW 확인" maxlength="20">
 				</td>
 			</tr>
 			<tr>

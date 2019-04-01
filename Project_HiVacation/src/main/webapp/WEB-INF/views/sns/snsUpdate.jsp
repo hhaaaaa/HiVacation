@@ -17,14 +17,14 @@
 				<tr>
 					<td align="center" class="snsWriteMenu" style="border-top: black solid 1px;">제목</td>
 					<td align="center" class="snsWriteMenu" style="border-top: black solid 1px; padding-left: 40px;">
-						<input id="snsTitle" name="hs_title" autocomplete="off" autofocus="autofocus" style="" value="${selectSNS.hs_title }">
+						<input id="snsTitle" name="hs_title" autocomplete="off" autofocus="autofocus" style="" value="${updateSNS.hs_title }">
 					</td>
 				</tr>
-				<tr><td><input type="hidden" value="${selectSNS.hs_no }" name="hs_no"></td></tr>
+				<tr><td><input type="hidden" value="${updateSNS.hs_no }" name="hs_no"></td></tr>
 				<tr>
 					<td align="center" class="snsWriteMenu">내용</td>
 					<td align="center" class="snsWriteMenu" style="padding-left: 40px;">
-						<textarea id="snsText" name="hs_text" >${selectSNS.hs_text }</textarea>
+						<textarea id="snsText" name="hs_text" >${updateSNS.hs_text }</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -33,7 +33,7 @@
 					</td>
 					<td align="center" class="snsWriteMenu" style="padding-left: 40px;" id="fileTD">
 						<table>
-							<c:forEach items="${selectSNS.hv_image }" var="si">
+							<c:forEach items="${updateSNS.hv_image }" var="si">
 								<tr>
 									<td>
 										${si.hi_fname }

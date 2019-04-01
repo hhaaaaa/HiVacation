@@ -41,7 +41,7 @@
 		select * from hv_sns where hs_no=#{hs_no}
 	</select>
 	<select id="snsViewImg" parameterType="com.ht.hv.sns.SNSMsg" resultType="com.ht.hv.sns.Image">
-		select * from hv_image where hi_sno=#{hs_no} 
+		select * from hv_image where hi_sno=#{hs_no} order by hi_no
 	</select>
 	
 	<delete id="snsDelete" parameterType="com.ht.hv.sns.SNSMsg">

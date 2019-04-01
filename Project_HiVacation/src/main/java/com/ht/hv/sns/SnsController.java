@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ht.hv.member.Member;
 import com.ht.hv.member.MemberDAO;
+import com.ht.hv.plan.PlanDAO;
 import com.ht.hv.snsreply.SnsReply;
 import com.ht.hv.snsreply.SnsReplyDAO;
  
@@ -26,6 +27,9 @@ public class SnsController {
 	@Autowired
 	private SnsReplyDAO srDAO;
 	
+	@Autowired
+	private PlanDAO pDAO;
+	
 	@RequestMapping(value = "/go.sns", method = RequestMethod.GET)
 	public String goSns(Member m, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
@@ -37,8 +41,12 @@ public class SnsController {
 	
 	@RequestMapping(value = "/go.sns.write", method = RequestMethod.GET)
 	public String goSnsWrite(Member m, HttpServletRequest request, HttpServletResponse response) {
-		mDAO.loginCheck(m, request, response);
-		request.setAttribute("contentPage", "sns/snsWrite.jsp");       
+		if (mDAO.loginCheck(m, request, response)) {
+			request.setAttribute("contentPage", "sns/snsWrite.jsp");       
+		} else {
+			pDAO.getTodayDate(request);
+			request.setAttribute("contentPage", "scheduling/scheduling.jsp");
+		}
 		return "index"; 
 	}
 	
@@ -93,7 +101,7 @@ public class SnsController {
 	@RequestMapping(value = "/go.sns.update", method = RequestMethod.GET)
 	public String goSNSUpdate(Member m, SNSMsg sm, HttpServletRequest request, HttpServletResponse response) {
 		mDAO.loginCheck(m, request, response);
-		sDAO.view(sm, request, response);
+		sDAO.viewUpdate(sm, request, response);
 		request.setAttribute("contentPage", "sns/snsUpdate.jsp");       
 		return "index";
 	}

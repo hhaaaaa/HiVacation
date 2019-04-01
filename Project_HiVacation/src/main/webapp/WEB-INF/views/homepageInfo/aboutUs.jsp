@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="margin-top: 10px;">우리는?</div>
+	<div style="margin-top: 200px;">
+		<img src="resources/img/us.jpeg">
+	</div>
 </body>
 </html>

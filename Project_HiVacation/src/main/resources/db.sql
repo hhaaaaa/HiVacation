@@ -78,8 +78,9 @@ select * from hv_plan;
 
 -----------------------------------------
 
-delete from hv_reply where hr_no=41;
+delete from hv_sns where hs_no=233;
 
-drop table hv_plan cascade constraint purge;
+
+drop table hv_reply cascade constraint purge;
 
 

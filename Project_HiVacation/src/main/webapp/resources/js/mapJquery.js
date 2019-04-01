@@ -22,7 +22,7 @@ function schedulingPaging(boolLogin) {
 	});
 	$("#step2Menu").click(function() {
 		if (!boolLogin){
-			alert("로그인 후 이용해주십시오.");
+			alert("로그인 후 이용 가능합니다.");
 		} else {
 			$("#step" + no + "Div").css("left", "-1200px");
 			$("#step" + no + "Menu").css("background-color", "white");

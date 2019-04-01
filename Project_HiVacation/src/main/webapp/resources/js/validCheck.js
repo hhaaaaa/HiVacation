@@ -5,23 +5,24 @@ function join() {
 	var hm_name = document.joinForm.hm_name;
 	var hm_address1 = document.joinForm.address1;
 	var hm_address3 = document.joinForm.address3;
-	if (isEmpty(hm_id) || containKS(hm_id)||$("#joinIdOK").text()=="id중복") {
+	if (isEmpty(hm_id) || containKS(hm_id) || !isNotNumber(hm_id) 
+			|| lessThan(hm_id, 7) ||$("#joinIdOK").text()=="id중복") {
 		alert("ID를 다시 입력해주세요.");
 		hm_id.value = "";
 		hm_id.focus();
 		return false;
-	} else if (isEmpty(hm_pw)) {
+	} else if (isEmpty(hm_pw) || notContain(hm_pw, "0123456789") || lessThan(hm_pw, 7)) {
 		alert("PW를 다시 입력해주세요.");
 		hm_pw.value = "";
 		hm_pw.focus();
 		return false;
-	} else if (isEmpty(hm_pw2)) {
-		alert("PW확인을 다시 입력해주세요.");
+	} else if (isEmpty(hm_pw2) || notContain(hm_pw2, "0123456789") || lessThan(hm_pw2, 7)) {
+		alert("PW 확인란을 다시 입력해주세요.");
 		hm_pw2.value = "";
 		hm_pw2.focus();
 		return false;
 	} else if (notEquals(hm_pw, hm_pw2)) {
-		alert("PW와 PW확인이 다릅니다.");
+		alert("PW와 PW확인이 일치하지 않습니다.");
 		hm_pw2.value = "";
 		hm_pw.value = "";
 		hm_pw.focus();
@@ -101,3 +102,22 @@ function update() {
 	return true;
 }
 
+
+
+function snsWrite() {
+	var hs_title = document.snsWriteForm.hs_title;
+	var hs_text = document.snsWriteForm.hs_text;
+	
+	if (isEmpty(hs_title)) {
+		alert("제목을 입력해주세요.");
+		hs_title.value = "";
+		hs_title.focus();
+		return false;
+	} else if (isEmpty(hs_text)) {
+		alert("내용을 입력해주세요.");
+		hs_text.value = "";
+		hs_text.focus();
+		return false;
+	} 
+	return true;
+}

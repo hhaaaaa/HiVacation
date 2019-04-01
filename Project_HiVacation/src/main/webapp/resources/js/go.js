@@ -30,8 +30,12 @@ function goUpdate() {
 	location.href="go.update";
 }
 
-function goSnsView(hs_no){  
-	location.href="go.sns.view?hs_no="+hs_no;
+function goSnsView(hs_no, member){
+	if (member.length == 0) {
+		alert("로그인 후 이용 가능합니다.");
+	} else {
+		location.href="go.sns.view?hs_no="+hs_no;
+	}
 }
 
 function doSNSDelete(hs_no){	
@@ -126,4 +130,34 @@ function doWithdraw(hm_pw) {
 			location.href="go.update";
 		}
 	});
+}
+
+
+// ### 이미지 클릭 시 확대/축소 ###
+function doImgPop(img){ 
+	img1= new Image(); 
+	img1.src=(img); 
+	imgControll(img); 
+}   
+function imgControll(img){ 
+	if((img1.width!=0)&&(img1.height!=0)){ 
+		 viewImage(img); 
+	} 
+	else{ 
+		controller="imgControll('"+img+"')"; 
+	     intervalID=setTimeout(controller,20); 
+	} 
+}
+function viewImage(img){ 
+	W=img1.width; 
+	H=img1.height; 
+	if (W > 650) { W = 650; }
+	if (H > 590) { H = 590; }
+	O="width=" + W + ",height=" + H + ",scrollbars=yes"; 
+	
+	imgWin=window.open("","",O); 
+	imgWin.document.write("<html><head><title>이미지 상세보기</title></head>");
+	imgWin.document.write("<body topmargin=0 leftmargin=0>");
+	imgWin.document.write("<img src=" + img + " onclick='self.close()' style='cursor:pointer; height:" + H + ";' title ='클릭하시면 창이 닫힙니다.'>");
+	imgWin.document.close();
 }
