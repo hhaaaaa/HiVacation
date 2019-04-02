@@ -30,9 +30,11 @@ function getMyPlan() {
 				if (plan[i].hp_city == plan[i-1].hp_city
 						&& plan[i].hp_date == plan[i-1].hp_date) {
 					onedayPlan.push(plan[i]);
+					
 					if (i == plan.length - 1) {
 						eachdayPlan[eachdayIndex] = onedayPlan;
 						onedayPlan = [];
+						planCount += 1;
 						break;
 					}
 					continue;
@@ -58,21 +60,29 @@ function getMyPlan() {
 				if (day.length < 2) { day = "0" + day; }
 				date = year + "." + month + "." + day;
 				
-				var td1 = $("<td></td>").text(date).css("width", "100px").attr("align", "center");
+				var td1 = $("<td></td>").text(date).css("width", "80px").attr("align", "center").css("font-size", "10pt");
 				$(td1).css("font-weight", "normal");
-				var td2 = $("<td></td>").text(ep[0].hp_city).css("width", "100px").attr("align", "center");
-				var tr = $("<tr></tr>").append(td1, td2);
+				var td2 = $("<td></td>").attr("id", "mpCity"+i).text(ep[0].hp_city).css("width", "100px")
+							.attr("align", "center").css("cursor", "pointer");
+				var td3 = $("<td></td>").text("x").attr("id", "deletePlan"+i).css("width", "30px")
+							.attr("align", "center").css("cursor", "pointer");
+				var tr = $("<tr></tr>").append(td1, td2, td3);
 				var table = $("<table></table>").append(tr);
-				$(table).css("cursor", "pointer").css("margin-top", "3px").css("margin-bottom", "3px;")
-				$(table).attr("id", "mpTable"+i).css("border", "black solid 1px").css("border-radius", "5px");
+				$(table).css("margin-top", "3px").css("margin-bottom", "3px;").attr("id", "mpTable"+i)
+						.css("border", "black solid 1px").css("border-radius", "5px");
 				var div = $("<div></div>").attr("id", "mpDiv"+i);
 				
 				$("#myPlanDiv").append(table, div);
 				
 				changeCssMyPlanTable(i);
 				
+//				alert(JSON.stringify(eachdayPlan[3]));
+				// 각 여행 삭제 클릭
+				deletePlan(ep, i);
+				
 				// 각 여행 클릭
 				printDetailPlanAndMap(ep, i);
+				
 			}
 			
 		}
@@ -81,6 +91,12 @@ function getMyPlan() {
 
 //		### 각 여행 hover하면 css 변화주기 ###
 function changeCssMyPlanTable(index) {
+	$(document).on("mouseover", "#deletePlan"+index, function() {
+		$("#deletePlan"+index).text("삭제").css("text-shadow", "1px 1px 1px #2eb8b8").css("font-size", "8pt");
+	});
+	$(document).on("mouseleave", "#deletePlan"+index, function() {
+		$("#deletePlan"+index).text("x").css("font-size", "11pt").css("text-shadow", "none");
+	});
 	$(document).on("mouseover", "#mpTable"+index, function() {
 		$("#mpTable"+index).css("box-shadow", "0px 0px 7px #2eb8b8");
 		$("#mpTable"+index).css("border", "#2eb8b8 solid 1px").css("color", "#2eb8b8");
@@ -98,7 +114,7 @@ var markers3 = [];
 function printDetailPlanAndMap(eachPlan, index) {
 	var clickBool = false;
 	
-	$(document).on("click", "#mpTable"+index, function() {
+	$(document).on("click", "#mpCity"+index, function() {
 		if (!clickBool) {
 			// 각 여행 클릭하면 마커 초기화
 			for (var i = 0; i < markers3.length; i++) {
@@ -144,7 +160,44 @@ function printDetailPlanAndMap(eachPlan, index) {
 	});
 }
 
+// ### 각 여행 일정 DB에서 삭제 ###
+function deletePlan(eachPlan, index) {
+	$(document).on("click", "#deletePlan"+index, function() {
+//		alert(JSON.stringify(eachPlan));
+		
+		for (var i = 0; i < eachPlan.length; i++) {
+			var ep = eachPlan[i];
+			
+			var date = new Date(ep.hp_date);
+			var year = date.getFullYear();
+			var month = "" + (date.getMonth() + 1);
+			var day = "" + date.getDate();
+			if (month.length < 2) { month = "0" + month; }
+			if (day.length < 2) { day = "0" + day; }
+			var date2 = year + "." + month + "." + day;
+			
+			var city = ep.hp_city;
+			var no = ep.hp_no;
+			
+			$.ajax({
+				url: "delete.each.plan",
+				data: {hp_no: no, hp_date: date, hp_city: city},
+				success: function(data) {
+					if (no == data.result) {
+						alert(date2 + " " + city + " 여행이 삭제됐습니다.");
+					}
+					
+					// 삭제한 테이블 없애기
+					$("#mpTable"+index).remove();
+					$("#mpDetail"+index).remove();
+				}
+			});
+		}
+		
+	});
+}
 
+// ### 각 날짜 여행 지도에 찍기 ###
 function setEachdayPlanToMap(places) {
 	// proxy 서버로 ajax 요청해서 location 받아오기
 	for (var i = 0; i < places.length; i++) {

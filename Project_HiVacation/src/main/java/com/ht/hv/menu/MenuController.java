@@ -47,6 +47,12 @@ public class MenuController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/delete.each.plan", method = RequestMethod.GET, 
+			produces = "application/json; charset=utf-8")
+	public @ResponseBody String deleteEachPlan(Plan p, HttpServletRequest request, HttpServletResponse response) {
+		return menuDAO.deleteEachPlan(p, request);
+	}
+	
 	@RequestMapping(value = "/get.myPlan", method = RequestMethod.GET, 
 			produces = "application/json; charset=utf-8")
 	public @ResponseBody Plans getMyPlan(Plan p, HttpServletRequest request) {

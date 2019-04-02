@@ -1,5 +1,8 @@
 package com.ht.hv.menu;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,23 @@ public class MenuDAO {
 
 	@Autowired 
 	private SqlSession ss;
+	
+	public String deleteEachPlan(Plan p, HttpServletRequest request) {
+		try {
+			BigDecimal hp_no = p.getHp_no();
+			
+			if (ss.getMapper(PlanMapper.class).deleteEachPlan(p) == 1) {
+				request.setAttribute("r", "여행 삭제 성공");
+				return "{\"result\": \"" + hp_no + "\"}";
+			}
+			return null;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("r", "여행 삭제 실패");
+			return "{\"result\": \"실패.\"}";
+		}
+	}
 	
 	public void select(Plan p, HttpServletRequest request) {
 		try {

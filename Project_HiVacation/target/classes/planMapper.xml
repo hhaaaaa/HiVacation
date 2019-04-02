@@ -11,4 +11,9 @@
 	<select id="getMyPlan" parameterType="com.ht.hv.plan.Plan" resultType="com.ht.hv.plan.Plan">
 		select * from hv_plan where hp_uid=#{hp_uid} order by hp_date, hp_city, hp_order
 	</select>
+	
+	<delete id="deleteEachPlan" parameterType="com.ht.hv.plan.Plan">
+		delete from hv_plan where hp_no=#{hp_no}
+	</delete>
+	
 </mapper>
