@@ -31,7 +31,7 @@
 					<td align="center" class="snsWriteMenu">
 						<img src="resources/img/plus_button.png" style="width: 35px;" id="addUpdateFile">
 					</td>
-					<td align="center" class="snsWriteMenu" style="padding-left: 40px;" id="fileTD">
+					<td class="snsWriteMenu" style="padding-left: 40px;" id="fileTD">
 						<table>
 							<c:forEach items="${updateSNS.hv_image }" var="si">
 								<tr>

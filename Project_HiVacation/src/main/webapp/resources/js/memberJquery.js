@@ -53,7 +53,7 @@ function myMenuLocationControl() {
 	});
 }
 
-//sns 글쓸때 file받아오기
+// ### sns 글쓸때 file 받아오기 ###
 var imgInputC = 0;
 var imgI = 0;
 function addFile(){
@@ -62,7 +62,7 @@ function addFile(){
 		var input = $("<input>").attr("type","file").attr("name","file"+imgI).css("margin-left","-251px");
 		imgI=imgI+1;
 		var aTag = $("<a></a>").text("삭제");
-		$(aTag).attr("onclick", "deleteFile(this)");
+		$(aTag).attr("onclick", "deleteFile(this)").css("cursor", "pointer").css("font-size", "10pt");
 		var div = $("<div></div>").append(input,aTag);
 		$("#fileTD").append(div);
 	});
@@ -82,10 +82,10 @@ var imgUpdateI = 0; //인덱스
 function addUpdateFile(){
 	$("#addUpdateFile").click(function(){
 		imgUpdateC = imgUpdateC + 1;
-		var input = $("<input>").attr("type","file").attr("name","updateFile"+imgUpdateI).css("margin-left","-251px");
+		var input = $("<input>").attr("type","file").attr("name","updateFile"+imgUpdateI);
 		imgUpdateI=imgUpdateI+1;
 		var aTag = $("<a></a>").text("삭제");
-		$(aTag).attr("onclick", "deleteFile(this)");
+		$(aTag).attr("onclick", "deleteFile(this)").css("cursor", "pointer").css("font-size", "10pt");
 		var div = $("<div></div>").append(input,aTag);
 		$("#fileTD").append(div);
 	});

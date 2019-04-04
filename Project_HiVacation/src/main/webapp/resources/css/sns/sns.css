@@ -96,3 +96,10 @@
 	text-decoration: underline;
 	color: black;
 }
+
+.imgDeletButton {
+	cursor: pointer;
+}
+.imgDeletButton:hover {
+	text-shadow: 1px 1px 1px black;
+}
