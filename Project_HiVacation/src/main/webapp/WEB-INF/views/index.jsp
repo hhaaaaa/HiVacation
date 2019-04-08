@@ -16,9 +16,10 @@
 <link rel="stylesheet" href="resources/css/sns/sns.css">
 <link rel="stylesheet" href="resources/css/sns/snsWrite.css">
 <link rel="stylesheet" href="resources/css/sns/snsRead.css">
-<link rel="stylesheet" href="resources/css/menu/fullcalendar.css" />
-<link rel="stylesheet" href="resources/css/menu/mypage.css" />
-<link rel="stylesheet" href="resources/css/scheduling/budget.css" />
+<link rel="stylesheet" href="resources/css/menu/fullcalendar.css">
+<link rel="stylesheet" href="resources/css/menu/mypage.css">
+<link rel="stylesheet" href="resources/css/aboutUs.css">
+<link rel="stylesheet" href="resources/css/scheduling/budget.css">
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script type="text/javascript" src="resources/js/validCheckHha.js"></script>
 <script type="text/javascript" src="resources/js/validCheck.js"></script>
@@ -52,6 +53,8 @@
 		searchDetailByKeyword();
 		eachIMGdelete();
 		initializeLikeArea();
+		aboutUsImgClick();
+		howToUsePaging();
 	});
 </script>
 </head>

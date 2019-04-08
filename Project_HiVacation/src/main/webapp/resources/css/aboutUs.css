@@ -1,0 +1,87 @@
+@CHARSET "UTF-8";
+#tionImg {
+	cursor: pointer;
+}
+#hiImg {
+	cursor: pointer;
+}
+#howToUse {
+	text-decoration: underline;	
+	color: grey;
+}
+#madeBy {
+	color: grey;
+}
+
+
+#howToUseTotal {
+	width: 100%;
+	position: absolute;
+	left: 0px;
+}
+#howToUseStep1 {
+	width: 100%;
+	position: absolute;
+	left: 0px;
+}
+#howToUseStep2 {
+	width: 100%;
+	position: absolute;
+	left: -1600px;
+}
+#howToUseStep3 {
+	width: 100%;
+	position: absolute;
+	left: -1600px;
+}
+#howToUseStep4 {
+	width: 100%;
+	position: absolute;
+	left: -1600px;
+}
+#howToUseStep5 {
+	width: 100%;
+	position: absolute;
+	left: -1600px;
+}
+#howToUseStep6 {
+	width: 100%;
+	position: absolute;
+	left: -1600px;
+}
+#howToUseStep7 {
+	width: 100%;
+	position: absolute;
+	left: -1600px;
+}
+.howToUseNextTd {
+	padding-right: 10px; 
+	padding-top: 10px; 
+	font-size: 10pt;
+	padding-bottom: 50px;
+}
+.howToUseBeforeTd {
+	padding-left: 10px;
+	padding-top: 10px; 
+	font-size: 10pt;
+	padding-bottom: 50px;
+}
+.howToUseNextButton {
+	cursor: pointer;
+}
+.howToUseBeforeButton {
+	cursor: pointer;
+}
+.howToUseNextButton:hover {
+	text-shadow: 1px 1px 1px black;
+}
+.howToUseBeforeButton:hover {
+	text-shadow: 1px 1px 1px black;
+}
+
+
+#madeByTotal {
+	width: 100%;
+	position: absolute;
+	left: -2000px;
+}
