@@ -161,3 +161,59 @@ function viewImage(img){
 	imgWin.document.write("<img src=" + img + " onclick='self.close()' style='cursor:pointer; height:" + H + ";' title ='클릭하시면 창이 닫힙니다.'>");
 	imgWin.document.close();
 }
+
+
+function aboutUsImgClick() {
+	$("#hiImg").mouseenter(function() {
+		$("#madeBy").css("color", "#2eb8b8");
+	});
+	$("#hiImg").mouseleave(function() {
+		$("#madeBy").css("color", "grey");
+	});
+	$("#tionImg").mouseenter(function() {
+		$("#howToUse").css("color", "#2eb8b8");
+	});
+	$("#tionImg").mouseleave(function() {
+		$("#howToUse").css("color", "grey");
+	});
+	
+	$("#hiImg").click(function() {
+		$("#howToUse").css("text-decoration", "none");
+		$("#madeBy").css("text-decoration", "underline");
+		$("#howToUseTotal").css("left", "-2000px");
+		$("#madeByTotal").css("left", "0px");
+	});
+	$("#tionImg").click(function() {
+		$("#madeBy").css("text-decoration", "none");
+		$("#howToUse").css("text-decoration", "underline");
+		$("#madeByTotal").css("left", "-2000px");
+		$("#howToUseTotal").css("left", "0px");
+		
+		pagingIndex = 1;
+		$("#howToUseStep1").css("left", "0px");
+		$("#howToUseStep2").css("left", "-1600px");
+		$("#howToUseStep3").css("left", "-1600px");
+		$("#howToUseStep4").css("left", "-1600px");
+		$("#howToUseStep5").css("left", "-1600px");
+		$("#howToUseStep6").css("left", "-1600px");
+		$("#howToUseStep7").css("left", "-1600px");
+	});
+}
+
+var pagingIndex = 1;
+function howToUsePaging() {
+	
+	$(".howToUseBeforeButton").click(function() {
+		$("#howToUseStep"+pagingIndex).css("left", "-1600px");
+		pagingIndex -= 1;
+		$("#howToUseStep"+pagingIndex).css("left", "0px")
+	});
+	$(".howToUseNextButton").click(function() {
+		$("#howToUseStep"+pagingIndex).css("left", "-1600px");
+		pagingIndex += 1;
+		$("#howToUseStep"+pagingIndex).css("left", "0px");
+	});
+}
+
+
+
