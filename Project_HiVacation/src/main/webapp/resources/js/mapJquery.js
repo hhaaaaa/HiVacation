@@ -128,10 +128,57 @@ function searchDetailByKeyword() {
 
 			    	// 모든 검색 결과 마커로 출력
 			    	dropAllMarker(searchedResult);
+			    	
+			    	// 날씨 출력
+			    	searchWeather = [];
+			    	$("#weatherMenuTd").empty();
+			    	printWeatherOfSearchLocation();
 			    }
-			    
 			}
 		});
+	});
+}
+
+// ### 여행 검색 하면, 해당 지역 날씨 출력 ###
+var searchWeather = [];
+function printWeatherOfSearchLocation() {
+	$.ajax({
+		url: "http://api.openweathermap.org/data/2.5/forecast",
+		data: {lat: locLatLng.lat(), lon: locLatLng.lng(), units: "metric", 
+			appid: "baff8f3c6cbc28a4024e336599de28c4", lang: "kr"},
+		success: function(data) {
+			var weather = data.list;
+			var noonIndex = 3;			// 매일 12시를 날씨 기준으로 삼기 위한 index([3], [11], [18], ... 7씩 증가)
+			
+			for (var i = 0; i < weather.length; i++) {
+				if (i == noonIndex) {
+					var date = weather[i].dt_txt.substr(5, 5).replace("-", "/");
+					
+					searchWeather.push({
+						temp: weather[i].main.temp,
+						humidity: weather[i].main.humidity,
+						icon: weather[i].weather[0].icon,
+						description: weather[i].weather[0].description,
+						date: date
+					});
+					
+					noonIndex += 7;
+					if (noonIndex > weather.length) {
+						break;
+					}
+				}
+			}
+			
+			// 출력
+			for (var i = 0; i < searchWeather.length; i++) {
+				var div = $("<div></div>").attr("id", "weatherDiv"+i)
+						.html(searchWeather[i].date + " " + $("#step1SearchCity").val() 
+								+ "<img src=\"https://openweathermap.org/img/w/" + searchWeather[i].icon +".png\" style=\"width: 30px; position: relative; top: 10px;\">"
+								+ " " + searchWeather[i].description + " : " + searchWeather[i].temp + "℃ (" + searchWeather[i].humidity + "%)")
+						.css("font-size", "10pt").css("color", "black").css("position", "absolute").css("right", "0px").css("top", "-5px");
+				$("#weatherMenuTd").append(div);
+			}
+		}
 	});
 }
 
