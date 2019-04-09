@@ -177,7 +177,7 @@ function printWeatherOfSearchLocation() {
 								+ " " + searchWeather[i].description + " : " + searchWeather[i].temp + "℃ (" + searchWeather[i].humidity + "%)")
 						.css("font-size", "10pt").css("color", "black").css("position", "absolute").css("right", "0px").css("top", "-5px");
 				$("#weatherMenuTd").append(div);
-			}
+			} 
 		}
 	});
 }

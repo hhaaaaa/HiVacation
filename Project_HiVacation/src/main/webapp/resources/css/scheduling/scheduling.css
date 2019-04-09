@@ -300,6 +300,7 @@
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }
+
 @keyframes fadein1 {
 	0% {opacity: 0;}
 	5% {opacity: 1;}
