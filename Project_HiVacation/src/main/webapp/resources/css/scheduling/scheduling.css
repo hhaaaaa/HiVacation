@@ -292,7 +292,7 @@
 	animation-delay: -8000ms;
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
-}
+} 
 #weatherDiv4 {
 	animation-name: fadein1;
 	animation-duration: 20s;

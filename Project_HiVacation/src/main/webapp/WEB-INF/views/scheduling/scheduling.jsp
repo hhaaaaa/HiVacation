@@ -15,7 +15,7 @@
 			<td align="center" class="schedulingMenuTd" id="step2Menu">Choice</td>
 			<td align="center" class="schedulingMenuTd" id="step3Menu">Budget</td>
 			<td id="weatherMenuTd" colspan="2" align="right" valign="top"></td>
-		</tr> 
+		</tr>  
 	</table>
 	<div id="schedulingTotalDiv">
 		<div id="step1Div">
