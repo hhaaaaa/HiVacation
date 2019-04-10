@@ -169,8 +169,8 @@ function printWeatherOfSearchLocation() {
 				}
 			}
 			
-			// 출력
-			for (var i = 0; i < searchWeather.length; i++) {
+			// 출력 (총 6일치의 날씨정보를 출력할 수 있지만, 100이 6으로 나눠떨어지지 않기 때문에 당일 포함 5일치의 날씨 정보만 출력)
+			for (var i = 0; i < searchWeather.length-1; i++) {
 				var div = $("<div></div>").attr("id", "weatherDiv"+i)
 						.html(searchWeather[i].date + " " + $("#step1SearchCity").val() 
 								+ "<img src=\"https://openweathermap.org/img/w/" + searchWeather[i].icon +".png\" style=\"width: 30px; position: relative; top: 10px;\">"
